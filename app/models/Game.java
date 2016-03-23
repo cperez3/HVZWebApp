@@ -19,8 +19,8 @@ public class Game {
     public ArrayList humanMessages;
     public ArrayList zombieMessages;
 
-    public static void lookUpUser(String userName){
-
+    public static Boolean lookUpUser(String userName){
+        return true;
     }
     public static void removeUser(String userName){
 
@@ -38,7 +38,7 @@ public class Game {
 
     }
     //should take 
-    public static void joinGame(String user){
+    public static void joinGame(User userToAdd){
 
     }
 

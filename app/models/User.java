@@ -20,5 +20,22 @@ public class User extends Model {
     public int type;
     public Boolean isActive;
     public String gameCode;
-}
+    public static void changeModStatus(){
+
+    }
+    public static void changType(){
+
+    }
+    public static void changeActiveStatus(){
+
+    }
+    public static void setGameCode(){
+
+    }
+    public static void resetPassword(){
+
+    }
+    public static void getType(){
+
+    }
 }

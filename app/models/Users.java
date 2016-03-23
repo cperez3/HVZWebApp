@@ -5,8 +5,8 @@ package models;
  */
 
 import play.db.ebean.Model;
-import java.persistence.Entity;
-import java.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
 
