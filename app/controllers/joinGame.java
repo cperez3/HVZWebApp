@@ -2,7 +2,6 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.joinGame;
-import views.html.gamePage;
 /**
  * Created by mariahflaim on 2/18/16.
  */
