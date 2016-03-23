@@ -22,15 +22,15 @@
                 <h1 class="text-center">Login</h1>
             </div>
             <div class="modal-body">
-                <form class="form col-md-12 center-block">
+                <form id="login-form" class="form col-md-12 center-block">
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Email">
+                        <input id="email" type="text" class="form-control input-lg" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" placeholder="Password">
+                        <input id="password" type="password" class="form-control input-lg" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+                        <button id="signin-button" class="btn btn-primary btn-lg btn-block">Sign In</button>
                         <span class="pull-right"><a href="@routes.SignUp.loadSignUp()">Register</a></span>
                     </div>
                 </form>
@@ -44,5 +44,26 @@
 <!-- script references -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script>
+          $("#login-form").on('submit', function(e) {
+              e.preventDefault();
+              var email= $('#email').val();
+              var password= $('#password').val();
+              myJsRoutes.controllers.LogIn.validateLogIn(email,password).ajax({
+                  success : function(data) {
+                      console.log(data);
+                      //figure out how to tell if user is in game or not
+                      window.location.href=@routes.GamePage.loadPage();
+
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      alert("Invalid Login");
+                  }
+
+              });
+
+          });
+    </script>
 </body>
 </html>

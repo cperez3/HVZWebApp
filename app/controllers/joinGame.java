@@ -12,7 +12,8 @@ public class JoinGame extends Controller{
     }
     public static Result verifyCode(String code){
     //TO DO: VERIFY THAT THE GAME CODE IS CORRECT
-        return ok(gamePage.render());
+        return ok();
+
     }
 
 }

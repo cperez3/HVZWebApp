@@ -17,9 +17,8 @@ public class Application extends Controller {
         return ok(
                 Routes.javascriptRouter("myJsRoutes",
                         routes.javascript.JoinGame.verifyCode(),
-                        routes.javascript.GamePage.loadPage()
-
-
+                        routes.javascript.SignUp.validateSignUp(),
+                        routes.javascript.LogIn.validateLogIn()
                 )
         );
     }

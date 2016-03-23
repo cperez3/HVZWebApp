@@ -22,21 +22,24 @@
             <h1 class="text-center">Sign Up</h1>
           </div>
           <div class="modal-body">
-            <form class="form col-md-12 center-block">
+            <form id="signup-form" class="form col-md-12 center-block">
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Email">
+                <input id="name" type="text" class="form-control input-lg" placeholder="Username">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Password">
+                <input id="email" type="text" class="form-control input-lg" placeholder="Email">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Re-type Password">
+                <input id="password1" type="password" class="form-control input-lg" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <input id="password2" type="password" class="form-control input-lg" placeholder="Re-type Password">
               </div>
               <div class="checkbox">
-                <label><input type="checkbox" value="">I'm a moderator</label>
+                <label><input id="is-mod" type="checkbox" value="">I'm a moderator</label>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block">Sign Up</button>
+                <button id="signup-button" class="btn btn-primary btn-lg btn-block">Sign Up</button>
                 <span class="pull-right"><a href="@routes.LogIn.loadLogIn()">Already Have An Account?</a></span>
               </div>
             </form>
@@ -50,6 +53,35 @@
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script>
+          $("#signup-form").on('submit', function(e) {
+            e.preventDefault();
+            var email= $('#email').val();
+            var name= $('#name').val();
+            var password1= $('#password1').val();
+            var password2= $('#password2').val();
+            var isMod;
+            if($('#is-mod').checked){
+              isMod=yes;
+            }else{
+              isMod=no;
+            }
+
+            myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
+              success : function(data) {
+                //figure out how to tell if user is in game or not
+                window.location.href=@routes.JoinGame.loadPage();
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Invalid SignUp");
+              }
+
+            });
+
+          });
+    </script>
 
   </body>
 </html>

@@ -11,6 +11,9 @@ public class SignUp extends Controller{
     public static Result loadSignUp(){
         return ok(signup.render());
     }
+    public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
+        return ok();
+    }
 
 }
 
