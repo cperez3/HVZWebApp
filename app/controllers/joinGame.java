@@ -11,7 +11,7 @@ public class JoinGame extends Controller{
         return ok(joinGame.render());
     }
     public static Result verifyCode(String code){
-    //TO DO: VERIFY THAT THE GAME CODE IS CORRECT
+        //TO DO: VERIFY THAT THE GAME CODE IS CORRECT
         return ok();
 
     }
