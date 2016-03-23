@@ -11,5 +11,6 @@ public class SignUp extends Controller{
     public static Result loadSignUp(){
         return ok(signup.render());
     }
+
 }
 

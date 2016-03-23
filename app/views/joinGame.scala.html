@@ -9,6 +9,7 @@
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
       <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
   </head>
@@ -19,25 +20,18 @@
         <div class="modal-content">
           <div class="modal-header">
 
-            <h1 class="text-center">Sign Up</h1>
+            <h1 class="text-center">Join Game</h1>
+            <h5 class="text-center">You are not currently in a game</h5>
+              <h5 class="text-center">Please enter a game code to join a game</h5>
           </div>
           <div class="modal-body">
-            <form class="form col-md-12 center-block">
+            <form id="join-game" class="form col-md-12 center-block">
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Email">
+                <input id="game-code" type="password" class="form-control input-lg" placeholder="Game Code">
               </div>
+
               <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control input-lg" placeholder="Re-type Password">
-              </div>
-              <div class="checkbox">
-                <label><input type="checkbox" value="">I'm a moderator</label>
-              </div>
-              <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block">Sign Up</button>
-                <span class="pull-right"><a href="@routes.LogIn.loadLogIn()">Already Have An Account?</a></span>
+                <button id="join" class="btn btn-primary btn-lg btn-block">Join</button>
               </div>
             </form>
           </div>
@@ -50,6 +44,17 @@
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+      <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 
+      <script>
+          $("#join-game").on('submit', function(e) {
+              e.preventDefault();
+            var code= $('#game-code').val();
+            var codeString=String(code);
+              console.log("http://localhost:9000"+myJsRoutes.controllers.GamePage.loadPage())
+           window.location.href=myJsRoutes.controllers.GamePage.loadPage();
+
+        });
+    </script>
   </body>
 </html>
