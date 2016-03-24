@@ -58,20 +58,24 @@
           $("#signup-form").on('submit', function(e) {
             e.preventDefault();
             var email= $('#email').val();
-            var name= $('#name').val();
-            var password1= $('#password1').val();
-            var password2= $('#password2').val();
-            var isMod;
-            if($('#is-mod').checked){
-              isMod=yes;
-            }else{
-              isMod=no;
-            }
 
+            var name= $('#name').val();
+
+            var password1= $('#password1').val();
+
+            var password2= $('#password2').val();
+
+            var isMod="yes";
+            if($('#is-mod').checked){
+              isMod="yes";
+            }else{
+              isMod="no";
+            }
+            console.log(isMod);
             myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
               success : function(data) {
                 //figure out how to tell if user is in game or not
-                window.location.href=@routes.JoinGame.loadPage();
+                //window.location.href=@routes.JoinGame.loadPage();
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
