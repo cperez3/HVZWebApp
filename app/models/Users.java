@@ -4,7 +4,6 @@ package models;
  * Created by Beth on 3/23/2016.
  */
 
-import play.db.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -18,6 +17,10 @@ public class Users {
 
 
     public static boolean addUser(String name, String password, String email, boolean isMod) {
+
+
+
+
         return true;
     }
 
