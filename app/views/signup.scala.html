@@ -39,7 +39,7 @@
                 <label><input id="is-mod" type="checkbox" value="">I'm a moderator</label>
               </div>
               <div class="form-group">
-                <button id="signup-button" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+               <button id="signup-button" class="btn btn-primary btn-lg btn-block" >Sign Up</button>
                 <span class="pull-right"><a href="@routes.LogIn.loadLogIn()">Already Have An Account?</a></span>
               </div>
             </form>
@@ -64,18 +64,26 @@
             var password1= $('#password1').val();
 
             var password2= $('#password2').val();
-
-            var isMod="yes";
-            if($('#is-mod').checked){
-              isMod="yes";
+            var isMod = "true";
+            if($('#is-mod').is(':checked')){
+              isMod="true";
             }else{
-              isMod="no";
+              isMod="false";
+
             }
             console.log(isMod);
             myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
               success : function(data) {
+                //query to add the user if all is valid
+                myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
+
+                  success : function(data){
+                    //when adding the user works, it should set them as logged in via cookies I suspect
+                  }
+                })
                 //figure out how to tell if user is in game or not
-                //window.location.href=@routes.JoinGame.loadPage();
+                  //if user  is signing up they should not be in any game yet
+                window.location.href=@routes.JoinGame.loadPage();
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
