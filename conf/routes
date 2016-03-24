@@ -8,7 +8,7 @@ GET     /javascriptRoutes     controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET /login/ controllers.LogIn.loadLogIn()
-GET /signup/ controllers.SignUp.loadSignUp()
+POST /signup/ controllers.SignUp.addPerson()
 GET /joinGame/ controllers.JoinGame.loadPage()
 GET /joinGame/:code controllers.JoinGame.verifyCode(code)
 GET /gamePage/ controllers.GamePage.loadPage()
