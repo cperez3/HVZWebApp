@@ -1,7 +1,7 @@
 package controllers;
+import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.home;
 import views.html.signup;
 
 /**
@@ -12,6 +12,17 @@ public class SignUp extends Controller{
         return ok(signup.render());
     }
     public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
+        return ok();
+    }
+    public static Result addUser(String emailIn, String passwordIn, String nameIn, String isModVal){
+        //this stuff is not being parsed properly. it's also going into the db wrong, probably because of that
+        User newUser = new User();
+        newUser.userName = nameIn;
+        newUser.email = emailIn;
+        newUser.password = passwordIn;
+        newUser.isMod = Boolean.valueOf(isModVal);
+        newUser.isActive = true;
+        newUser.save();
         return ok();
     }
 
