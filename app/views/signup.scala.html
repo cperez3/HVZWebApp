@@ -58,16 +58,20 @@
           $("#signup-form").on('submit', function(e) {
             e.preventDefault();
             var email= $('#email').val();
+
             var name= $('#name').val();
+
             var password1= $('#password1').val();
+
             var password2= $('#password2').val();
             var isMod = "true";
             if($('#is-mod').is(':checked')){
               isMod="true";
             }else{
               isMod="false";
-            }
 
+            }
+            console.log(isMod);
             myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
               success : function(data) {
                 //query to add the user if all is valid

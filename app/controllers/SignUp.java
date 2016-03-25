@@ -12,6 +12,7 @@ public class SignUp extends Controller{
         return ok(signup.render());
     }
     public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
+        System.out.println(email+" "+password1+" "+password2+" "+username+" "+isMod);
         return ok();
     }
     public static Result addUser(String emailIn, String passwordIn, String nameIn, String isModVal){
