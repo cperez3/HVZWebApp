@@ -25,7 +25,7 @@
               <h5 class="text-center">Please enter a game code to join a game</h5>
           </div>
           <div class="modal-body">
-            <form id="join-game" class="form col-md-12 center-block">
+            <form id="join-game" class="form col-md-12 center-block" action="@routes.JoinGame.createGame()" method="post">
               <div class="form-group">
                 <input id="game-code" type="password" class="form-control input-lg" placeholder="Game Code">
               </div>

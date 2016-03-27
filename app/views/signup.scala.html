@@ -21,14 +21,22 @@
 
             <h1 class="text-center">Sign Up</h1>
           </div>
+
           <div class="modal-body">
+<<<<<<< HEAD
             <form id="signup-form" action="@routes.SignUp.addPerson()" class="form col-md-12 center-block" method="post" >
+=======
+            <form id="signup-form" class="form col-md-12 center-block">
+
+>>>>>>> 527091c69343677ff2effbdc46f952cef675645f
               <div class="form-group">
                 <input id="name" type="text" class="form-control input-lg" placeholder="Username">
               </div>
+
               <div class="form-group">
                 <input id="email" type="text" class="form-control input-lg" placeholder="Email">
               </div>
+
               <div class="form-group">
                 <input id="password1" type="password" class="form-control input-lg" placeholder="Password">
               </div>
@@ -39,13 +47,16 @@
                 <label><input id="is-mod" type="checkbox" value="">I'm a moderator</label>
               </div>
               <div class="form-group">
-                <button id="signup-button" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+               <button id="signup-button" class="btn btn-primary btn-lg btn-block" >Sign Up</button>
                 <span class="pull-right"><a href="@routes.LogIn.loadLogIn()">Already Have An Account?</a></span>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-
+            <div id="username-message" style="display:none;color:red;text-align: center">User name already in use</div>
+            <div id="email-message" style="display:none;color:red;text-align: center">Email is invalid</div>
+              <div id="password-message" style="display:none;color:red;text-align: center">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
+                <div id="password-message2" style="display:none;color:red;text-align: center">passwords do not match</div>
           </div>
         </div>
       </div>
@@ -55,27 +66,65 @@
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
+       function resetForm(){
+         document.getElementById('password-message2').style.display= 'none';
+         document.getElementById('password-message').style.display= 'none';
+         document.getElementById('email-message').style.display= 'none';
+         document.getElementById('username-message').style.display= 'none';
+         document.getElementById('password1').style.borderColor = "#CCC";
+         document.getElementById('password2').style.borderColor = "#CCC";
+         document.getElementById('email').style.borderColor = "#CCC";
+
+
+       }
           $("#signup-form").on('submit', function(e) {
             e.preventDefault();
+            resetForm();
             var email= $('#email').val();
-            var name= $('#name').val();
-            var password1= $('#password1').val();
-            var password2= $('#password2').val();
-            var isMod;
-            if($('#is-mod').checked){
-              isMod=yes;
-            }else{
-              isMod=no;
-            }
 
+            var name= $('#name').val();
+
+            var password1= $('#password1').val();
+
+            var password2= $('#password2').val();
+            var isMod = "true";
+            if($('#is-mod').is(':checked')){
+              isMod="true";
+            }else{
+              isMod="false";
+
+            }
+            console.log(isMod);
             myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
               success : function(data) {
+                //query to add the user if all is valid
+                myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
+
+                  success : function(data){
+                    //when adding the user works, it should set them as logged in via cookies I suspect
+                  }
+                })
                 //figure out how to tell if user is in game or not
+                  //if user  is signing up they should not be in any game yet
                 window.location.href=@routes.JoinGame.loadPage();
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Invalid SignUp");
+                var error=XMLHttpRequest["responseText"];
+                if(error=="email"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('email-message').style.display= 'block';
+
+                }else if(error=="password"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message').style.display= 'block';
+                }else if(error=="mismatch"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message2').style.display= 'block';
+                }
+
               }
 
             });
