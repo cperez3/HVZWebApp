@@ -1,28 +1,21 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
 import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
 
-import static play.mvc.Results.forbidden;
-import static play.mvc.Results.ok;
+import controllers.SignUp;
+
+import static play.mvc.Http.Status.OK;
+import static play.mvc.Http.Status.FORBIDDEN;
 import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
-
+import play.mvc.Result;
 import static org.junit.Assert.assertEquals;
 
-import views.html.joinGame;
+import static org.fest.assertions.Assertions.assertThat;
+
+
+
+
 
 
 /**
@@ -45,6 +38,26 @@ public class ApplicationTest {
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
+    @Test
+    public void validateSignUp(){
+        String pass1 = "Password1";
+        String pass2 = "Password1";
+        String email= "npatel2@ithaca.edu";
+        Result result= new SignUp().validateSignUp("myemail", pass1, pass2, "npatel2", "true");
+        Result result1= new SignUp().validateSignUp(email, "password", "password", "npatel2", "true");
+        Result result2= new SignUp().validateSignUp(email, "Password2", "pass2", "npatel2", "true");
+        Result result3= new SignUp().validateSignUp(email,pass1, pass2, "npatel2", "true");
+
+        assertEquals(FORBIDDEN, status(result));
+        assertEquals("email", contentAsString(result));
+        assertEquals(FORBIDDEN, status(result1));
+        assertEquals("password", contentAsString(result1));
+        assertEquals(FORBIDDEN, status(result2));
+        assertEquals("mismatch", contentAsString(result2));
+        assertEquals(OK, status(result3));
+    }
+
+
 
 
 

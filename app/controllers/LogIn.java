@@ -2,6 +2,11 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
+import com.avaje.ebean.RawSql;
+import com.avaje.ebean.RawSqlBuilder;
+import models.User;
+import com.avaje.ebean.Query;
+import com.avaje.ebean.Ebean;
 import views.html.signup;
 //import javax.inject.*;
 import java.util.concurrent.CompletableFuture;
@@ -25,6 +30,16 @@ public class LogIn extends Controller{
 
     public static Result validateLogIn(String email, String password) {
         String sql = "select id, name from user where email = " + email + " and password = " + password;
+        /*RawSql rawSql =
+                RawSqlBuilder
+                        .parse(sql)
+                        .columnMapping("id",  "user.id")
+                        .columnMapping("name",  "user.name")
+                        .create();
+
+        Query<User> query = Ebean.find(User.class);
+        query.setRawSql(rawSql);*/
+
 
         if (true) {
             return ok();
