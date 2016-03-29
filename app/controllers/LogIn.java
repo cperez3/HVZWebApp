@@ -76,6 +76,8 @@ instead of this one that you may want just logged */ }
         Query<User> query = Ebean.find(User.class);
         query.setRawSql(rawSql);*/
 
+        //TO DO if the user is moderator call moderator load page
+
         if (true) {
             return ok();
         } else {
