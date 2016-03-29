@@ -21,7 +21,7 @@ public class User extends Model {
     public String password;
     public String email;
     public Boolean isMod;
-    public int type;
+    public static int type;
     public Boolean isActive;
     public String gameCode;
 
@@ -29,7 +29,7 @@ public class User extends Model {
     public static void changeModStatus(){
 
     }
-    public static void changType(){
+    public static void changeType(){
 
     }
     public static void changeActiveStatus(){
@@ -42,7 +42,7 @@ public class User extends Model {
 
     }
     public static void getType(){
-
+        System.out.println("Type: " + type + ".");
     }
 
 }

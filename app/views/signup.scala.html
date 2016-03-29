@@ -21,14 +21,19 @@
 
             <h1 class="text-center">Sign Up</h1>
           </div>
+
           <div class="modal-body">
-            <form id="signup-form" class="form col-md-12 center-block">
+
+            <form id="signup-form"  class="form col-md-12 center-block" method="post" >
+
               <div class="form-group">
                 <input id="name" type="text" class="form-control input-lg" placeholder="Username">
               </div>
+
               <div class="form-group">
                 <input id="email" type="text" class="form-control input-lg" placeholder="Email">
               </div>
+
               <div class="form-group">
                 <input id="password1" type="password" class="form-control input-lg" placeholder="Password">
               </div>
@@ -45,7 +50,10 @@
             </form>
           </div>
           <div class="modal-footer">
-
+            <div id="username-message" style="display:none;color:red;text-align: center">User name already in use</div>
+            <div id="email-message" style="display:none;color:red;text-align: center">Email is invalid</div>
+              <div id="password-message" style="display:none;color:red;text-align: center">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
+                <div id="password-message2" style="display:none;color:red;text-align: center">passwords do not match</div>
           </div>
         </div>
       </div>
@@ -55,8 +63,20 @@
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
+       function resetForm(){
+         document.getElementById('password-message2').style.display= 'none';
+         document.getElementById('password-message').style.display= 'none';
+         document.getElementById('email-message').style.display= 'none';
+         document.getElementById('username-message').style.display= 'none';
+         document.getElementById('password1').style.borderColor = "#CCC";
+         document.getElementById('password2').style.borderColor = "#CCC";
+         document.getElementById('email').style.borderColor = "#CCC";
+
+
+       }
           $("#signup-form").on('submit', function(e) {
             e.preventDefault();
+            resetForm();
             var email= $('#email').val();
 
             var name= $('#name').val();
@@ -71,7 +91,7 @@
               isMod="false";
 
             }
-            console.log(isMod);
+
             myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
               success : function(data) {
                 //query to add the user if all is valid
@@ -87,7 +107,21 @@
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Invalid SignUp");
+                var error=XMLHttpRequest["responseText"];
+                if(error=="email"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('email-message').style.display= 'block';
+
+                }else if(error=="password"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message').style.display= 'block';
+                }else if(error=="mismatch"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message2').style.display= 'block';
+                }
+
               }
 
             });

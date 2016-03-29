@@ -4,7 +4,6 @@ import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 //import play.api.UsefulException;
 //import play.api.routing.Router;
 //import play.http.DefaultHttpErrorHandler;
-
 
 /**
  * Created by mariahflaim on 2/18/16.
@@ -25,6 +23,7 @@ public class LogIn extends Controller{
 
 
     public static Result validateLogIn(String email, String password) {
+
        String sql = "SELECT id, user_name FROM user WHERE email = '" + email + "' AND password = '" + password +"'";
         //sql query is not being case sensitive :O
         System.out.println(sql);
@@ -88,6 +87,7 @@ instead of this one that you may want just logged */ }
 
 }
 
+//I don't know if this down here came from git or was here. sorry.
 /*public class ErrorHandler extends DefaultHttpErrorHandler {
 
     @Inject

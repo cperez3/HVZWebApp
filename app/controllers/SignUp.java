@@ -4,30 +4,64 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
 
+import models.User;
+import play.data.Form;
+import play.db.ebean.Model;
+
+
+
+import java.lang.Exception;
+
 /**
  * Created by mariahflaim on 3/4/16.
  */
 public class SignUp extends Controller{
-    public static Result loadSignUp(){
+    public static Result loadSignUp() {
         return ok(signup.render());
+
     }
+
+    public static Result addPerson() {
+        User user = Form.form(User.class).bindFromRequest().get();
+        user.save();
+
+        //return redirect(routes.SignUp.loadSignUp());        //redirects to the sign up page after adding a person to db
+        return ok();
+    }
+
     public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
         System.out.println(email+" "+password1+" "+password2+" "+username+" "+isMod);
-        return ok();
+        //TO DO: check that username is not already being used
+        String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        String PASSWORD_REGEX="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])((?!.*\\s)).{6,}$";
+        Boolean passwordVerified=password1.matches(PASSWORD_REGEX);
+        Boolean emailVerified = email.matches(EMAIL_REGEX);
+        Boolean passwordsMatch=password1.equals(password2);
+        if(!emailVerified){
+            return forbidden("email");
+        }else if(!passwordVerified){
+            return forbidden("password");
+        }else if(!passwordsMatch) {
+            return forbidden("mismatch");
+        }else{
+            return ok();
+        }
     }
     public static Result addUser(String emailIn, String passwordIn, String nameIn, String isModVal){
-        //this stuff is not being parsed properly. it's also going into the db wrong, probably because of that
-        //System.out.println("Username :" + nameIn + "\t email : " + emailIn + "password : " + passwordIn + "mod status : " + isModVal);
-        //sorry Toby, the println is the most convenient way to do things
         //also TODO: hide passwords (hashing/encrypting/whatever)
-        User newUser = new User();
-        newUser.userName = nameIn;
-        newUser.email = emailIn;
-        newUser.password = passwordIn;
-        newUser.isMod = Boolean.valueOf(isModVal);
-        newUser.isActive = true;
-        newUser.save();
-        return ok();
+        //TO DO: check that username is not already being used
+
+            User newUser = new User();
+            newUser.userName = nameIn;
+            newUser.email = emailIn;
+            newUser.password = passwordIn;
+            newUser.isMod = Boolean.valueOf(isModVal);
+            newUser.isActive = true;
+            newUser.save();
+            return ok();
+
+
+
     }
 
 }
