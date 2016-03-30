@@ -1,27 +1,51 @@
+/**
+ * @author      Mariah Flaim
+ * @author      Evan Willner
+ * @author      Elizabeth Dellea
+ * @author      Nikhil Patel
+ * @version     1.0
+ * @since       2016-03-28
+ **/
+
 package controllers;
 
 import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+//import statements
 //import javax.inject.*;
 //import play.api.UsefulException;
 //import play.api.routing.Router;
 //import play.http.DefaultHttpErrorHandler;
 
+
 /**
  * Created by mariahflaim on 2/18/16.
  */
+
+
 public class LogIn extends Controller{
 
+    /**
+     * loads the login page
+     * @param - none
+     * @return - Result login page
+     */
     public static Result loadLogIn(){
         return ok(login.render());
     }
 
-
+    /**
+     * validates a users inputted login email and password
+     * @param email - the users email
+     * @param password - the users password
+     * @return - Result HTTP 200 ok() status
+     */
     public static Result validateLogIn(String email, String password) {
 
        String sql = "SELECT id, user_name FROM user WHERE email = '" + email + "' AND password = '" + password +"'";

@@ -1,34 +1,56 @@
+/**
+ * @author      Mariah Flaim
+ * @author      Evan Willner
+ * @author      Elizabeth Dellea
+ * @author      Nikhil Patel
+ * @version     1.0
+ * @since       2016-03-28
+ **/
+
 package controllers;
+
+//import statements
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
-
 import models.User;
 import play.data.Form;
 import play.db.ebean.Model;
-
-
-
 import java.lang.Exception;
 
-/**
- * Created by mariahflaim on 3/4/16.
- */
-public class SignUp extends Controller{
+public class SignUp extends Controller {
+
+    /**
+     * loads the sign up page
+     * @param - none
+     * @return - Result sign up page
+     */
     public static Result loadSignUp() {
         return ok(signup.render());
-
     }
 
+    /**
+     * adds a new user to the User class database
+     * @param - none
+     * @return - HTTP 200 ok() status
+     */
     public static Result addPerson() {
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
 
-        //return redirect(routes.SignUp.loadSignUp());        //redirects to the sign up page after adding a person to db
         return ok();
     }
 
+    /**
+     * validation check to sign up a user
+     * @param email - user's email
+     * @param password1 - user's password
+     * @param password2 - user's password again
+     * @param username - user's username
+     * @param isMod - moderator status of the user
+     * @return - Result page that approves or denies continued use based on the inputted email and password
+     */
     public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
         System.out.println(email+" "+password1+" "+password2+" "+username+" "+isMod);
         //TO DO: check that username is not already being used
@@ -47,6 +69,15 @@ public class SignUp extends Controller{
             return ok();
         }
     }
+
+    /**
+     * Constructor to add a user to the User database
+     * @param emailIn - user's email
+     * @param passwordIn - user's password
+     * @param nameIn - user's name
+     * @param isModVal - user's moderator status
+     * @return - HTTP 200 ok() status
+     */
     public static Result addUser(String emailIn, String passwordIn, String nameIn, String isModVal){
         //also TODO: hide passwords (hashing/encrypting/whatever)
         //TO DO: check that username is not already being used
