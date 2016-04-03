@@ -13,6 +13,8 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import play.mvc.Result;
+import play.db.ebean.Model;
 
 
 @Entity
@@ -47,10 +49,19 @@ public class Users {
 
     /**
      * removes a user from the User class database
-     * @param name - a user's name
-     * @return - boolean validating whether or not a user has been removed from the User class database
+     * @param id - a user's id
+     * @return - Result validating whether or not a user has been removed from the User class database
      */
-    public static boolean deleteUser(String name){
-        return true;
+    public static Result deleteUser(int id) {
+
+        User user = User.find.select("id").where().eq("id",id).findUnique();
+
+        if(user == null) {
+            return notFound();
+        } else {
+            user.delete();
+            return ok();
+        }
+
     }
 }
