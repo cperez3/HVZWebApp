@@ -30,3 +30,5 @@ GET /validateLogIn/:email/:password controllers.LogIn.validateLogIn(email:String
 GET /createGame/ controllers.JoinGame.createGame()
 
 GET /moderatorPage/ controllers.ModPage.loadPage()
+
+GET /settings/ controllers.GamePage.loadSettings()
