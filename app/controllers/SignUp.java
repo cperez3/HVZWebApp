@@ -88,6 +88,8 @@ public class SignUp extends Controller {
             newUser.password = passwordIn;
             newUser.isMod = Boolean.valueOf(isModVal);
             newUser.isActive = true;
+            newUser.type = "none";
+            newUser.gameCode = " ";
             newUser.save();
             return ok();
 
