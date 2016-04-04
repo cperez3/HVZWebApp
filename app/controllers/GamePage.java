@@ -13,7 +13,7 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.gamePage;
-import views.html.joinGame;
+import views.html.regularSettings;
 
 public class GamePage extends Controller {
 
@@ -25,5 +25,6 @@ public class GamePage extends Controller {
     public static Result loadPage(){
         return ok(gamePage.render());
     }
+    public static Result loadSettings(){return ok(regularSettings.render());};
 
 }
