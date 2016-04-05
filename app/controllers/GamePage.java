@@ -10,10 +10,13 @@
 package controllers;
 
 //import statements
+
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.gamePage;
 import views.html.joinGame;
+import views.html.login;
+import views.html.regularSettings;
 
 public class GamePage extends Controller {
 
@@ -23,7 +26,19 @@ public class GamePage extends Controller {
      * @return - Result page of games
      */
     public static Result loadPage(){
-        return ok(gamePage.render());
+        String uName = session("uname");
+        if(uName != null) {
+            String gCode = session("gCode");
+            if(!gCode.equals(" ")) {
+                return ok(gamePage.render());
+            }
+            else{
+                return forbidden(joinGame.render());
+            }
+        }
+            return forbidden(login.render());
+
     }
+    public static Result loadSettings(){return ok(regularSettings.render());};
 
 }

@@ -20,6 +20,7 @@ create table user (
   password                  varchar(255),
   email                     varchar(255),
   is_mod                    tinyint(1) default 0,
+  type                      varchar(255),
   is_active                 tinyint(1) default 0,
   game_code                 varchar(255),
   constraint pk_user primary key (id))
