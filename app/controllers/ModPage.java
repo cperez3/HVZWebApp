@@ -23,7 +23,7 @@ public class ModPage extends Controller {
      */
     public static Result loadPage(){
         //TO DO: check if moderator is in a game or not then load page based off if they are
-        return ok(noGameModSettings.render());
+        return ok(inGameModSettings.render());
     }
 
 }
