@@ -49,6 +49,8 @@
       <script>
           $("#join-game").on('submit', function(e) {
               e.preventDefault();
+
+
             var code= $('#game-code').val();
               myJsRoutes.controllers.JoinGame.verifyCode(code).ajax({
                   success : function(data) {
@@ -62,7 +64,8 @@
                   }
 
               });
-              //console.log(myJsRoutes.controllers.JoinGame.verifyCode(codeString))
+             e.stopPropagation();
+            //console.log(myJsRoutes.controllers.JoinGame.verifyCode(codeString))
 
             //window.location.replace=myJsRoutes.controllers.JoinGame.verifyCode(codeString);
 

@@ -35,10 +35,15 @@ public class GamePage extends Controller {
             else{
                 return forbidden(joinGame.render());
             }
+
         }
             return forbidden(login.render());
 
     }
-    public static Result loadSettings(){return ok(regularSettings.render());};
+    public static Result loadSettings(){return ok(regularSettings.render());}
+    public static Result logOut(){
+        session().clear();
+        return ok();
+    }
 
 }
