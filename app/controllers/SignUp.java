@@ -14,7 +14,6 @@ import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
-import models.User;
 import play.data.Form;
 import play.db.ebean.Model;
 import java.lang.Exception;

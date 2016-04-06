@@ -30,7 +30,7 @@ public class GamePage extends Controller {
         if(uName != null) {
             String gCode = session("gCode");
             if(!gCode.equals(" ")) {
-                return ok(gamePage.render());
+                return ok(gamePage.render(uName));
             }
             else{
                 return forbidden(joinGame.render());
