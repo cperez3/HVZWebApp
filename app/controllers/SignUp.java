@@ -91,6 +91,15 @@ public class SignUp extends Controller {
             newUser.type = "none";
             newUser.gameCode = " ";
             newUser.save();
+
+
+            session("uname", nameIn);
+            session("id", String.valueOf(newUser.id));
+            session("is_mod", isModVal);
+            session("type", "none");
+            session("is_active", "true");
+            session("gCode", " ");
+
             return ok();
 
 

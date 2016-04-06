@@ -10,11 +10,13 @@
 package controllers;
 
 //import statements
+
 import models.Game;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.joinGame;
+import views.html.login;
 
 public class JoinGame extends Controller {
 
@@ -24,7 +26,11 @@ public class JoinGame extends Controller {
      * @return - Result join game page
      */
     public static Result loadPage(){
-        return ok(joinGame.render());
+        String uName = session("uname");
+        if(uName != null) {
+            return ok(joinGame.render());
+        }
+        return forbidden(login.render());
     }
 
     /**
