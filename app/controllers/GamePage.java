@@ -43,7 +43,7 @@ public class GamePage extends Controller {
     public static Result loadSettings(){return ok(regularSettings.render());}
     public static Result logOut(){
         session().clear();
-        return ok();
+        return ok(login.render());
     }
 
 }
