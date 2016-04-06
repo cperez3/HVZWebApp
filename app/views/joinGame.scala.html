@@ -36,7 +36,7 @@
             </form>
           </div>
           <div class="modal-footer">
-
+            <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Game Code Please Try Again.</div>
           </div>
         </div>
       </div>
@@ -49,10 +49,11 @@
       <script>
           $("#join-game").on('submit', function(e) {
               e.preventDefault();
-
+            document.getElementById('no-game-message').style.display= 'none';
 
             var code= $('#game-code').val();
               myJsRoutes.controllers.JoinGame.verifyCode(code).ajax({
+
                   success : function(data) {
                     console.log(data);
                       //return data;
@@ -60,7 +61,8 @@
 
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            alert("Invalid Game Code");
+                    document.getElementById('no-game-message').style.borderColor = "red";
+                    document.getElementById('no-game-message').style.display= 'block';
                   }
 
               });
