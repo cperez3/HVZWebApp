@@ -4,11 +4,14 @@ import org.junit.*;
 import play.mvc.*;
 
 import controllers.SignUp;
+import controllers.ModPage;
 import static play.mvc.Http.Status.OK;
 import static play.mvc.Http.Status.FORBIDDEN;
+
 import static play.test.Helpers.*;
 import play.mvc.Result;
 import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import models.Game;
 
@@ -93,6 +96,14 @@ public class ApplicationTest {
         Result result2 = new SignUp().validateSignUp(email, "Password2", "pass2", "npatel2", "true");
         assertEquals(FORBIDDEN, status(result2));
         assertEquals("mismatch", contentAsString(result2));
+    }
+    @Test
+    public void createGame() {
+        Result result = new ModPage().createGame();
+        Result result1=new ModPage().loadPage();
+        assertEquals(OK,status(result1));
+        String htmlStringToEqual="<h5 class=\"text-center\">Game Code: Game Code Here </h5>";
+        assertEquals(true,contentAsString(result1).contains(htmlStringToEqual));
     }
 
     @Test

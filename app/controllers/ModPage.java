@@ -9,6 +9,8 @@
 package controllers;
 
 //import statements
+import models.Game;
+import play.data.Form;
 import play.mvc.Controller;
 import views.html.inGameModSettings;
 import views.html.noGameModSettings;
@@ -23,7 +25,18 @@ public class ModPage extends Controller {
      */
     public static Result loadPage(){
         //TO DO: check if moderator is in a game or not then load page based off if they are
-        return ok(noGameModSettings.render());
+        return ok(inGameModSettings.render());
+    }
+    /**
+     * creates a new game in the Game class database
+     * @param - none
+     * @return - Result redirect to the join game page
+     */
+    public static Result createGame() {
+        //Game game = Form.form(Game.class).bindFromRequest().get();
+        // game.save();
+        //TO DO : create game and add moderator to it
+        return redirect(routes.ModPage.loadPage());
     }
 
 }

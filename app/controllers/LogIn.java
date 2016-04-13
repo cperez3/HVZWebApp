@@ -47,10 +47,10 @@ public class LogIn extends Controller{
      * @return - Result HTTP 200 ok() status
      */
     public static Result validateLogIn(String email, String password) {
-        Boolean isUser=true;
-       String sql = "SELECT id, user_name, password FROM user WHERE email = '" + email + "' AND password = '" + password +"'";
+        Boolean isUser=false;
+        String sql = "SELECT * FROM user WHERE email = '" + email + "' AND password = '" + password +"'";
         //sql query is not being case sensitive :O
-
+        String[] fetched = new String[10];
     //https://www.playframework.com/documentation/2.1.3/JavaEbean
         java.sql.Connection conn = DB.getConnection();
         try {
@@ -60,14 +60,8 @@ public class LogIn extends Controller{
             try {
                ResultSet rst = stmt.executeQuery(sql);
                 try {
-                    if(!rst.next()){
-                        isUser=false;
-                    }else{
-                        isUser=true;
-                    }
                     while ( rst.next() ) {
                         int numColumns = rst.getMetaData().getColumnCount();
-
 
 
                         //this is where to throw an error I guess -- if one or more is invalid, it just sends back an empty result
@@ -77,10 +71,30 @@ public class LogIn extends Controller{
                             // Also there are many methods on the result set to return
                             //  the column as a particular type. Refer to the Sun documentation
                             //  for the list of valid conversions.
-                            System.out.println( "COLUMN " + i + " = " + rst.getObject(i) );
+                            fetched[i] = rst.getString(i);
+                            System.out.println( "COLUMN " + i + " = " + fetched[i] );
                         }
 
+                        if( !password.equals(fetched[3])){
+                            System.out.println(password + " from db: " + fetched[3]);
+                            isUser = false;
+                        }
+                        else{
+                            isUser = true;
+                            System.out.println("time to bake some cookies!!");
+                            //process the data into cookies
+                            session("uname", fetched[2]);
+                            session("id", fetched[1]);
+                            session("is_mod", fetched[5]);
+                            session("type", fetched[6]);
+                            session("is_active", fetched[7]);
+                            if(fetched[8] == null){
+                                fetched[8] = " ";
+                            }
+                            session("gCode", fetched[8]);
+                        }
                     }
+
                 } finally {
                     try { rst.close(); } catch (Throwable ignore) { /* Propagate the original exception
 instead of this one that you may want just logged */ }

@@ -27,6 +27,10 @@ GET /addUser/:email/:password1/:name/:mod controllers.SignUp.addUser(email:Strin
 
 GET /validateLogIn/:email/:password controllers.LogIn.validateLogIn(email:String,password:String)
 
-GET /createGame/ controllers.JoinGame.createGame()
+#GET /createGame/ controllers.JoinGame.createGame()
 
 GET /moderatorPage/ controllers.ModPage.loadPage()
+
+GET /settings/ controllers.GamePage.loadSettings()
+
+GET /logOut/ controllers.GamePage.logOut()

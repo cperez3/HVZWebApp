@@ -27,7 +27,7 @@ public class User extends Model {
     public String password;
     public String email;
     public Boolean isMod;
-    public static int type;
+    public String type;
     public Boolean isActive;
     public String gameCode;
 
@@ -84,7 +84,7 @@ public class User extends Model {
      * @return - void
      */
     public static void getType(){
-        System.out.println("Type: " + type + ".");
+
     }
 
 }

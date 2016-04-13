@@ -14,7 +14,6 @@ import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
-import models.User;
 import play.data.Form;
 import play.db.ebean.Model;
 import java.lang.Exception;
@@ -88,7 +87,18 @@ public class SignUp extends Controller {
             newUser.password = passwordIn;
             newUser.isMod = Boolean.valueOf(isModVal);
             newUser.isActive = true;
+            newUser.type = "none";
+            newUser.gameCode = " ";
             newUser.save();
+
+
+            session("uname", nameIn);
+            session("id", String.valueOf(newUser.id));
+            session("is_mod", isModVal);
+            session("type", "none");
+            session("is_active", "true");
+            session("gCode", " ");
+
             return ok();
 
 
