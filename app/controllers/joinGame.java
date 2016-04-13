@@ -116,16 +116,6 @@ instead of this one that you may want just logged */ }
 
 
 
-    /**
-     * creates a new game in the Game class database
-     * @param - none
-     * @return - Result redirect to the join game page
-     */
-    public static Result createGame() {
-        Game game = Form.form(Game.class).bindFromRequest().get();
-       // game.save();
 
-        return redirect(routes.JoinGame.loadPage());
-    }
 
 }
