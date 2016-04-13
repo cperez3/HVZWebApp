@@ -29,6 +29,8 @@ public class ApplicationTest {
     private String email;
 
     public String id;
+    public String htmlAfterCreate;
+    public String htmlAfterEnd;
     public String gameCode;
     public ArrayList humanUsers;
     public ArrayList zombieUsers;
@@ -52,7 +54,8 @@ public class ApplicationTest {
         moderatorMessages = new ArrayList();
         humanMessages = new ArrayList();
         zombieMessages = new ArrayList();
-
+        htmlAfterCreate="<h5 class=\"text-center\">Game Code: Game Code Here </h5>";
+        htmlAfterEnd= "<h5 class=\"text-center\">You are not in a game right now. </h5>";
         humanUsers.add("Evan");
         zombieUsers.add("Nikhil");
         deletedUsers.add("Ryan");
@@ -102,8 +105,7 @@ public class ApplicationTest {
         Result result = new ModPage().createGame();
         Result result1=new ModPage().loadPage();
         assertEquals(OK,status(result1));
-        String htmlStringToEqual="<h5 class=\"text-center\">Game Code: Game Code Here </h5>";
-        assertEquals(true,contentAsString(result1).contains(htmlStringToEqual));
+        assertEquals(true,contentAsString(result1).contains(htmlAfterCreate));
     }
 
     @Test
@@ -114,28 +116,22 @@ public class ApplicationTest {
 
     @Test
     public void ifAccountDoesNotExistForbiddenIsResturned() {
-        Result result4 = new controllers.LogIn().validateLogIn(email, password);
+        Result result4 = new controllers.LogIn().validateLogIn(email, pass1);
         assertEquals(FORBIDDEN, status(result4));
         assertEquals("not user", contentAsString(result4));
     }
 
     @Test
     public void ifAccountExistsOKIsResturned() {
-        Result result5 = new controllers.LogIn().validateLogIn(email, password);
+        Result result5 = new controllers.LogIn().validateLogIn(email, pass1);
         assertEquals(OK, status(result5));
     }
 
-    //Game creation and ending
     @Test
-    public void ifOrganizerCreatesGameNewDataIsCreated() {
-        Result result6 = new controllers.addGame(id, gameCode, humanUsers, zombieUsers, deletedUsers, moderatorMessages, humanMessages, zombieMessages);
-        assertEquals(OK, status(result6));
-    }
-
-    @Test
-    public void ifOrganizerEndsGameDataIsRemoved() {
-        Result result7 = new controllers.deleteGame(gameDelete);
-        assertEquals(OK, status(result7));
+    public void endGame() {
+        Result result7 = new controllers.ModPage().endGame();
+        Result result8= new controllers.ModPage().loadPage();
+        assertEquals(true, contentAsString(result8).contains(htmlAfterEnd));
     }
 
     /*public static Result addGame(String idIn, String gameCodeIn, ArrayList humanUsersIn,

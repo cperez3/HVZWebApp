@@ -38,6 +38,9 @@ public class ModPage extends Controller {
         //TO DO : create game and add moderator to it
         return redirect(routes.ModPage.loadPage());
     }
+    public static Result endGame(){
+
+    }
 
 }
 
