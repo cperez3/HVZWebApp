@@ -11,7 +11,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET /login/ controllers.LogIn.loadLogIn()
 
-POST /signup/ controllers.SignUp.addPerson()
+#POST /signup/ controllers.SignUp.addPerson()
 
 GET /signup/ controllers.SignUp.loadSignUp()
 

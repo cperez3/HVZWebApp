@@ -17,6 +17,7 @@ import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.joinGame;
+import views.html.gamePage;
 import views.html.login;
 
 import java.sql.ResultSet;
@@ -31,8 +32,11 @@ public class JoinGame extends Controller {
      */
     public static Result loadPage(){
         String uName = session("uname");
-        if(uName != null) {
+        String gCode= session("gCode");
+        if(uName != null&&gCode==" ") {
             return ok(joinGame.render());
+        }else if(uName!=null&&gCode!=" "){
+            return ok(gamePage.render(uName));
         }
         return forbidden(login.render());
     }

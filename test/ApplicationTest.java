@@ -79,28 +79,7 @@ public class ApplicationTest {
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
 
-    //Login and SignUp Testing
-    @Test
-    public void ifEmailIsFalseForbiddenIsReturned() {
-        Result result = new SignUp().validateSignUp("myemail", pass1, pass2, "npatel2", "true");
-        assertEquals(FORBIDDEN, status(result));
-        assertEquals("email", contentAsString(result));
-    }
 
-    @Test
-    public void ifPasswordIsNotGoodForbiddenIsReturned() {
-        Result result1 = new SignUp().validateSignUp(email, "password", "password", "npatel2", "true");
-        assertEquals(FORBIDDEN, status(result1));
-        assertEquals("password", contentAsString(result1));
-    }
-
-    @Test
-    public void ifPasswordsDoNotMatchForbiddenIsReturned() {
-        Result result2 = new SignUp().validateSignUp(email, "Password2", "pass2", "npatel2", "true");
-        assertEquals(FORBIDDEN, status(result2));
-        assertEquals("mismatch", contentAsString(result2));
-    }
-    @Test
     public void createGame() {
         Result result = new ModPage().createGame();
         Result result1=new ModPage().loadPage();

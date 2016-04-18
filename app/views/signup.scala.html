@@ -102,11 +102,12 @@
 
                   success : function(data){
                     //when adding the user works, it should set them as logged in via cookies I suspect
+                    window.location.href=@routes.GamePage.loadPage();
                   }
                 })
                 //figure out how to tell if user is in game or not
                   //if user  is signing up they should not be in any game yet
-                window.location.href=@routes.JoinGame.loadPage();
+
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
