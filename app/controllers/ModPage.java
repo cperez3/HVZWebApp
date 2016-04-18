@@ -47,7 +47,7 @@ public class ModPage extends Controller {
     /**
      * creates a new game in the Game class database
      * @param - none
-     * @return - Result redirect to the join game page
+     * @return - Result redirect to the in Game Mod Setting page
      */
     public static Result createGame() {
         //Game game = Form.form(Game.class).bindFromRequest().get();
@@ -55,10 +55,20 @@ public class ModPage extends Controller {
         //TO DO : create game and add moderator to it
         return redirect(routes.ModPage.loadPage());
     }
+    /**
+     *removes game from database
+     * @param - none
+     * @return - Result redirect to the no Game Mod Setting page
+     */
     public static Result endGame(){
             return ok();
     }
-
+    
+    /**
+     * gets rid of moderator status of user and reloads page so that game page is not longer mod page
+     * @param - none
+     * @return - none
+     */
     public static void changeStatus(){
         Boolean isMod=false;
         String sql2 = "UPDATE user SET is_mod = '" + isMod + "' WHERE id = " + session("id");
