@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Bootstrap Login Form</title>
+    <title>Settings</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
@@ -12,6 +12,10 @@
 
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
+
+    <!--favicon-->
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
     <script type="text/javascript">
         function codeAddress() {
           //TO DO: if player is a moderator then line of code below should be loaded
@@ -38,24 +42,33 @@
           <div class="modal-body">
             <form class="form col-md-12 center-block">
 
-              <div class="form-group">
+              <div id="change-team-form" class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
               </div>
-
+            </form>
+              <form id="change-status-form"class="form col-md-12 center-block">
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
               </div>
+              </form>
+              <form id="remove-mod-form"class="form col-md-12 center-block">
               <div id="mod-status" class="form-group" style="display:none">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
               </div>
+            </form>
+              <form id="log-out-form"class="form col-md-12 center-block">
+
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Log Out</button>
+                <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
               </div>
+              </form>
+            <form id="delete-form"class="form col-md-12 center-block">
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
               </div>
-
             </form>
+
+
           </div>
           <div class="modal-footer">
 
@@ -74,6 +87,11 @@
             window.location.href=@routes.GamePage.loadPage();
 
           }
+          $("#log-out-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.logOut();
+          });
+
 
 
     </script>

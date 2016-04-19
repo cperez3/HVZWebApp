@@ -13,6 +13,8 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.noGameModSettings;
+import views.html.inGameModSettings;
 import views.html.gamePage;
 import views.html.joinGame;
 import views.html.login;
@@ -29,16 +31,30 @@ public class GamePage extends Controller {
         String uName = session("uname");
         if(uName != null) {
             String gCode = session("gCode");
-            if(!gCode.equals(" ")) {
-                return ok(gamePage.render());
+            String isMod=session("is_mod");
+            System.out.println("isMod: "+isMod);
+            if(!gCode.equals(" ")&&(isMod.equals("0")||isMod.equals("false"))){
+                return ok(gamePage.render(uName));
+            }if((isMod.equals("1")||isMod.equals("true"))
+                    &&!gCode.equals(" ")){
+                return ok(inGameModSettings.render());
+
+            }if((isMod.equals("1")||isMod.equals("true"))
+                    &&gCode.equals(" ")){
+                return ok(noGameModSettings.render());
             }
             else{
                 return forbidden(joinGame.render());
             }
+
         }
             return forbidden(login.render());
 
     }
-    public static Result loadSettings(){return ok(regularSettings.render());};
+    public static Result loadSettings(){return ok(regularSettings.render());}
+    public static Result logOut(){
+        session().clear();
+        return ok(login.render());
+    }
 
 }
