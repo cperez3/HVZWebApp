@@ -10,6 +10,7 @@
 package models;
 
 //import statements
+import models.User;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;

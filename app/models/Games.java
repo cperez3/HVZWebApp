@@ -10,23 +10,16 @@
 package models;
 
 //import statements
-import play.api.mvc.AnyContentAsRaw;
-import play.db.ebean.Model;
+import play.mvc.Result;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
-import play.mvc.Result;
-
 
 @Entity
 public class Games {
 
     @Id
     public String id;
-
-    public static String createGame(){
-        return "gameCode";
-    }
 
     /**
      * removes a game from the Game database given a game code
