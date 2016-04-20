@@ -9,15 +9,10 @@
 package controllers;
 
 //import statements
-import models.Game;
-import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
-import views.html.gamePage;
-import views.html.login;
-import views.html.inGameModSettings;
-import views.html.noGameModSettings;
 import play.mvc.Result;
+import views.html.*;
 
 import java.sql.SQLException;
 
@@ -69,9 +64,9 @@ public class ModPage extends Controller {
      * @param - none
      * @return - none
      */
-    public static void changeStatus(){
-        Boolean isMod=false;
-        String sql2 = "UPDATE user SET is_mod = '" + isMod + "' WHERE id = " + session("id");
+    public static Result changeStatus(){
+        String isMod= "false";
+        String sql2 = "UPDATE user SET is_mod = " + isMod + " WHERE id = " + session("id");
         java.sql.Connection conn2 = DB.getConnection();
         try {
             //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
@@ -95,7 +90,7 @@ public class ModPage extends Controller {
         }
         //TO DO: Error checking
         session("is_mod","false");
-        loadPage();
+        return ok(regularSettings.render());
     }
 
 }
