@@ -57,4 +57,29 @@ public class SignUpTest {
         Result result3 = new SignUp().validateSignUp(email, pass1, pass2, "npatel2", "true");
         assertEquals(OK, status(result3));
     }
+    @Test
+    public void repeatSignUpEmail(){
+        Result result4;
+        //assertEquals(FORBIDDEN, status(result4));
+        //assertEquals("repeatE", contentAsString(result4));
+        // ^^ asserts are accurate assuming an appropriate query can be made
+        //not sure how to write these tests as they rely on checking against existing database entries
+    }
+
+    @Test
+    public void repeatSignUpUname(){
+        Result result5;
+        //assertEquals(FORBIDDEN, status(result5));
+        //assertEquals("repeatU", contentAsString(result5));
+        // ^^ asserts are accurate assuming an appropriate query can be made
+        //not sure how to write these tests as they rely on checking against existing database entries
+    }
+    @Test
+    public void repeatSignUpUnameEmail(){
+        Result result6;
+        //assertEquals(FORBIDDEN, status(result6));
+        //assertEquals("repeatUE", contentAsString(result6));
+        // ^^ asserts are accurate assuming an appropriate query can be made
+        //not sure how to write these tests as they rely on checking against existing database entries
+    }
 }
