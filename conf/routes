@@ -34,3 +34,5 @@ GET /moderatorPage/ controllers.ModPage.loadPage()
 GET /settings/ controllers.GamePage.loadSettings()
 
 GET /logOut/ controllers.GamePage.logOut()
+
+GET /changeMod/ controllers.ModPage.changeStatus()
