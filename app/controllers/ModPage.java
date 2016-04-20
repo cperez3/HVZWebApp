@@ -63,7 +63,7 @@ public class ModPage extends Controller {
     public static Result endGame(){
             return ok();
     }
-    
+
     /**
      * gets rid of moderator status of user and reloads page so that game page is not longer mod page
      * @param - none
