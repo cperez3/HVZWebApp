@@ -83,7 +83,9 @@ public class LogIn extends Controller{
                             isUser = true;
                             System.out.println("time to bake some cookies!!");
                             //process the data into cookies
+                            System.out.println(fetched[4]);
                             session("uname", fetched[2]);
+                            session("email",fetched[4]);
                             session("id", fetched[1]);
                             session("is_mod", fetched[5]);
                             session("type", fetched[6]);
@@ -116,8 +118,10 @@ instead of this one that you may want just logged */ }
         //TO DO if the user is moderator call moderator load page
 
       if(isUser){
+          System.out.println("isuser");
           return ok();
       }else{
+          System.out.println("nouser");
           return forbidden("not user");
       }
 

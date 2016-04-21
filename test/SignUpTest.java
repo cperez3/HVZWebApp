@@ -164,9 +164,10 @@ public class SignUpTest {
                 assertEquals(OK, status(result));
             }
             public void deleteUser(String emailIn){
+
                 request = Json.newObject()
                         .put("email",emailIn);
-                result=callAction(routes.ref.GamePage.deleteUser(emailIn),fakeRequest().withJsonBody(request));
+                result=callAction(routes.ref.GamePage.deactivateAccount(),fakeRequest().withJsonBody(request));
             }
 
             public void run() {
