@@ -123,10 +123,10 @@ public class LoginTest {
                 fakeRequest1(email,pass);
                 assertEquals(OK, status(result));
             }
-            public void deleteUser(){
+            public void deleteUser(String emailIn){
                 request = Json.newObject()
-                    .put("email",email);
-                result=callAction(routes.ref.GamePage.deleteUser(email),fakeRequest().withJsonBody(request));
+                    .put("email",emailIn);
+                result=callAction(routes.ref.GamePage.deleteUser(emailIn),fakeRequest().withJsonBody(request));
             }
             @Override
             public void run() {
@@ -146,7 +146,7 @@ public class LoginTest {
                         validateLoginBadPasswordCase();
                     } if(testNumber==5){
                         validateLoginGoodAccount();
-                        //deleteUser();
+                        deleteUser(email);
                     }
 
 

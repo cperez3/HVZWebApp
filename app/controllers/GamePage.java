@@ -67,14 +67,19 @@ public class GamePage extends Controller {
     }
 
     public static Result deleteUser(String email) {
-        String sql2 = "DELETE FROM 'hvz'.'user' WHERE email =" + email;
+        String sql1="SET SQL_SAFE_UPDATES = 0";
+        String sql2 = "DELETE FROM user WHERE email = '" + email + "'";
+        String sql3="SET SQL_SAFE_UPDATES = 1";
         java.sql.Connection conn2 = DB.getConnection();
         try {
             //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
 
             java.sql.Statement stmt = conn2.createStatement();
             try {
-                Boolean rst = stmt.execute(sql2);
+                //Boolean rst1 = stmt.execute(sql1);
+                System.out.println("JIIIIIII");
+                Boolean rst2 = stmt.execute(sql2);
+                //Boolean rst3 = stmt.execute(sql3);
                 // rst.close();
             } finally {
 
