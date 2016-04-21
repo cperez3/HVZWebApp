@@ -35,7 +35,6 @@
           </div>
 
           <div class="modal-body">
-            <form class="form col-md-12 center-block">
 
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
@@ -43,8 +42,13 @@
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
               </div>
+              <div class="form-group">
+                <form id="change-mod-status-form" class="form center-block">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
+                <!-- "stop moderating is a lame phrase but it's what I've got atm -->
+                </form>
+              </div>
 
-            </form>
           </div>
           <div class="modal-footer">
 
@@ -62,6 +66,22 @@
             window.location.href=@routes.GamePage.loadSettings();
 
           }
+          $("#change-mod-status-form").on('submit', function(e) {
+            e.preventDefault();
+            console.log("mod stat button pressed!");
+            /*
+            myJsRoutes.controllers.ModPage.changeStatus().ajax({
+
+              success : function(data){
+                //when adding the user works, it should set them as logged in via cookies I suspect
+                window.location.href=@routes.GamePage.loadSettings();
+              }
+            })
+            */
+            window.location.href=@routes.ModPage.changeStatus();
+
+
+          });
 
 
     </script>

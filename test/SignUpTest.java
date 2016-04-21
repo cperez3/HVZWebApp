@@ -75,6 +75,19 @@ public class SignUpTest {
     public void test6(){
         signUpTest(6);
     }
+    @Test
+    public void test7(){
+        signUpTest(7);
+    }
+    @Test
+    public void test8(){
+        signUpTest(8);
+    }
+    @Test
+    public void test9(){
+        signUpTest(9);
+    }
+
     public void signUpTest(int testNumber) {
         running(fakeApplication(), new Runnable() {
 
@@ -99,6 +112,31 @@ public class SignUpTest {
                         .put("password", pass1);
                 result=callAction(controllers.routes.ref.LogIn.validateLogIn(email,pass1),fakeRequest().withJsonBody(request));
                 assertEquals(OK, status(result));
+            }
+
+            public void addUserRepeatSignUpEmail(){
+                Result result4;
+                //assertEquals(FORBIDDEN, status(result4));
+                //assertEquals("repeatE", contentAsString(result4));
+                // ^^ asserts are accurate assuming an appropriate query can be made
+                //not sure how to write these tests as they rely on checking against existing database entries
+            }
+
+
+            public void addUserRepeatSignUpUname(){
+                Result result5;
+                //assertEquals(FORBIDDEN, status(result5));
+                //assertEquals("repeatU", contentAsString(result5));
+                // ^^ asserts are accurate assuming an appropriate query can be made
+                //not sure how to write these tests as they rely on checking against existing database entries
+            }
+
+            public void addUserRepeatSignUpUnameEmail(){
+                Result result6;
+                //assertEquals(FORBIDDEN, status(result6));
+                //assertEquals("repeatUE", contentAsString(result6));
+                // ^^ asserts are accurate assuming an appropriate query can be made
+                //not sure how to write these tests as they rely on checking against existing database entries
             }
 
             public void validateSignUpWithBadEmail() {
@@ -136,15 +174,24 @@ public class SignUpTest {
                         addUser();
                     }
                     if(testNumber==3){
-                        validateSignUpWithBadEmail();
+                        addUserRepeatSignUpEmail();
                     }
                     if(testNumber==4){
-                        validateSignUpWithBadPassword();
+                        addUserRepeatSignUpUname();
                     }
                     if(testNumber==5){
-                        validateSignUpWithMistmatchPasswords();
+                       addUserRepeatSignUpUnameEmail();
                     }
                     if(testNumber==6){
+                        validateSignUpWithBadEmail();
+                    }
+                    if(testNumber==7){
+                        validateSignUpWithBadPassword();
+                    }
+                    if(testNumber==8){
+                        validateSignUpWithMistmatchPasswords();
+                    }
+                    if(testNumber==9){
                         validateSignUpGoodInput();
                     }
 

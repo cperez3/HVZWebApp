@@ -35,5 +35,8 @@ GET /settings/ controllers.GamePage.loadSettings()
 
 GET /logOut/ controllers.GamePage.logOut()
 
+
 GET /deleteAccount/:email controllers.GamePage.deleteUser(email:String)
+
+GET /changeMod/ controllers.ModPage.changeStatus()
 
