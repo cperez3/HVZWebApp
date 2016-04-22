@@ -39,15 +39,11 @@ public class GamePage extends Controller {
             String gCode = session("gCode");
             String isMod = session("is_mod");
             System.out.println("isMod: " + isMod);
-            if (!gCode.equals(" ") && (isMod.equals("0") || isMod.equals("false"))) {
+            if (!gCode.equals(" ")) {
                 return ok(gamePage.render(uName));
+                //works for regular player and moderator this way
             }
-            //should just give them the game page
-            if ((isMod.equals("1") || isMod.equals("true"))
-                    && !gCode.equals(" ")) {
-                return ok(inGameModSettings.render());
 
-            }
             if ((isMod.equals("1") || isMod.equals("true"))
                     && gCode.equals(" ")) {
                 return ok(noGameModSettings.render());
@@ -66,7 +62,13 @@ public class GamePage extends Controller {
             return ok(regularSettings.render());
         } if(isMod.equals("1")||isMod.equals("true")){
             //TO DO: return mod settings
-            return ok();
+            String gCode = session("gCode");
+            if(gCode != " "){
+                return ok(inGameModSettings.render());
+            }
+            else {
+                return ok(noGameModSettings.render());
+            }
         }
 
         return forbidden(login.render());

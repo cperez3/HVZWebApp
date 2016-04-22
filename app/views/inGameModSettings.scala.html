@@ -23,36 +23,88 @@
         <div class="modal-content">
           <div class="modal-header">
 
-            <div class="col-xs-1 col-xs-offset-10"><input onclick="" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
 
             <br>
             <br>
-            <h5 class="text-center">Game Code: Game Code Here </h5>
+
+          </div>
+            <div>
+
+                <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#modStuff" aria-controls="modStuff" role="tab" data-toggle="tab">Mod Settings</a></li>
+                <li role="presentation"><a href="#gameStuff" aria-controls="gameStuff" role="tab" data-toggle="tab">Game Settings</a></li>
+              </ul>
+
+                <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="modStuff">
+
+                  <h5 class="text-center">Game Code: Game Code Here </h5>
+
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
+                    </div>
+                    <div class="form-group">
+                      <form id="change-mod-status-form" class="form center-block">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
+                          <!-- "stop moderating is a lame phrase but it's what I've got atm -->
+                      </form>
+                    </div>
+
+                  </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="gameStuff">
+
+                  <div class="col-xs-12"><h3>User Name</h3></div>
+                  <div class="col-xs-12">Team: Humans</div>
+                  <div class="col-xs-12">Status: Active</div>
+                  <br><br><br>
+
+                  <form class="form col-md-12 center-block">
+
+                    <div id="change-team-form" class="form-group">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
+                    </div>
+                  </form>
+                  <form id="change-status-form"class="form col-md-12 center-block">
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
+                    </div>
+                  </form>
+                  <form id="remove-mod-form"class="form col-md-12 center-block">
+                    <div id="mod-status" class="form-group" style="display:none">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
+                    </div>
+                  </form>
+                  <form id="log-out-form"class="form col-md-12 center-block">
+
+                    <div class="form-group">
+                      <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
+                    </div>
+                  </form>
+                  <form id="delete-form"class="form col-md-12 center-block">
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
+                    </div>
+                  </form>
 
 
 
+                </div>
+
+              </div>
 
           </div>
 
-          <div class="modal-body">
 
-              <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
-              </div>
-              <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
-              </div>
-              <div class="form-group">
-                <form id="change-mod-status-form" class="form center-block">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
-                <!-- "stop moderating is a lame phrase but it's what I've got atm -->
-                </form>
-              </div>
-
-          </div>
-          <div class="modal-footer">
-
-          </div>
         </div>
       </div>
     </div>
@@ -64,6 +116,11 @@
     <script>
           function loadSettings(){
             window.location.href=@routes.GamePage.loadSettings();
+
+          }
+          function goBack(){
+            //TO DO: If user is moderator it should go back to the Mod Page
+            window.location.href=@routes.GamePage.loadPage();
 
           }
           $("#change-mod-status-form").on('submit', function(e) {
@@ -82,6 +139,12 @@
 
 
           });
+
+          $("#log-out-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.logOut();
+          });
+
 
 
     </script>
