@@ -119,9 +119,9 @@ public class GamePageTest {
 
             }
             public void deleteUser(String emailIn){
-                request = Json.newObject()
-                        .put("email",emailIn);
-                result=callAction(routes.ref.GamePage.deleteUser(emailIn),fakeRequest().withJsonBody(request));
+                request = Json.newObject();
+
+                result=callAction(routes.ref.GamePage.deactivateAccount(),fakeRequest().withJsonBody(request).withSession("email",emailIn));
             }
 
             public void run() {

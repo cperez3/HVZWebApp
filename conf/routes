@@ -37,8 +37,6 @@ GET /logOut/ controllers.GamePage.logOut()
 
 GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
 
-GET /deleteAccount/:email controllers.GamePage.deleteUser(email:String)
-
 GET /changeMod/ controllers.ModPage.changeStatus()
 
 GET /getPlayers/ controllers.ModPage.getPlayers()
