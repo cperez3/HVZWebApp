@@ -141,7 +141,7 @@ instead of this one that you may want just logged */
             newUser.password = passwordIn;
             newUser.isMod = Boolean.valueOf(isModVal);
             newUser.isActive = true;
-            newUser.type = "none";
+            newUser.type = "human";
             newUser.gameCode = " ";
             newUser.save();
 

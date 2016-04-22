@@ -163,6 +163,11 @@ public class SignUpTest {
                 fakeRequest1(email, pass1, pass2, name, mod);
                 assertEquals(OK, status(result));
             }
+            public void deleteUser(String emailIn){
+
+                request = Json.newObject();
+                result=callAction(routes.ref.GamePage.deactivateAccount(),fakeRequest().withJsonBody(request).withSession("email",emailIn));
+            }
 
             public void run() {
                 Ebean.beginTransaction();
@@ -172,6 +177,7 @@ public class SignUpTest {
                     }
                     if(testNumber==2){
                         addUser();
+
                     }
                     if(testNumber==3){
                         addUserRepeatSignUpEmail();
@@ -193,6 +199,7 @@ public class SignUpTest {
                     }
                     if(testNumber==9){
                         validateSignUpGoodInput();
+                        deleteUser(email);
                     }
 
                 } finally {

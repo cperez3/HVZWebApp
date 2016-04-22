@@ -32,6 +32,8 @@ public class GamePage extends Controller {
      * @return - Result page of games
      */
     public static Result loadPage() {
+
+        //TO DO: should put inGameModSettings into mod settings so moderator can access gamepage and then just do mod stuff from settings
         String uName = session("uname");
         if (uName != null) {
             String gCode = session("gCode");
@@ -40,6 +42,7 @@ public class GamePage extends Controller {
             if (!gCode.equals(" ") && (isMod.equals("0") || isMod.equals("false"))) {
                 return ok(gamePage.render(uName));
             }
+            //should just give them the game page
             if ((isMod.equals("1") || isMod.equals("true"))
                     && !gCode.equals(" ")) {
                 return ok(inGameModSettings.render());
@@ -58,38 +61,73 @@ public class GamePage extends Controller {
     }
 
     public static Result loadSettings() {
-        return ok(regularSettings.render());
+        String isMod = session("is_mod");
+        if(isMod.equals("0")||isMod.equals("false")){
+            return ok(regularSettings.render());
+        } if(isMod.equals("1")||isMod.equals("true")){
+            //TO DO: return mod settings
+            return ok();
+        }
+
+        return forbidden(login.render());
     }
 
     public static Result logOut() {
-        session().clear();
-        return ok(login.render());
+        String uName = session("uname");
+        if(uName!=null){
+            session().clear();
+            return ok(login.render());
+        }else{
+            return forbidden(login.render());
+        }
+
+    }
+
+    public static Result deactivateAccount(){
+        String email = session("email");
+        System.out.println(email);
+        if(email!=null){
+
+            return deleteUser(email);
+        }else{
+            return forbidden(login.render());
+        }
     }
 
     public static Result deleteUser(String email) {
-        String sql2 = "DELETE FROM 'hvz'.'user' WHERE email =" + email;
-        java.sql.Connection conn2 = DB.getConnection();
-        try {
-            //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
 
-            java.sql.Statement stmt = conn2.createStatement();
-            try {
-                Boolean rst = stmt.execute(sql2);
-                // rst.close();
-            } finally {
 
-                stmt.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+            String sql1="SET SQL_SAFE_UPDATES = 0";
+            String sql2 = "DELETE FROM user WHERE email = '" + email + "'";
+            String sql3="SET SQL_SAFE_UPDATES = 1";
+            java.sql.Connection conn2 = DB.getConnection();
             try {
-                conn2.close();
+                //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+                java.sql.Statement stmt = conn2.createStatement();
+                try {
+                    //Boolean rst1 = stmt.execute(sql1);
+                    System.out.println("JIIIIIII");
+                    Boolean rst2 = stmt.execute(sql2);
+                    //Boolean rst3 = stmt.execute(sql3);
+                    // rst.close();
+                } finally {
+
+                    stmt.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    conn2.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        return ok();
+            return ok();
+
+
+
     }
 
 
