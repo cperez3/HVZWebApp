@@ -1,13 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 import play.mvc.Controller;
-import controllers.JoinGame;
 import play.mvc.Result;
 
 import static org.junit.Assert.assertEquals;
 import static play.test.Helpers.*;
-import static play.test.Helpers.status;
-import static play.mvc.Http.Status.FORBIDDEN;
+
 /**
  * Created by mariahflaim on 4/15/16.
  */

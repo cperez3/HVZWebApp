@@ -1,7 +1,9 @@
 import controllers.routes;
 
+import org.eclipse.jetty.http.HttpCookie;
 import org.junit.Before;
 import org.junit.Test;
+import play.mvc.Http;
 import play.mvc.Result;
 
 
@@ -9,6 +11,7 @@ import play.mvc.Result;
 import static org.junit.Assert.assertEquals;
 import static play.mvc.Http.Status.FORBIDDEN;
 import static play.mvc.Http.Status.OK;
+import static play.mvc.Http.Cookie;
 import static play.test.Helpers.contentAsString;
 import static play.test.Helpers.status;
 import com.avaje.ebean.Ebean;
@@ -72,7 +75,8 @@ public class LoginTest {
     @Test
     public void test4(){
         loginTest(4);
-    }@Test
+    }
+    @Test
     public void test5(){
         loginTest(5);
     }
@@ -124,9 +128,9 @@ public class LoginTest {
                 assertEquals(OK, status(result));
             }
             public void deleteUser(String emailIn){
-                request = Json.newObject()
-                    .put("email",emailIn);
-                result=callAction(routes.ref.GamePage.deleteUser(emailIn),fakeRequest().withJsonBody(request));
+                request = Json.newObject();
+                //Http.Cookie cookie= new Http.Cookie("email",emailIn,1,"ds","dffsd",true,true);
+                result=callAction(routes.ref.GamePage.deactivateAccount(),fakeRequest().withJsonBody(request).withSession("email",emailIn));
             }
             @Override
             public void run() {
