@@ -94,7 +94,7 @@ instead of this one that you may want just logged */ }
                 java.sql.Statement stmt = conn2.createStatement();
                 try {
                     Boolean rst = stmt.execute(sql2);
-                   // rst.close();
+                    // rst.close();
                 } finally {
 
                     stmt.close();
