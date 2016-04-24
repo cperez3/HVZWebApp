@@ -72,18 +72,18 @@ public class LogIn extends Controller{
                             //  the column as a particular type. Refer to the Sun documentation
                             //  for the list of valid conversions.
                             fetched[i] = rst.getString(i);
-                            System.out.println( "COLUMN " + i + " = " + fetched[i] );
+
                         }
 
                         if( !password.equals(fetched[3])){
-                            System.out.println(password + " from db: " + fetched[3]);
+
                             isUser = false;
                         }
                         else{
                             isUser = true;
-                            System.out.println("time to bake some cookies!!");
+
                             //process the data into cookies
-                            System.out.println(fetched[4]);
+
                             session("uname", fetched[2]);
                             session("email",fetched[4]);
                             session("id", fetched[1]);
