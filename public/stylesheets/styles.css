@@ -1,0 +1,14 @@
+.modal-footer {   border-top: 0px; }
+
+.full {
+    background-color: black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.btn:hover, .btn:active, .btn:focus, .btn > a:focus, .btn > a:active, .btn > a:hover{
+    background-color: darkred;
+}

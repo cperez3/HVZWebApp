@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="full" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
+      <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
+      <!--favicon-->
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+  </head>
+  <body>
+      <!--login modal-->
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h1 class="text-center">Sign Up</h1>
+          </div>
+
+          <div class="modal-body">
+
+            <form id="signup-form"  class="form col-md-12 center-block" method="post" >
+
+              <div class="form-group">
+                <input id="name" type="text" class="form-control input-lg" placeholder="Username">
+              </div>
+
+              <div class="form-group">
+                <input id="email" type="text" class="form-control input-lg" placeholder="Email">
+              </div>
+
+              <div class="form-group">
+                <input id="password1" type="password" class="form-control input-lg" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <input id="password2" type="password" class="form-control input-lg" placeholder="Re-type Password">
+              </div>
+              <div class="checkbox">
+                <label><input id="is-mod" type="checkbox" value="">I'm a moderator</label>
+              </div>
+              <div class="form-group">
+               <button id="signup-button" class="btn btn-primary btn-lg btn-block" >Sign Up</button>
+                <span class="pull-right"><a href="@routes.LogIn.loadLogIn()">Already Have An Account?</a></span>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div id="username-message" style="display:none;color:red;text-align: center">User name already in use</div>
+            <div id="email-repeat-message" style="display:none;color:red;text-align: center">Email already in use</div>
+            <div id="email-message" style="display:none;color:red;text-align: center">Email is invalid</div>
+              <div id="password-message" style="display:none;color:red;text-align: center">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
+                <div id="password-message2" style="display:none;color:red;text-align: center">passwords do not match</div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script>
+       function resetForm(){
+         document.getElementById('password-message2').style.display= 'none';
+         document.getElementById('password-message').style.display= 'none';
+         document.getElementById('email-message').style.display= 'none';
+         document.getElementById('username-message').style.display= 'none';
+         document.getElementById('email-repeat-message').style.display= 'none';
+         document.getElementById('password1').style.borderColor = "#CCC";
+         document.getElementById('password2').style.borderColor = "#CCC";
+         document.getElementById('email').style.borderColor = "#CCC";
+
+
+       }
+          $("#signup-form").on('submit', function(e) {
+            e.preventDefault();
+            resetForm();
+            var email= $('#email').val();
+
+            var name= $('#name').val();
+
+            var password1= $('#password1').val();
+
+            var password2= $('#password2').val();
+            var isMod = "true";
+            if($('#is-mod').is(':checked')){
+              isMod="true";
+            }else{
+              isMod="false";
+
+            }
+
+            myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
+              success : function(data) {
+                //query to add the user if all is valid
+                myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
+
+                  success : function(data){
+                    //when adding the user works, it should set them as logged in via cookies I suspect
+                    window.location.href=@routes.GamePage.loadPage();
+                  }
+                })
+                //figure out how to tell if user is in game or not
+                  //if user  is signing up they should not be in any game yet
+
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                var error=XMLHttpRequest["responseText"];
+                if(error == "repeatUE"){
+                  document.getElementById("name").style.borderColor = "red";
+                  document.getElementById("email").style.borderColor = "red";
+                  document.getElementById('username-message').style.display= 'block';
+                  document.getElementById('email-repeat-message').style.display= 'block';
+                }else if(error=="repeatU"){
+                  document.getElementById('name').style.borderColor = "red";
+                  document.getElementById('username-message').style.display= 'block';
+                }else if(error == "repeatE"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('email-repeat-message').style.display= 'block';
+
+                }else if(error=="email"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('email-message').style.display= 'block';
+
+                }else if(error=="password"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message').style.display= 'block';
+                }else if(error=="mismatch"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  document.getElementById('password-message2').style.display= 'block';
+                }
+
+              }
+
+            });
+
+          });
+    </script>
+
+  </body>
+</html>

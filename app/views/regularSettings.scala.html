@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="full" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Settings</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
+      <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+    <![endif]-->
+    <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
+
+    <!--favicon-->
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+    <script type="text/javascript">
+        function codeAddress() {
+          //TO DO: if player is a moderator then line of code below should be loaded
+         // document.getElementById('mod-status').style.display= 'block';
+        }
+        window.onload = codeAddress;
+        </script>
+  </head>
+  <body>
+      <!--login modal-->
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+
+            <div class="col-xs-12"><h3>User Name</h3></div>
+            <div class="col-xs-12">Team: Humans</div>
+            <div class="col-xs-12">Status: Active</div>
+
+
+          </div>
+
+          <div class="modal-body">
+            <form class="form col-md-12 center-block">
+
+              <div id="change-team-form" class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
+              </div>
+            </form>
+              <form id="change-status-form"class="form col-md-12 center-block">
+              <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
+              </div>
+              </form>
+              <form id="remove-mod-form"class="form col-md-12 center-block">
+              <div id="mod-status" class="form-group" style="display:none">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
+              </div>
+            </form>
+              <form id="log-out-form"class="form col-md-12 center-block">
+
+              <div class="form-group">
+                <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
+              </div>
+              </form>
+            <form id="delete-form"class="form col-md-12 center-block">
+              <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
+              </div>
+            </form>
+
+
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script>
+          function goBack(){
+            //TO DO: If user is moderator it should go back to the Mod Page
+            window.location.href=@routes.GamePage.loadPage();
+
+          }
+          $("#log-out-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.logOut();
+          });
+
+
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,32 @@
+/*!
+ * Start Bootstrap - The Big Picture HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+/*
+*{
+    background-color: black !important;
+}
+*/
+body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: black;
+}
+
+.full {
+    background-color: black !important;
+    background: url("/assets/images/maxresdefault.jpg") no-repeat center center fixed;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+.full image {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
