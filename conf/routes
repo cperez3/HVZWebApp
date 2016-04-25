@@ -41,4 +41,4 @@ GET /changeMod/ controllers.ModPage.changeStatus()
 
 GET /getPlayers/ controllers.ModPage.getPlayers()
 
-GET /addModerator/ controllers.ModPage.addModerator()
+GET /addModerator/:email controllers.ModPage.addModerator(email:String)
