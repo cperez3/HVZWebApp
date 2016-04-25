@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Bootstrap Login Form</title>
+    <title>Sign Up</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
@@ -11,6 +11,9 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
+      <!--favicon-->
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
   </head>
   <body>
       <!--login modal-->
@@ -99,11 +102,12 @@
 
                   success : function(data){
                     //when adding the user works, it should set them as logged in via cookies I suspect
+                    window.location.href=@routes.GamePage.loadPage();
                   }
                 })
                 //figure out how to tell if user is in game or not
                   //if user  is signing up they should not be in any game yet
-                window.location.href=@routes.JoinGame.loadPage();
+
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {

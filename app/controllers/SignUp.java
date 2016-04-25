@@ -33,13 +33,13 @@ public class SignUp extends Controller {
      * adds a new user to the User class database
      * @param - none
      * @return - HTTP 200 ok() status
-     */
+
     public static Result addPerson() {
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
 
         return ok();
-    }
+    }*/
 
     /**
      * validation check to sign up a user
@@ -90,6 +90,15 @@ public class SignUp extends Controller {
             newUser.type = "none";
             newUser.gameCode = " ";
             newUser.save();
+
+            System.out.println("isModVal"+isModVal);
+            session("uname", nameIn);
+            session("id", String.valueOf(newUser.id));
+            session("is_mod", isModVal);
+            session("type", "none");
+            session("is_active", "true");
+            session("gCode", " ");
+
             return ok();
 
 
