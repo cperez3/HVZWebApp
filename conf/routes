@@ -29,7 +29,7 @@ GET /validateLogIn/:email/:password controllers.LogIn.validateLogIn(email:String
 
 #GET /createGame/ controllers.JoinGame.createGame()
 
-GET /moderatorPage/ controllers.ModPage.loadPage()
+#GET /moderatorPage/ controllers.ModPage.loadPage()
 
 GET /settings/ controllers.GamePage.loadSettings()
 
@@ -37,8 +37,12 @@ GET /logOut/ controllers.GamePage.logOut()
 
 GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
 
-GET /changeMod/ controllers.ModPage.changeStatus()
+GET /changeMod/ controllers.GamePage.changeStatus()
 
-GET /getPlayers/ controllers.ModPage.getPlayers()
+GET /getPlayers/ controllers.GamePage.getPlayers()
 
-GET /addModerator/ controllers.ModPage.addModerator()
+GET /addModerator/:email controllers.GamePage.addModerator(email:String)
+
+GET /createGame/  controllers.GamePage.createGame()
+
+GET /endGame/  controllers.GamePage.endGame()

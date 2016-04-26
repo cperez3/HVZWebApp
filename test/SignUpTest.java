@@ -32,13 +32,13 @@ public class SignUpTest {
     @Before
     public void setUp() {
 
-        pass1 = "Password1";
-        pass2 = "Password1";
-        email = "npatel2@ithaca.edu";
-        badEmail="email";
-        badPass="password";
-        misMatchPass="Password2";
-        name="npatel1";
+        pass1 = "TestPassword1";
+        pass2 = "TestPassword1";
+        email = "testEmail@test.test";
+        badEmail="test";
+        badPass="test";
+        misMatchPass="TestPassword2";
+        name="testUser";
         mod="true";
         signUpHTML="<h1 class=\"text-center\">Sign Up</h1>";
     }
@@ -177,7 +177,6 @@ public class SignUpTest {
                     }
                     if(testNumber==2){
                         addUser();
-
                     }
                     if(testNumber==3){
                         addUserRepeatSignUpEmail();
@@ -189,6 +188,7 @@ public class SignUpTest {
                        addUserRepeatSignUpUnameEmail();
                     }
                     if(testNumber==6){
+                        deleteUser(email);
                         validateSignUpWithBadEmail();
                     }
                     if(testNumber==7){
@@ -199,7 +199,7 @@ public class SignUpTest {
                     }
                     if(testNumber==9){
                         validateSignUpGoodInput();
-                        deleteUser(email);
+
                     }
 
                 } finally {

@@ -41,14 +41,13 @@ public class LoginTest {
 
     @Before
     public void setUp() {
-
-        pass = "Password1";
-        badPass1 = "password1";
-        badPass2="eoifewjpefjfe";
-        email = "npatel2@ithaca.edu";
+        pass = "TestPassword1";
+        email = "testEmail@test.test";
+        badPass1 = "notPassword1";
+        badPass2="notPassword2";
         isMod="false";
-        uname="nikhil";
-        badEmail="badEmail@email.com";
+        uname="testUser";
+        badEmail="badEmail@test.test";
         logInHTML="<h1 class=\"text-center\">Login</h1>";
 
     }
