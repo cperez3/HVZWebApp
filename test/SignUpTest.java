@@ -20,10 +20,12 @@ public class SignUpTest {
     private String pass1;
     private String pass2;
     private String email;
+    private String email2;
     private String badEmail;
     private String badPass;
     private String misMatchPass;
     private String name;
+    private String name2;
     private String mod;
     private Result result;
     private String signUpHTML;
@@ -35,10 +37,12 @@ public class SignUpTest {
         pass1 = "TestPassword1";
         pass2 = "TestPassword1";
         email = "testEmail@test.test";
+        email2 = "testEmail2@test.test";
         badEmail="test";
         badPass="test";
         misMatchPass="TestPassword2";
         name="testUser";
+        name2 = "testUser2";
         mod="true";
         signUpHTML="<h1 class=\"text-center\">Sign Up</h1>";
     }
@@ -115,28 +119,31 @@ public class SignUpTest {
             }
 
             public void addUserRepeatSignUpEmail(){
-                Result result4;
-                //assertEquals(FORBIDDEN, status(result4));
-                //assertEquals("repeatE", contentAsString(result4));
-                // ^^ asserts are accurate assuming an appropriate query can be made
-                //not sure how to write these tests as they rely on checking against existing database entries
+                //run the addUser() test before running this one so that the base case is in the db
+                //fakeRequest1(email, pass1, pass2, name, mod);
+                fakeRequest1(email, pass1, pass2, name2, mod);
+                assertEquals(FORBIDDEN, status(result));
+                assertEquals("repeatE", contentAsString(result));
+
             }
 
 
             public void addUserRepeatSignUpUname(){
-                Result result5;
-                //assertEquals(FORBIDDEN, status(result5));
-                //assertEquals("repeatU", contentAsString(result5));
-                // ^^ asserts are accurate assuming an appropriate query can be made
-                //not sure how to write these tests as they rely on checking against existing database entries
+                //make sure the base case should pass addUser() test has run first so this is duplicating something
+                //fakeRequest1(email, pass1, pass2, name, mod);
+                fakeRequest1(email2, pass1, pass2, name, mod);
+                assertEquals(FORBIDDEN, status(result));
+                assertEquals("repeatU", contentAsString(result));
+
             }
 
             public void addUserRepeatSignUpUnameEmail(){
-                Result result6;
-                //assertEquals(FORBIDDEN, status(result6));
-                //assertEquals("repeatUE", contentAsString(result6));
-                // ^^ asserts are accurate assuming an appropriate query can be made
-                //not sure how to write these tests as they rely on checking against existing database entries
+                //make sure the good case has run and is in the db so that this repeats something
+                //fakeRequest1(email, pass1, pass2, name, mod);
+                fakeRequest1(email, pass1, pass2, name, mod);
+                assertEquals(FORBIDDEN, status(result));
+                assertEquals("repeatUE", contentAsString(result));
+
             }
 
             public void validateSignUpWithBadEmail() {
