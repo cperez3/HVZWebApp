@@ -34,15 +34,10 @@ public class ModPage extends Controller {
         String gCode = session("gCode");
         String isMod = session("is_mod");
         String uname = session("uname");
-        if (gCode != " " && (isMod == "true" || isMod == "1")) {
-            return ok(inGameModSettings.render());
-        } else if (gCode == " " && (isMod == "true" || isMod == "1")) {
-            return ok(noGameModSettings.render());
-        } else if (isMod == "false" || isMod == "0") {
+        if (uname!=null){
             return ok(gamePage.render(uname));
         }
         return forbidden(login.render());
-
 
     }
 
@@ -57,7 +52,7 @@ public class ModPage extends Controller {
         // game.save();
         //TO DO : create game and add moderator to it
         if((session("is_mod")=="true"||session("is_mod")=="1")&&(session("gCode")==null||session("gCode")==" ")){
-            return redirect(routes.ModPage.loadPage());
+            return loadPage();
         }else{
             return forbidden(login.render());
         }
