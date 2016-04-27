@@ -1,3 +1,4 @@
+@(uname : String)(gCode: String)(status : String)(team : String)
 <!DOCTYPE html>
 <html class="full" lang="en">
   <head>
@@ -27,10 +28,9 @@
 
             <br>
             <br>
-
+            <div class="col-xs-12"><h4>@uname</h4></div>
           </div>
-            <div>
-
+          <div class="modal-body">
                 <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#modStuff" aria-controls="modStuff" role="tab" data-toggle="tab">Mod Settings</a></li>
@@ -41,10 +41,8 @@
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="modStuff">
 
-                  <h5 class="text-center">Game Code: Game Code Here </h5>
-
-                  <div class="modal-body">
-
+                  <h5 class="text-center">Game Code: @gCode </h5>
+                    <br><br>
                     <div class="form-group">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
                     </div>
@@ -58,54 +56,46 @@
                       </form>
                     </div>
 
+                </div><!-- mod-specific settings tab -->
+                <div role="tabpanel" class="tab-pane fade" id="gameStuff">
+                  <div class="col-xs-12 text-center"><h5>Team: @team &emsp; Status: @status</h5></div>
+                  <br><br>
+                  <div id="change-team-form" class="form-group">
+                    <form class="form col-md-12 center-block">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
+                    </form>
                   </div>
 
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="gameStuff">
-
-                  <div class="col-xs-12"><h3>User Name</h3></div>
-                  <div class="col-xs-12">Team: Humans</div>
-                  <div class="col-xs-12">Status: Active</div>
-                  <br><br><br>
-
-                  <form class="form col-md-12 center-block">
-
-                    <div id="change-team-form" class="form-group">
-                      <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
-                    </div>
-                  </form>
-                  <form id="change-status-form"class="form col-md-12 center-block">
-                    <div class="form-group">
+                  <div class="form-group">
+                    <form id="change-status-form"class="form col-md-12 center-block">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
-                    </div>
-                  </form>
-                  <form id="remove-mod-form"class="form col-md-12 center-block">
-                    <div id="mod-status" class="form-group" style="display:none">
+                    </form>
+                  </div>
+                  <div id="mod-status" class="form-group" style="display:none">
+                    <form id="remove-mod-form"class="form col-md-12 center-block">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
-                    </div>
-                  </form>
-                  <form id="log-out-form"class="form col-md-12 center-block">
-
-                    <div class="form-group">
+                    </form>
+                  </div>
+                  <div class="form-group">
+                    <form id="log-out-form"class="form col-md-12 center-block">
                       <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
-                    </div>
-                  </form>
-                  <form id="delete-form"class="form col-md-12 center-block">
-                    <div class="form-group">
+                    </form>
+                  </div>
+                  <div class="form-group">
+                    <form id="delete-form"class="form col-md-12 center-block">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
 
 
+                </div><!-- in game settings tab -->
 
-                </div>
+              </div><!-- end of tab-related content -->
 
-              </div>
-
-          </div>
+          </div> <!-- end of modal-body div -->
 
 
-        </div>
+        </div> <!-- end of  modal contet div-->
       </div>
     </div>
 

@@ -50,7 +50,7 @@ public class GamePage extends Controller {
             }
             if ((isMod.equals("1") || isMod.equals("true"))
                     && gCode.equals(" ")) {
-                return ok(noGameModSettings.render());
+                return ok(noGameModSettings.render(uName));
             } else {
                 return forbidden(joinGame.render());
             }
@@ -62,20 +62,28 @@ public class GamePage extends Controller {
 
     public static Result loadSettings() {
         String isMod = session("is_mod");
+        String uName = session("uname");
+        String status = session("is_active");
+        if (status.equals("1"))
+            status = "Active";
+        if (status.equals("0"))
+            status = "Inactive";
+        String team = session("type");
         if(isMod!=null){
             if(isMod.equals("0")||isMod.equals("false")){
-                return ok(regularSettings.render());
+
+                return ok(regularSettings.render(uName, status, team));
             } if(isMod.equals("1")||isMod.equals("true")){
                 //TO DO: return mod settings
                 String gCode = session("gCode");
 
                 if(!gCode.equals(" ")){
 
-                    return ok(inGameModSettings.render());
+                    return ok(inGameModSettings.render(uName, gCode, status, team));
                 }
                 else {
 
-                    return ok(noGameModSettings.render());
+                    return ok(noGameModSettings.render(uName));
                 }
             }
         }
