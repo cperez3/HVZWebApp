@@ -40,12 +40,13 @@ public class GamePage extends Controller {
 
         //TO DO: should put inGameModSettings into mod settings so moderator can access gamepage and then just do mod stuff from settings
         String uName = session("uname");
+        String status = session("is_active");
 
         if (uName != null) {
             String gCode = session("gCode");
             String isMod = session("is_mod");
             if (!gCode.equals(" ")) {
-                return ok(gamePage.render(uName));
+                return ok(gamePage.render(uName,status));
                 //works for regular player and moderator this way
             }
             if ((isMod.equals("1") || isMod.equals("true"))
@@ -185,7 +186,7 @@ public class GamePage extends Controller {
      * @param - none
      * @return - game page
      */
-    public static Result changeStatus() {
+    public static Result changeModStatus() {
         //TO DO: check if there are anyother moderators in the game. If there arent then you cant change status
         if(session("is_mod")!=null){
             if(session("is_mod").equals("true")||session("is_mod").equals("1")){

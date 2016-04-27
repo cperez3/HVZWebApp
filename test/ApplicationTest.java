@@ -4,7 +4,7 @@ import org.junit.*;
 import play.mvc.*;
 
 import controllers.SignUp;
-import controllers.ModPage;
+
 import static play.mvc.Http.Status.OK;
 import static play.mvc.Http.Status.FORBIDDEN;
 
@@ -13,7 +13,6 @@ import play.mvc.Result;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import models.Game;
 
 import static org.fest.assertions.Assertions.assertThat;
 
