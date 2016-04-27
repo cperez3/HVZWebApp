@@ -65,12 +65,14 @@ public class GamePage extends Controller {
         String isMod = session("is_mod");
         String uName = session("uname");
         String status = session("is_active");
-        if (status.equals("1"))
-            status = "Active";
-        if (status.equals("0"))
-            status = "Inactive";
         String team = session("type");
         if(isMod!=null){
+            if (status.equals("1"))
+                status = "Active";
+            if (status.equals("0"))
+                status = "Inactive";
+
+
             if(isMod.equals("0")||isMod.equals("false")){
 
                 return ok(regularSettings.render(uName, status, team));
@@ -186,43 +188,99 @@ public class GamePage extends Controller {
      * @param - none
      * @return - game page
      */
-    public static Result changeModStatus() {
+    public static Result verifyChangeModStatus() {
         //TO DO: check if there are anyother moderators in the game. If there arent then you cant change status
-        if(session("is_mod")!=null){
-            if(session("is_mod").equals("true")||session("is_mod").equals("1")){
-                String isMod = "false";
-                String sql2 = "UPDATE user SET is_mod = " + isMod + " WHERE id = " + session("id");
-                java.sql.Connection conn2 = DB.getConnection();
-                try {
-                    //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
-
-                    java.sql.Statement stmt = conn2.createStatement();
-                    try {
-                        Boolean rst = stmt.execute(sql2);
-                        // rst.close();
-                    } finally {
-
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        conn2.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        if (session("is_mod") != null) {
+            if (session("is_mod").equals("true") || session("is_mod").equals("1")) {
+                if (session("gCode").equals(" ")) {
+                    //change status right away
+                    changeModStatus();
+                    return loadPage();
                 }
-                //TO DO: Error checking
-                session("is_mod", "false");
-                return loadPage();
+                Boolean isNotOnlyMod=isNotOnlyMod();
+                if(isNotOnlyMod){
+                    changeModStatus();
+                    return loadPage();
+                }else{
+                    System.out.println("ONLY MOD");
+                    return forbidden("You are the only moderator, please add another moderator before switching your moderator status.");
+                }
             }
-
+            System.out.println("NOT MOD");
             return forbidden(login.render());
         }
-
-
+        System.out.println("NOT LOGGED IN");
         return forbidden(login.render());
+    }
+
+    public static Boolean isNotOnlyMod(){
+        String sql2 = "SELECT * FROM user WHERE is_mod = 1 and game_code ='"+ Integer.parseInt(session("gCode"))+"'";
+        int i=0;
+        java.sql.Connection conn2 = DB.getConnection();
+        try {
+            //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+            java.sql.Statement stmt = conn2.createStatement();
+            try {
+                ResultSet rst = stmt.executeQuery(sql2);
+                try {
+                    while ( rst.next() ) {
+                        i++;
+                    }
+
+                } finally {
+                    try { rst.close(); } catch (Throwable ignore) { /* Propagate the original exception
+instead of this one that you may want just logged */ }
+                }
+
+                // rst.close();
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn2.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(i>1){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public static void changeModStatus(){
+            String isMod = "false";
+            String sql2 = "UPDATE user SET is_mod = " + isMod + " WHERE id = " + session("id");
+            java.sql.Connection conn2 = DB.getConnection();
+            try {
+                //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+                java.sql.Statement stmt = conn2.createStatement();
+                try {
+                    Boolean rst = stmt.execute(sql2);
+                    // rst.close();
+                } finally {
+
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn2.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            //TO DO: Error checking
+            session("is_mod", "false");
 
     }
 
