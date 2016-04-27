@@ -42,6 +42,17 @@
               </div>
 
             </form>
+            <form id="log-out-form"class="form col-md-12 center-block">
+
+              <div class="form-group">
+                <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
+              </div>
+            </form>
+            <form id="delete-form"class="form col-md-12 center-block">
+              <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
 
@@ -59,6 +70,11 @@
             window.location.href=@routes.GamePage.loadSettings();
 
           }
+          $("#log-out-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.logOut();
+          });
+
 
 
     </script>
