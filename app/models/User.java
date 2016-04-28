@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import com.avaje.ebean.SqlUpdate;
+
 
 @Entity
 public class User extends Model {
@@ -39,7 +41,9 @@ public class User extends Model {
      * @return - void
      */
     public static void changeModStatus(){
-
+        SqlUpdate down = Ebean.createSqlUpdate("UPDATE isMod SET place = '0'");
+        down.execute();
+        return ok();
     }
 
     /**
@@ -47,8 +51,10 @@ public class User extends Model {
      * @param - none
      * @return - void
      */
-    public static void changeType(){
-
+    public static void changeType() {
+        SqlUpdate down = Ebean.createSqlUpdate("UPDATE type SET place = 'zombie'");
+        down.execute();
+        return ok();
     }
 
     /**
@@ -57,7 +63,9 @@ public class User extends Model {
      * @return - void
      */
     public static void changeActiveStatus(){
-
+        SqlUpdate down = Ebean.createSqlUpdate("UPDATE isActive SET place = '0'");
+        down.execute();
+        return ok();
     }
 
     /**
@@ -84,6 +92,8 @@ public class User extends Model {
      * @return - void
      */
     public static void getType(){
+        User user = User.find.select("type").where().eq("type",type);
+        System.out.println(user);
 
     }
 

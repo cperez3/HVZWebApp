@@ -11,6 +11,8 @@ package controllers;
 
 //import statements
 
+import models.Game;
+import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,10 +25,7 @@ import views.html.regularSettings;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GamePage extends Controller {
 
@@ -438,6 +437,68 @@ instead of this one that you may want just logged */
 
 
     }
+    /**
+     * adds a new game to the Game class database
+     * @param - none
+     * @return - HTTP 200 ok() status
+     */
+    public static Result addNewGame() {
+        Game game = Form.form(Game.class).bindFromRequest().get();
+        //game.save();
+
+        return ok();
+    }
+
+    /**
+     * creates an alphanumeric game code
+     * @return String game code
+     */
+    public static String gameCode() {
+        int limit = 7;
+
+        Random r = new Random();
+
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < limit; i++) {
+            char c = (char)(r.nextInt((int)(Character.MAX_VALUE)));
+            sb.append(c);
+        }
+        return sb.toString();
+    }
 
 
+    /**
+     * Adds a game to the games database
+     * @param idIn - game id
+     * @param gameCodeIn - game code
+     * @param humanUsersIn - list of human users in game
+     * @param zombieUsersIn - list of zombie users in game
+     * @param deletedUsersIn - list of users removed from game
+     * @param moderatorMessagesIn - list of moderator messages
+     * @param humanMessagesIn - list of human messages
+     * @param zombieMessagesIn - list of zombie messages
+     * @return - Result HTTP 200 ok status
+     */
+    public static Result addGame(String idIn, String gameCodeIn, ArrayList humanUsersIn,
+                                 ArrayList zombieUsersIn, ArrayList deletedUsersIn, ArrayList moderatorMessagesIn,
+                                 ArrayList humanMessagesIn, ArrayList zombieMessagesIn) {
+
+        Game newGame = new Game();
+
+        newGame.id = idIn;
+        newGame.gameCode = gameCodeIn;
+        newGame.humanUsers = humanUsersIn;
+        newGame.zombieUsers = zombieUsersIn;
+        newGame.deletedUsers = deletedUsersIn;
+        newGame.moderatorMessages = moderatorMessagesIn;
+        newGame.humanMessages = humanMessagesIn;
+        newGame.zombieMessages = zombieMessagesIn;
+
+        //newGame.save();
+
+        return ok();
+    }
 }
+
+

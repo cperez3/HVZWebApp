@@ -10,8 +10,7 @@
 package models;
 
 //import statements
-import play.api.mvc.AnyContentAsRaw;
-import play.db.ebean.Model;
+import play.mvc.Result;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -21,12 +20,23 @@ public class Games {
 
     @Id
     public String id;
-    public static String createGame(){
-        return "gameCode";
-    }
-    public static void removeGame(String code){
+
+    /**
+     * removes a game from the Game database given a game code
+     * @param id - the game code to be removed
+     */
+    public static Result removeGame(int id) {
+        Game game = Game.find.select("id").where().eq("id",id).findUnique();
+
+        if(game == null) {
+            return notFound();
+        } else {
+            game.delete();
+            return ok();
+        }
 
     }
+
 
     /**
      * verifies the existence of a game
