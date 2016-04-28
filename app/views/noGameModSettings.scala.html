@@ -1,9 +1,10 @@
+@(uname: String)
 <!DOCTYPE html>
 <html class="full" lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Moderator Settings</title>
+    <title>No Game Moderator Settings</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
@@ -27,6 +28,7 @@
             <div class="col-xs-1 col-xs-offset-10"><input onclick="" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
             <br>
             <br>
+            <h4>@uname</h4>
             <h5 class="text-center">You are not in a game right now. </h5>
             <h5 class="text-center"> Click start game to create a game and start it.</h5>
 
@@ -41,6 +43,17 @@
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Start Game</button>
               </div>
 
+            </form>
+            <form id="log-out-form"class="form col-md-12 center-block">
+
+              <div class="form-group">
+                <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
+              </div>
+            </form>
+            <form id="delete-form"class="form col-md-12 center-block">
+              <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -59,6 +72,11 @@
             window.location.href=@routes.GamePage.loadSettings();
 
           }
+          $("#log-out-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.logOut();
+          });
+
 
 
     </script>

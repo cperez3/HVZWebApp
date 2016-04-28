@@ -36,7 +36,7 @@ public class JoinGame extends Controller {
         if(uName != null&&gCode==" ") {
             return ok(joinGame.render());
         }else if(uName!=null&&gCode!=" "){
-            return ok(gamePage.render(uName));
+            return GamePage.loadPage();
         }
         return forbidden(login.render());
     }
@@ -86,7 +86,7 @@ instead of this one that you may want just logged */ }
 
 
         if(isGame){
-            String sql2 = "UPDATE user SET game_code = '" + code + "' WHERE id = " + session("id");
+            String sql2 = "UPDATE user SET game_code = '" + code + "' WHERE user_name = '" + session("uname") +"'";
             java.sql.Connection conn2 = DB.getConnection();
             try {
                 //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
