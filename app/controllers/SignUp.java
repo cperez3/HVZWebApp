@@ -11,12 +11,16 @@ package controllers;
 
 //import statements
 import models.User;
+import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
 import play.data.Form;
 import play.db.ebean.Model;
 import java.lang.Exception;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class SignUp extends Controller {
 
@@ -50,15 +54,66 @@ public class SignUp extends Controller {
      * @param isMod - moderator status of the user
      * @return - Result page that approves or denies continued use based on the inputted email and password
      */
-    public static Result validateSignUp(String email, String password1,String password2, String username, String isMod){
-        System.out.println(email+" "+password1+" "+password2+" "+username+" "+isMod);
-        //TO DO: check that username is not already being used
+    public static Result validateSignUp(String email, String password1,String password2, String username, String isMod) {
+
         String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-        String PASSWORD_REGEX="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])((?!.*\\s)).{6,}$";
-        Boolean passwordVerified=password1.matches(PASSWORD_REGEX);
+        String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])((?!.*\\s)).{6,}$";
+        Boolean passwordVerified = password1.matches(PASSWORD_REGEX);
         Boolean emailVerified = email.matches(EMAIL_REGEX);
-        Boolean passwordsMatch=password1.equals(password2);
-        if(!emailVerified){
+        Boolean passwordsMatch = password1.equals(password2);
+
+        System.out.println(email + " " + password1 + " " + password2 + " " + username + " " + isMod);
+        boolean nameExists = false;
+        boolean emailExists = false;
+        //should check and return true if there is an entry with these credentials
+        String sql1 = "SELECT * FROM user WHERE email = '" + email + "'";
+        String sql2 = "SELECT * FROM user WHERE user_name = '" + username + "'";
+
+        java.sql.Connection conn = DB.getConnection();
+        try {
+            //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                ResultSet rst = stmt.executeQuery(sql2);
+                try {
+                    if (rst.next()) {
+
+                        System.out.println("name check: " + rst);
+                        nameExists = true;
+                    }
+                } catch (Throwable ignore) { /* Propagate the original exception
+instead of this one that you may want just logged */
+                }
+                ResultSet rst2 = stmt.executeQuery(sql1);
+                try {
+                    if (rst2.next()) {
+                        System.out.println("email check: " + rst2);
+                        emailExists = true;
+                    }
+                } catch (Throwable ignore) {//not sure these need to exist at this point, but better safe than sorry
+                }
+
+            } finally {
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (nameExists && emailExists) {
+            return forbidden("repeatUE");
+        }else if(nameExists){
+            return forbidden("repeatU");
+        }else if(emailExists){
+            return forbidden("repeatE");
+        }else if(!emailVerified){
             return forbidden("email");
         }else if(!passwordVerified){
             return forbidden("password");
@@ -87,7 +142,7 @@ public class SignUp extends Controller {
             newUser.password = passwordIn;
             newUser.isMod = Boolean.valueOf(isModVal);
             newUser.isActive = true;
-            newUser.type = "none";
+            newUser.type = "human";
             newUser.gameCode = " ";
             newUser.save();
 

@@ -54,6 +54,7 @@
           </div>
           <div class="modal-footer">
             <div id="username-message" style="display:none;color:red;text-align: center">User name already in use</div>
+            <div id="email-repeat-message" style="display:none;color:red;text-align: center">Email already in use</div>
             <div id="email-message" style="display:none;color:red;text-align: center">Email is invalid</div>
               <div id="password-message" style="display:none;color:red;text-align: center">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
                 <div id="password-message2" style="display:none;color:red;text-align: center">passwords do not match</div>
@@ -71,6 +72,7 @@
          document.getElementById('password-message').style.display= 'none';
          document.getElementById('email-message').style.display= 'none';
          document.getElementById('username-message').style.display= 'none';
+         document.getElementById('email-repeat-message').style.display= 'none';
          document.getElementById('password1').style.borderColor = "#CCC";
          document.getElementById('password2').style.borderColor = "#CCC";
          document.getElementById('email').style.borderColor = "#CCC";
@@ -112,7 +114,19 @@
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 var error=XMLHttpRequest["responseText"];
-                if(error=="email"){
+                if(error == "repeatUE"){
+                  document.getElementById("name").style.borderColor = "red";
+                  document.getElementById("email").style.borderColor = "red";
+                  document.getElementById('username-message').style.display= 'block';
+                  document.getElementById('email-repeat-message').style.display= 'block';
+                }else if(error=="repeatU"){
+                  document.getElementById('name').style.borderColor = "red";
+                  document.getElementById('username-message').style.display= 'block';
+                }else if(error == "repeatE"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('email-repeat-message').style.display= 'block';
+
+                }else if(error=="email"){
                   document.getElementById('email').style.borderColor = "red";
                   document.getElementById('email-message').style.display= 'block';
 

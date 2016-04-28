@@ -34,3 +34,11 @@ GET /moderatorPage/ controllers.ModPage.loadPage()
 GET /settings/ controllers.GamePage.loadSettings()
 
 GET /logOut/ controllers.GamePage.logOut()
+
+GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
+
+GET /changeMod/ controllers.ModPage.changeStatus()
+
+GET /getPlayers/ controllers.ModPage.getPlayers()
+
+GET /addModerator/:email/ controllers.ModPage.addModerator(email:String)
