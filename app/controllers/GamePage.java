@@ -11,6 +11,7 @@ package controllers;
 
 //import statements
 
+import com.avaje.ebean.SqlUpdate;
 import models.Game;
 import play.data.Form;
 import play.db.DB;
@@ -22,7 +23,7 @@ import views.html.gamePage;
 import views.html.joinGame;
 import views.html.login;
 import views.html.regularSettings;
-
+import com.avaje.ebean.Ebean;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -437,6 +438,7 @@ instead of this one that you may want just logged */
 
 
     }
+
     /**
      * adds a new game to the Game class database
      * @param - none
@@ -470,7 +472,6 @@ instead of this one that you may want just logged */
 
     /**
      * Adds a game to the games database
-     * @param idIn - game id
      * @param gameCodeIn - game code
      * @param humanUsersIn - list of human users in game
      * @param zombieUsersIn - list of zombie users in game
@@ -480,13 +481,12 @@ instead of this one that you may want just logged */
      * @param zombieMessagesIn - list of zombie messages
      * @return - Result HTTP 200 ok status
      */
-    public static Result addGame(String idIn, String gameCodeIn, ArrayList humanUsersIn,
+    public static Result addGame(String gameCodeIn, ArrayList humanUsersIn,
                                  ArrayList zombieUsersIn, ArrayList deletedUsersIn, ArrayList moderatorMessagesIn,
                                  ArrayList humanMessagesIn, ArrayList zombieMessagesIn) {
 
         Game newGame = new Game();
 
-        newGame.id = idIn;
         newGame.gameCode = gameCodeIn;
         newGame.humanUsers = humanUsersIn;
         newGame.zombieUsers = zombieUsersIn;
@@ -495,10 +495,58 @@ instead of this one that you may want just logged */
         newGame.humanMessages = humanMessagesIn;
         newGame.zombieMessages = zombieMessagesIn;
 
-        //newGame.save();
-
+        newGame.save();
         return ok();
     }
+
+    /**
+     * changes a players type (zombie, human, moderator)
+     * @param - none
+     * @return - void
+     */
+    public static Result changeType() {
+        SqlUpdate down = Ebean.createSqlUpdate("UPDATE type SET place = 'zombie'");
+        down.execute();
+        return ok();
+    }
+
+    /**
+     * changes a players status to or from active
+     * @param - none
+     * @return - void
+     */
+    public static Result changeActiveStatus(){
+        SqlUpdate down = Ebean.createSqlUpdate("UPDATE is_active SET place = '0'");
+        down.execute();
+        return ok();
+    }
+    /**
+     * removes a game from the Game database given a game code
+     * @param id - the game code to be removed
+     */
+    /*public static Result removeGame(int id) {
+        Game game = Game.find.select("id").where().eq("id",id).findUnique();
+
+        if(game == null) {
+            return notFound();
+        } else {
+            game.delete();
+            return ok();
+        }
+
+    }*/
+
+    /**
+     * displays a players type
+     * @param - none
+     * @return - void
+     *//*
+    public static void getType(){
+        User user = User.find.select("type").where().eq("type",type);
+        System.out.println(user);
+
+    }*/
+
 }
 
 
