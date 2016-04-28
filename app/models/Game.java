@@ -19,18 +19,13 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 
 @Entity
-public class Game {
+public class Game extends Model{
     @Id//primary key
     @GeneratedValue(strategy= GenerationType.AUTO)
     public int id;
 
     public String gameCode;
-    public ArrayList humanUsers;
-    public ArrayList zombieUsers;
-    public ArrayList deletedUsers;
-    public ArrayList moderatorMessages;
-    public ArrayList humanMessages;
-    public ArrayList zombieMessages;
+
     public Game(){
     }
 

@@ -473,27 +473,13 @@ instead of this one that you may want just logged */
     /**
      * Adds a game to the games database
      * @param gameCodeIn - game code
-     * @param humanUsersIn - list of human users in game
-     * @param zombieUsersIn - list of zombie users in game
-     * @param deletedUsersIn - list of users removed from game
-     * @param moderatorMessagesIn - list of moderator messages
-     * @param humanMessagesIn - list of human messages
-     * @param zombieMessagesIn - list of zombie messages
      * @return - Result HTTP 200 ok status
      */
-    public static Result addGame(String gameCodeIn, ArrayList humanUsersIn,
-                                 ArrayList zombieUsersIn, ArrayList deletedUsersIn, ArrayList moderatorMessagesIn,
-                                 ArrayList humanMessagesIn, ArrayList zombieMessagesIn) {
+    public static Result addGame(String gameCodeIn) {
 
         Game newGame = new Game();
 
         newGame.gameCode = gameCodeIn;
-        newGame.humanUsers = humanUsersIn;
-        newGame.zombieUsers = zombieUsersIn;
-        newGame.deletedUsers = deletedUsersIn;
-        newGame.moderatorMessages = moderatorMessagesIn;
-        newGame.humanMessages = humanMessagesIn;
-        newGame.zombieMessages = zombieMessagesIn;
 
         newGame.save();
         return ok();
