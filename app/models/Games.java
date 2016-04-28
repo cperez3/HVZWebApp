@@ -21,21 +21,6 @@ public class Games {
     @Id
     public String id;
 
-    /**
-     * removes a game from the Game database given a game code
-     * @param id - the game code to be removed
-     */
-    public static Result removeGame(int id) {
-        Game game = Game.find.select("id").where().eq("id",id).findUnique();
-
-        if(game == null) {
-            return notFound();
-        } else {
-            game.delete();
-            return ok();
-        }
-
-    }
 
 
     /**
