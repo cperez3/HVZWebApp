@@ -36,7 +36,7 @@ public class JoinGame extends Controller {
         if(uName != null&&gCode==" ") {
             return ok(joinGame.render());
         }else if(uName!=null&&gCode!=" "){
-            return ok(gamePage.render(uName));
+            return GamePage.loadPage();
         }
         return forbidden(login.render());
     }

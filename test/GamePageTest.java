@@ -23,10 +23,14 @@ public class GamePageTest {
     private String badPass2;
     private String email;
     private String uname;
+    private String email2;
+    private String uname2;
     private String gCode;
     private String isMod;
     private String isNotMod;
     private String badEmail;
+    private String isActive;
+    private String team;
     private Result result;
     ObjectNode request;
     private String logInHTML;
@@ -40,11 +44,15 @@ public class GamePageTest {
 
         pass = "TestPassword1";
         email = "testEmail@test.test";
+        email2= "testEmail2@test.test";
         badPass1 = "notPassword1";
         badPass2="notPassword2";
+        isActive="1";
+        team="human";
         isNotMod="false";
         isMod="true";
         uname="testUser";
+        uname2="testUser2";
         badEmail="badEmail@test.test";
         gCode="12345";
         joinGameHTML="<h1 class=\"text-center\">Join Game</h1>";
@@ -164,6 +172,22 @@ public class GamePageTest {
     public void test27(){
         gamePageTest(27);
     }
+    @Test
+    public void test28(){
+        gamePageTest(28);
+    }
+    @Test
+    public void test29(){
+        gamePageTest(29);
+    }
+    @Test
+    public void test30(){
+        gamePageTest(30);
+    }
+    @Test
+    public void test31(){
+        gamePageTest(31);
+    }
 
     public void gamePageTest(int testNumber) {
 
@@ -205,7 +229,7 @@ public class GamePageTest {
             public void loadSettingsModInGame(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isMod));
+                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isMod).withSession("is_active",isActive).withSession("type",team));
                 assertEquals(OK,status(result));
                 assertEquals(true, contentAsString(result).contains(inGameHTML));
 
@@ -213,7 +237,7 @@ public class GamePageTest {
             public void loadSettingsModNoGame(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod));
+                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod).withSession("is_active",isActive).withSession("type",team));
                 assertEquals(OK,status(result));
                 assertEquals(true, contentAsString(result).contains(htmlAfterEnd));
 
@@ -222,7 +246,7 @@ public class GamePageTest {
             public void loadSettingsRegularInGame(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isNotMod));
+                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isNotMod).withSession("is_active",isActive).withSession("type",team));
                 assertEquals(OK,status(result));
                 assertEquals(true, contentAsString(result).contains(settingsHTML));
 
@@ -230,7 +254,7 @@ public class GamePageTest {
             public void loadSettingsRegularNoGame(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isNotMod));
+                result=callAction(routes.ref.GamePage.loadSettings(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isNotMod).withSession("is_active",isActive).withSession("type",team));
                 assertEquals(OK,status(result));
                 assertEquals(true, contentAsString(result).contains(settingsHTML));
 
@@ -323,26 +347,69 @@ public class GamePageTest {
                 assertEquals(true,contentAsString(result).contains(htmlAfterEnd));*/
 
             }
-            public void changeStatusModLoggedIn(){
+            public void changeModStatusModLoggedInNotOnly(){
+                request = Json.newObject()
+                        .put("email", email)
+                        .put("password1", pass)
+                        .put("password1", pass)
+                        .put("name", uname)
+                        .put("mod", isMod);
+                result=callAction(routes.ref.SignUp.addUser(email,pass,uname,isMod),fakeRequest().withJsonBody(request));
+
+                request = Json.newObject()
+                        .put("code", gCode);
+                result=callAction(routes.ref.JoinGame.verifyCode(gCode),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," "));
+
+                request = Json.newObject()
+                        .put("email", email2)
+                        .put("password1", pass)
+                        .put("password1", pass)
+                        .put("name", uname2)
+                        .put("mod", isMod);
+                result=callAction(routes.ref.SignUp.addUser(email2,pass,uname2,isMod),fakeRequest().withJsonBody(request));
+
+                request = Json.newObject()
+                        .put("code", gCode);
+                result=callAction(routes.ref.JoinGame.verifyCode(gCode),fakeRequest().withJsonBody(request).withSession("uname",uname2).withSession("gCode"," "));
+
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.changeStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod));
+                result=callAction(routes.ref.GamePage.verifyChangeModStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isMod));
+                assertEquals(OK,status(result));
+                assertEquals(true,contentAsString(result).contains(gamePageHTML));
+                deleteUser(email2);
+
+
+            }
+            public void changeModStatusModLoggedInOnly(){
+                request = Json.newObject();
+
+                result=callAction(routes.ref.GamePage.verifyChangeModStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isMod));
+                assertEquals(FORBIDDEN,status(result));
+                assertEquals("You are the only moderator, please add another moderator before switching your moderator status.",contentAsString(result));
+
+                deleteUser(email);
+            }
+            public void changeModStatusModNoGame(){
+                request = Json.newObject();
+
+                result=callAction(routes.ref.GamePage.verifyChangeModStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod));
                 assertEquals(FORBIDDEN,status(result));
                 assertEquals(true,contentAsString(result).contains(joinGameHTML));
 
             }
-            public void changeStatusNotLoggedIn(){
+            public void changeModStatusNotLoggedIn(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.changeStatus(),fakeRequest().withJsonBody(request));
+                result=callAction(routes.ref.GamePage.verifyChangeModStatus(),fakeRequest().withJsonBody(request));
                 assertEquals(FORBIDDEN,status(result));
                 assertEquals(true,contentAsString(result).contains(logInHTML));
 
             }
-            public void changeStatusNotMod(){
+            public void changeModStatusNotMod(){
                 request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.changeStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isNotMod));
+                result=callAction(routes.ref.GamePage.verifyChangeModStatus(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode",gCode).withSession("is_mod",isNotMod));
                 assertEquals(FORBIDDEN,status(result));
                 assertEquals(true,contentAsString(result).contains(logInHTML));
 
@@ -452,6 +519,7 @@ public class GamePageTest {
             public void run() {
                 Ebean.beginTransaction();
                 try {
+                    //TESTS MUST BE IN THIS EXACT ORDER FOR THEM TO WORK AND DATBASE MUST BE BLANK TO START
                     if(testNumber==1){
                         loadPageLoggedInRegularInGame();
                     }
@@ -505,51 +573,63 @@ public class GamePageTest {
 
                     }
                     if(testNumber==16){
-                        endGameNotMod();
+                        createGameNotMod();
 
                     }
                     if(testNumber==17){
-                        endGameMod();
+                        endGameNotMod();
 
                     }
                     if(testNumber==18){
-                        changeStatusModLoggedIn();
+                        endGameMod();
 
                     }
                     if(testNumber==19){
+                        changeModStatusModLoggedInNotOnly();
 
-                        changeStatusNotLoggedIn();
                     }
                     if(testNumber==20){
-                        changeStatusNotMod();
 
+                        changeModStatusModLoggedInOnly();
                     }
                     if(testNumber==21){
+                        changeModStatusModNoGame();
+
+                    } if(testNumber==22){
+                        changeModStatusNotLoggedIn();
+
+                    }
+                    if(testNumber==23){
+                       changeModStatusNotMod();
+
+                    }
+
+                    if(testNumber==24){
                         getPlayersMod();
 
                     }
-                    if(testNumber==22){
+                    if(testNumber==25){
                         getPlayersModNoGame();
 
-                    } if(testNumber==23){
+                    } if(testNumber==26){
                        getPlayersNotMod();
 
-                    } if(testNumber==24){
+                    } if(testNumber==27){
 
                         getPlayersNotLoggedIn();
-                    } if(testNumber==25){
+                    } if(testNumber==28){
                         addModerator();
 
 
-                    } if(testNumber==26){
+                    } if(testNumber==29){
                         addModeratorWhoIsNotInGame();
 
 
-                    } if(testNumber==27){
+                    } if(testNumber==30){
                         addModeratorNoGame();
 
 
-                    }if(testNumber==28){
+                    }if(testNumber==31){
                         addModeratorNotLoggedIn();
                     }
 

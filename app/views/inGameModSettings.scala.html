@@ -116,16 +116,8 @@
           $("#change-mod-status-form").on('submit', function(e) {
             e.preventDefault();
             console.log("mod stat button pressed!");
-            /*
-            myJsRoutes.controllers.ModPage.changeStatus().ajax({
 
-              success : function(data){
-                //when adding the user works, it should set them as logged in via cookies I suspect
-                window.location.href=@routes.GamePage.loadSettings();
-              }
-            })
-            */
-            window.location.href=@routes.GamePage.changeStatus();
+            window.location.href=@routes.GamePage.verifyChangeModStatus();
 
 
           });

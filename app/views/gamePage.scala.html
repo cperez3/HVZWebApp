@@ -1,4 +1,4 @@
-@(uname : String)
+@(uname : String)(status : String)
 <!DOCTYPE html>
 <html class="full" lang="en">
   <head>
@@ -30,26 +30,40 @@
 
 
             </div>
+          <br>
+          <br>
+          <br>
 
-          <div class="modal-body">
+          <div id="inactive-message" style="display:none;color:red;text-align: center">You are currently an Inactive Player so you can not access the game functionality. To become Active go to your settings.</div>
+
+          <div id="buttons" class="modal-body">
             <form class="form col-md-12 center-block">
 
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Enemy Spotted!</button>
+                <button id ="enemybutton" class="btn btn-primary btn-lg btn-block" onclick="">Enemy Spotted!</button>
               </div>
 
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Help!</button>
+                <button id ="helpbutton"class="btn btn-primary btn-lg btn-block" onclick="">Help!</button>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">On My Way!</button>
+                <button id ="onmywaybutton" class="btn btn-primary btn-lg btn-block" onclick="">On My Way!</button>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary btn-lg btn-block" onclick="">Messages</button>
+                <button id ="messages" class="btn btn-primary btn-lg btn-block" onclick="">Messages</button>
               </div>
             </form>
           </div>
           <div class="modal-footer">
+            <script>
+
+               if(@status==0){
+                 document.getElementById("buttons").style.visibility = "hidden";
+                 document.getElementById('inactive-message').style.borderColor = "red";
+                 document.getElementById('inactive-message').style.display= 'block';
+                }
+
+            </script>
 
           </div>
         </div>

@@ -37,7 +37,7 @@ GET /logOut/ controllers.GamePage.logOut()
 
 GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
 
-GET /changeMod/ controllers.GamePage.changeStatus()
+GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
 GET /getPlayers/ controllers.GamePage.getPlayers()
 
