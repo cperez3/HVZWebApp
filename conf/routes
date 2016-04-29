@@ -47,3 +47,5 @@ GET /createGame/  controllers.GamePage.createGame()
 
 GET /endGame/  controllers.GamePage.endGame()
 
+GET /sendMessage/ controllers.GamePage.sendMessage()
+
