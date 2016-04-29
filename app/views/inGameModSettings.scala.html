@@ -58,6 +58,7 @@
                         <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
                           <!-- "stop moderating is a lame phrase but it's what I've got atm -->
                       </form>
+                      <div id="drop-mod-error" class="error-msg"></div>
                     </div>
 
                 </div><!-- mod-specific settings tab -->
@@ -119,9 +120,23 @@
           }
           $("#change-mod-status-form").on('submit', function(e) {
             e.preventDefault();
-            console.log("mod stat button pressed!");
+            //console.log("mod stat button pressed!");
 
-            window.location.href=@routes.GamePage.verifyChangeModStatus();
+            myJsRoutes.controllers.GamePage.verifyChangeModStatus().ajax({
+              success : function(data) {
+                console.log(data);
+                //figure out how to tell if user is in game or not
+                window.location.href=@routes.GamePage.loadSettings();
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //alert("There must be another moderator before you may step down.");
+                $("#drop-mod-error").append("<p>You are the only moderator, please add another moderator before switching your moderator status.</p>");
+                //document.getElementById('no-user-message').style.borderColor = "red";
+                //document.getElementById('no-user-message').style.display= 'block';
+              }
+
+            });
 
 
           });

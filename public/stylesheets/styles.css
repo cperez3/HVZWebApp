@@ -12,3 +12,11 @@
 .btn:hover, .btn:active, .btn:focus, .btn > a:focus, .btn > a:active, .btn > a:hover{
     background-color: darkred;
 }
+
+.error-msg{
+    color: red;
+    display: block;
+    text-align: center;
+    font-size: 90%;
+    margin-top: .5em;
+}
