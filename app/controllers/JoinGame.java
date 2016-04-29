@@ -42,9 +42,9 @@ public class JoinGame extends Controller {
     }
 
     /**
-     * verifies a game code
-     * @param code (the game code)
-     * @return HTTP 200 ok() Result
+     * verifies a game code and adds current user to the game
+     * @param code (String)
+     * @return HTTP 200 ok() Result of forbidden()
      */
     public static Result verifyCode(String code){
         //TO DO: VERIFY THAT THE GAME CODE IS CORRECT Boolean isUser=false;

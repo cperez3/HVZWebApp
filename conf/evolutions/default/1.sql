@@ -9,9 +9,14 @@ create table game (
   constraint pk_game primary key (id))
 ;
 
-create table games (
-  id                        varchar(255) not null,
-  constraint pk_games primary key (id))
+create table message (
+  id                        integer auto_increment not null,
+  created_at                datetime,
+  game_code                 varchar(255),
+  recipient                 varchar(255),
+  message                   varchar(255),
+  location                  varchar(255),
+  constraint pk_message primary key (id))
 ;
 
 create table user (
@@ -26,11 +31,6 @@ create table user (
   constraint pk_user primary key (id))
 ;
 
-create table users (
-  id                        varchar(255) not null,
-  constraint pk_users primary key (id))
-;
-
 
 
 
@@ -40,11 +40,9 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table game;
 
-drop table games;
+drop table message;
 
 drop table user;
-
-drop table users;
 
 SET FOREIGN_KEY_CHECKS=1;
 

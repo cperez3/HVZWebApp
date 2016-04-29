@@ -44,7 +44,7 @@ public class LogIn extends Controller{
      * validates a users inputted login email and password
      * @param email - the users email
      * @param password - the users password
-     * @return - Result HTTP 200 ok() status
+     * @return - Result HTTP 200 ok() status or forbidden()
      */
     public static Result validateLogIn(String email, String password) {
         Boolean isUser=false;
