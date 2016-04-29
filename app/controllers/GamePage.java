@@ -13,6 +13,7 @@ package controllers;
 
 import com.avaje.ebean.SqlUpdate;
 import models.Game;
+import models.Message;
 import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
@@ -60,7 +61,12 @@ public class GamePage extends Controller {
         return forbidden(login.render());
 
     }
-
+    /**
+     * load the appropriate pages for settings of the current user
+     *
+     * @param - none
+     * @return - ok(inGameModSettings.render()), ok(noGameModSettings.render()), forbidden(login.render())
+     */
     public static Result loadSettings() {
         String isMod = session("is_mod");
         String uName = session("uname");
@@ -92,7 +98,12 @@ public class GamePage extends Controller {
         }
         return forbidden(login.render());
     }
-
+    /**
+     * clears session variables and logs out the current user
+     *
+     * @param - none
+     * @return - ok(login.render()) or forbidden(login.render())
+     */
     public static Result logOut() {
         String uName = session("uname");
         if(uName!=null){
@@ -103,7 +114,12 @@ public class GamePage extends Controller {
         }
 
     }
-
+    /**
+     * deactivate account of user that is currently logged in
+     *
+     * @param - none
+     * @return - ok () or forbidden(login.render())
+     */
     public static Result deactivateAccount(){
         String email = session("email");
         System.out.println(email);
@@ -115,6 +131,12 @@ public class GamePage extends Controller {
         }
     }
 
+    /**
+     * deletes a user from the database with an email
+     *
+     * @param - email(String)
+     * @return - ok()
+     */
     public static Result deleteUser(String email) {
 
 
@@ -213,6 +235,12 @@ public class GamePage extends Controller {
         return forbidden(login.render());
     }
 
+    /**
+     * checks to see if signed in moderator is not the only moderator in the game
+     *
+     * @param - none
+     * @return - Boolean
+     */
     public static Boolean isNotOnlyMod(){
         String sql2 = "SELECT * FROM user WHERE is_mod = 1 and game_code ='"+ Integer.parseInt(session("gCode"))+"'";
         int i=0;
@@ -255,6 +283,12 @@ instead of this one that you may want just logged */ }
 
     }
 
+    /**
+     * changes moderator status of mod that is logged in
+     *
+     * @param - none
+     * @return - none
+     */
     public static void changeModStatus(){
             String isMod = "false";
             String sql2 = "UPDATE user SET is_mod = " + isMod + " WHERE id = " + session("id");
@@ -353,7 +387,7 @@ instead of this one that you may want just logged */ }
     /**
      * Adds mod status to a particular user with a particular email
      *
-     * @param - email of user you want to be moderator
+     * @param - email(String)
      * @return - render log in if not logged in as mod in name, reloads page with success message
      */
     public static Result addModerator(String email) {
@@ -376,7 +410,6 @@ instead of this one that you may want just logged */ }
 
                                 int numColumns = rst.getMetaData().getColumnCount();
                                 id = rst.getString(1);
-
                             }
 
                         } finally {
@@ -453,8 +486,9 @@ instead of this one that you may want just logged */
 
     /**
      * creates an alphanumeric game code
-     * @return String game code
+     * @return game code as String
      */
+    //TO DO: query database to make sure that no games have that code
     public static String gameCode() {
         int limit = 7;
 
@@ -471,8 +505,8 @@ instead of this one that you may want just logged */
 
 
     /**
-     * Adds a game to the games database
-     * @param gameCodeIn - game code
+     * Adds a game to the game database
+     * @param gameCodeIn(String)
      * @return - Result HTTP 200 ok status
      */
     public static Result addGame(String gameCodeIn) {
@@ -532,6 +566,21 @@ instead of this one that you may want just logged */
         System.out.println(user);
 
     }*/
+    //MESSAGES
+    public static Result sendMessage(String recipient,String message, String location){
+        String gameCode=session("gCode");
+        if(gameCode!=null){
+            Message newMessage = new Message();
+            newMessage.location=location;
+            newMessage.recipient=recipient;
+            newMessage.message=message;
+            newMessage.gameCode=gameCode;
+            newMessage.save();
+            return ok();
+        }
+        return forbidden(login.render());
+
+    }
 
 }
 
