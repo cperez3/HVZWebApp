@@ -46,3 +46,4 @@ GET /addModerator/:email controllers.GamePage.addModerator(email:String)
 GET /createGame/  controllers.GamePage.createGame()
 
 GET /endGame/  controllers.GamePage.endGame()
+

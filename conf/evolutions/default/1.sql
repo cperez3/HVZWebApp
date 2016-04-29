@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table game (
-  id                        varchar(255) not null,
+  id                        integer auto_increment not null,
   game_code                 varchar(255),
   constraint pk_game primary key (id))
 ;
