@@ -42,3 +42,17 @@ GET /changeMod/ controllers.ModPage.changeStatus()
 GET /getPlayers/ controllers.ModPage.getPlayers()
 
 GET /addModerator/:email controllers.ModPage.addModerator(email:String)
+
+GET /enemySpotted/ controllers.GamePage.loadEnemySpotPage()
+
+GET /addMod/ controllers.GamePage.loadAddModPage()
+
+GET /enemySpot/ controllers.GamePage.loadEnemySpotPage()
+
+GET /helpPage/ controllers.GamePage.loadhelpPage()
+
+GET /inGameModeMessage/ controllers.GamePage.loadinGameModMessagePage()
+
+GET /messageHistory/ controllers.GamePage.loadmessageHistoryPage()
+
+GET /viewPlayers/ controllers.GamePage.loadviewPlayersPage()

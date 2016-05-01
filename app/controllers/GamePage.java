@@ -16,6 +16,12 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.noGameModSettings;
 import views.html.inGameModSettings;
+import views.html.helpPage;
+import views.html.inGameModMessage;
+import views.html.messageHistory;
+import views.html.viewPlayers;
+import views.html.addMod;
+import views.html.enemySpot;
 import views.html.gamePage;
 import views.html.joinGame;
 import views.html.login;
@@ -128,8 +134,24 @@ public class GamePage extends Controller {
             }
             return ok();
 
-
-
+    }
+    public static Result loadEnemySpotPage(){
+        return(ok(enemySpot.render()));
+    }
+    public static Result loadAddModPage(){
+        return(ok(addMod.render()));
+    }
+    public static Result loadhelpPage(){
+        return(ok(helpPage.render()));
+    }
+    public static Result loadinGameModMessagePage(){
+        return(ok(inGameModMessage.render()));
+    }
+    public static Result loadmessageHistoryPage(){
+        return(ok(messageHistory.render()));
+    }
+    public static Result loadviewPlayersPage(){
+        return(ok(viewPlayers.render()));
     }
 
 
