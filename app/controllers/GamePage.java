@@ -218,12 +218,22 @@ public class GamePage extends Controller {
         //Game game = Form.form(Game.class).bindFromRequest().get();
         // game.save();
         //TO DO : create game and add moderator to it
-        if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") == null || session("gCode").equals(" "))) {
-            return loadPage();
-        } else {
-            return forbidden(login.render());
-        }
 
+        if(session("is_mod") != null){
+        if((session("is_mod").equals("true")||session("is_mod").equals("1"))&&(session("gCode")==null||session("gCode").equals(" "))) {
+            String gc = gameCode();
+            addGame(gc);
+            session("gCode", gc);
+            JoinGame.verifyCode(gc);
+            return loadPage();
+        } else{
+            String uName = session("uname");
+            String status = session("is_active");
+            return forbidden(gamePage.render(uName,status));
+        }
+        }else{
+        return forbidden(login.render());
+        }
     }
 
     /**
@@ -233,9 +243,19 @@ public class GamePage extends Controller {
      * @return - Result redirect to the no Game Mod Setting page or login if not logged in as mod in game
      */
     public static Result endGame() {
-        if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
-            return loadPage();
-        } else {
+        if (session("is_mod") != null) {
+            if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
+                //end the game
+                //try selecting from db
+                //if no game is returned, the game code got fucked up somewhere and we've got a problem
+                return loadPage();
+            } else {
+                String uName = session("uname");
+                String status = session("is_active");
+                return forbidden(gamePage.render(uName,status));
+            }
+        }
+        else {
             return forbidden(login.render());
         }
     }
@@ -589,19 +609,24 @@ instead of this one that you may want just logged */
     }
     /**
      * removes a game from the Game database given a game code
-     * @param id - the game code to be removed
+     * @return boolen to indicate success or failure
      */
-    /*public static Result removeGame(int id) {
-        Game game = Game.find.select("id").where().eq("id",id).findUnique();
+    public static boolean removeGame() {
+        String code = session("gCode");
 
-        if(game == null) {
-            return notFound();
-        } else {
-            game.delete();
-            return ok();
-        }
+        //delete from the db where game code is gCode
+        return true;
 
-    }*/
+    }
+
+    /**
+     * sets the game code of every player in a game back to " " and makes all players in the game "humans" again
+     * @return boolean to indicate success or failure
+     */
+    public static boolean releasePlayers(){
+        //for every player in the database with the indicated game code, set game code back to ' ' and change type to 'human'
+        return true;
+    }
 
     /**
      * displays a players type

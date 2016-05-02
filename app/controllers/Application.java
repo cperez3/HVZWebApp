@@ -38,7 +38,8 @@ public class Application extends Controller {
                         routes.javascript.JoinGame.verifyCode(),
                         routes.javascript.SignUp.validateSignUp(),
                         routes.javascript.LogIn.validateLogIn(),
-                        routes.javascript.SignUp.addUser()
+                        routes.javascript.SignUp.addUser(),
+                        routes.javascript.GamePage.verifyChangeModStatus()
                 )
         );
     }

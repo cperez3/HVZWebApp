@@ -44,21 +44,31 @@
                   <h5 class="text-center">Game Code: @gCode </h5>
                     <br><br>
                     <div class="form-group">
-                      <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
+                      <form id="end-game-form" class="form center-block">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
+                      </form>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
-                    </div>
-                    <div id="mod-status" class="form-group" >
-                            <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
+                      <form id="add-mod-form" class="form center-block">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
+                      </form>
                     </div>
                     <div class="form-group">
+
                             <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
                     </div>
-
+                    
                     <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
                     </div>
+
+                    <div class="form-group">
+                        <form id="change-mod-status-form" class="form center-block">
+                            <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
+                                <!-- "stop moderating is a lame phrase but it's what I've got atm -->
+                        </form>
+                    </div>
+                    <div id="drop-mod-error" class="error-msg"></div>
                 </div><!-- mod-specific settings tab -->
                 <div role="tabpanel" class="tab-pane fade" id="gameStuff">
                   <div class="col-xs-12 text-center"><h5>Team: @team &emsp; Status: @status</h5></div>
@@ -122,9 +132,23 @@
           }
           $("#change-mod-status-form").on('submit', function(e) {
             e.preventDefault();
-            console.log("mod stat button pressed!");
+            //console.log("mod stat button pressed!");
 
-            window.location.href=@routes.GamePage.verifyChangeModStatus();
+            myJsRoutes.controllers.GamePage.verifyChangeModStatus().ajax({
+              success : function(data) {
+                console.log(data);
+                //figure out how to tell if user is in game or not
+                window.location.href=@routes.GamePage.loadSettings();
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //alert("There must be another moderator before you may step down.");
+                $("#drop-mod-error").append("<p>You are the only moderator, please add another moderator before switching your moderator status.</p>");
+                //document.getElementById('no-user-message').style.borderColor = "red";
+                //document.getElementById('no-user-message').style.display= 'block';
+              }
+
+            });
 
 
           });
@@ -132,6 +156,13 @@
           $("#log-out-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
+          });
+          $("#add-mod-form").on('submit', function(a) {
+            a.preventDefault();
+          });
+          $("#end-game-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.endGame();
           });
 
 
