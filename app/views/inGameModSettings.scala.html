@@ -43,6 +43,7 @@
 
                   <h5 class="text-center">Game Code: @gCode </h5>
                     <br><br>
+                  <h4 class="error-msg">CAUTION: All actions taken are final.</h4> <!--TODO : confirm permanenet choices -->
                     <div class="form-group">
                       <form id="end-game-form" class="form center-block">
                         <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
@@ -58,7 +59,9 @@
                         <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
                           <!-- "stop moderating is a lame phrase but it's what I've got atm -->
                       </form>
-                      <div id="drop-mod-error" class="error-msg"></div>
+                      <div id="drop-mod-error" class="error-msg">
+                        <p>You are the only moderator, please add another moderator before switching your moderator status.</p>
+                      </div>
                     </div>
 
                 </div><!-- mod-specific settings tab -->
@@ -131,7 +134,7 @@
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //alert("There must be another moderator before you may step down.");
-                $("#drop-mod-error").append("<p>You are the only moderator, please add another moderator before switching your moderator status.</p>");
+                $("#drop-mod-error").slideDown();
                 //document.getElementById('no-user-message').style.borderColor = "red";
                 //document.getElementById('no-user-message').style.display= 'block';
               }
@@ -151,6 +154,10 @@
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.endGame();
+          });
+          $("#change-status-form").on('submit', function(a){
+            a.preventDefault();
+            window.loaction.href=@routes.GamePage.changeActiveStatus();
           });
 
 
