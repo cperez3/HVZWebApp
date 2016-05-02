@@ -25,6 +25,32 @@ import java.util.*;
 
 public class GamePage extends Controller {
 
+    //TO LOAD NIKHILS HTML PAGES FOR SPRINT 2
+    public static Result loadEnemySpotPage() {
+        return (ok(enemySpot.render()));
+    }
+
+    public static Result loadAddModPage() {
+        return (ok(addMod.render()));
+    }
+
+    public static Result loadhelpPage() {
+        return (ok(helpPage.render()));
+    }
+
+    public static Result loadinGameModMessagePage() {
+        return (ok(inGameModMessage.render()));
+    }
+
+    public static Result loadmessageHistoryPage() {
+        return (ok(messageHistory.render()));
+    }
+
+    public static Result loadviewPlayersPage() {
+        return (ok(viewPlayers.render()));
+
+    }
+
     /**
      * loads the game page
      *
@@ -55,7 +81,6 @@ public class GamePage extends Controller {
         return forbidden(login.render());
 
     }
-
     /**
      * load the appropriate pages for settings of the current user
      *
@@ -93,7 +118,6 @@ public class GamePage extends Controller {
         }
         return forbidden(login.render());
     }
-
     /**
      * clears session variables and logs out the current user
      *
@@ -110,7 +134,6 @@ public class GamePage extends Controller {
         }
 
     }
-
     /**
      * deactivate account of user that is currently logged in
      *
@@ -193,6 +216,7 @@ public class GamePage extends Controller {
             }
         } else {
             return forbidden(login.render());
+
         }
 
     }
@@ -402,8 +426,8 @@ instead of this one that you may want just logged */
         return forbidden(login.render());
 
 
-    }
 
+    }
     /**
      * Adds mod status to a particular user with a particular email
      *
@@ -494,7 +518,6 @@ instead of this one that you may want just logged */
 
     /**
      * adds a new game to the Game class database
-     *
      * @param - none
      * @return - HTTP 200 ok() status
      */
@@ -729,14 +752,14 @@ instead of this one that you may want just logged */
 
     }*/
     //MESSAGES
-    public static Result sendMessage(String recipient,String message, String location){
-        String gameCode=session("gCode");
-        if(gameCode!=null){
+    public static Result sendMessage(String recipient, String message, String location) {
+        String gameCode = session("gCode");
+        if (gameCode != null) {
             Message newMessage = new Message();
-            newMessage.location=location;
-            newMessage.recipient=recipient;
-            newMessage.message=message;
-            newMessage.gameCode=gameCode;
+            newMessage.location = location;
+            newMessage.recipient = recipient;
+            newMessage.message = message;
+            newMessage.gameCode = gameCode;
             newMessage.save();
             return ok();
         }
