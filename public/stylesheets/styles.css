@@ -15,7 +15,7 @@
 
 .error-msg{
     color: red;
-    display: block;
+    display: none;
     text-align: center;
     font-size: 90%;
     margin-top: .5em;

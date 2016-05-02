@@ -90,6 +90,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
           });
+          $("#change-status-form").on('submit', function(a){
+            a.preventDefault();
+            window.loaction.href=@routes.GamePage.changeActiveStatus();
+          });
 
 
 

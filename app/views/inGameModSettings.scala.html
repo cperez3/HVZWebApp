@@ -43,6 +43,7 @@
 
                   <h5 class="text-center">Game Code: @gCode </h5>
                     <br><br>
+                  <h4 class="error-msg">CAUTION: All actions taken are final.</h4> <!--TODO : confirm permanenet choices -->
                     <div class="form-group">
                       <form id="end-game-form" class="form center-block">
                         <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
@@ -57,7 +58,7 @@
 
                             <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
                     </div>
-                    
+
                     <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
                     </div>
@@ -68,7 +69,9 @@
                                 <!-- "stop moderating is a lame phrase but it's what I've got atm -->
                         </form>
                     </div>
-                    <div id="drop-mod-error" class="error-msg"></div>
+                    <div id="drop-mod-error" class="error-msg">
+                        <p>You are the only moderator, please add another moderator before switching your moderator status.</p>
+                    </div>
                 </div><!-- mod-specific settings tab -->
                 <div role="tabpanel" class="tab-pane fade" id="gameStuff">
                   <div class="col-xs-12 text-center"><h5>Team: @team &emsp; Status: @status</h5></div>
@@ -84,7 +87,11 @@
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
                     </form>
                   </div>
-
+                  <div id="mod-status" class="form-group" style="display:none">
+                    <form id="remove-mod-form"class="form col-md-12 center-block">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
+                    </form>
+                  </div>
                   <div class="form-group">
                     <form id="log-out-form"class="form col-md-12 center-block">
                       <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
@@ -93,17 +100,10 @@
                   <div class="form-group">
                     <form id="delete-form"class="form col-md-12 center-block">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
-
                     </form>
                   </div>
 
                     </div>
-
-
-
-
-
-
 
                 </div><!-- in game settings tab -->
 
@@ -143,7 +143,7 @@
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //alert("There must be another moderator before you may step down.");
-                $("#drop-mod-error").append("<p>You are the only moderator, please add another moderator before switching your moderator status.</p>");
+                $("#drop-mod-error").slideDown();
                 //document.getElementById('no-user-message').style.borderColor = "red";
                 //document.getElementById('no-user-message').style.display= 'block';
               }
@@ -163,6 +163,10 @@
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.endGame();
+          });
+          $("#change-status-form").on('submit', function(a){
+            a.preventDefault();
+            window.loaction.href=@routes.GamePage.changeActiveStatus();
           });
 
 

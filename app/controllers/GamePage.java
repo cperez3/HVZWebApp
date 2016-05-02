@@ -11,26 +11,14 @@ package controllers;
 
 //import statements
 
-import com.avaje.ebean.SqlUpdate;
 import models.Game;
 import models.Message;
 import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.noGameModSettings;
-import views.html.inGameModSettings;
-import views.html.helpPage;
-import views.html.inGameModMessage;
-import views.html.messageHistory;
-import views.html.viewPlayers;
-import views.html.addMod;
-import views.html.enemySpot;
-import views.html.gamePage;
-import views.html.joinGame;
-import views.html.login;
-import views.html.regularSettings;
-import com.avaje.ebean.Ebean;
+import views.html.*;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -93,7 +81,6 @@ public class GamePage extends Controller {
         return forbidden(login.render());
 
     }
-
     /**
      * load the appropriate pages for settings of the current user
      *
@@ -131,7 +118,6 @@ public class GamePage extends Controller {
         }
         return forbidden(login.render());
     }
-
     /**
      * clears session variables and logs out the current user
      *
@@ -148,7 +134,6 @@ public class GamePage extends Controller {
         }
 
     }
-
     /**
      * deactivate account of user that is currently logged in
      *
@@ -205,7 +190,6 @@ public class GamePage extends Controller {
 
     }
 
-
     //MODERATOR FUNCTIONS
 
     /**
@@ -218,22 +202,23 @@ public class GamePage extends Controller {
         //Game game = Form.form(Game.class).bindFromRequest().get();
         // game.save();
         //TO DO : create game and add moderator to it
+        if (session("is_mod") != null) {
+            if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") == null || session("gCode").equals(" "))) {
+                String gc = gameCode();
+                addGame(gc);
+                session("gCode", gc);
+                JoinGame.verifyCode(gc);
+                return loadPage();
+            } else {
+                String uName = session("uname");
+                String status = session("is_active");
+                return forbidden(gamePage.render(uName, status));
+            }
+        } else {
+            return forbidden(login.render());
 
-        if(session("is_mod") != null){
-        if((session("is_mod").equals("true")||session("is_mod").equals("1"))&&(session("gCode")==null||session("gCode").equals(" "))) {
-            String gc = gameCode();
-            addGame(gc);
-            session("gCode", gc);
-            JoinGame.verifyCode(gc);
-            return loadPage();
-        } else{
-            String uName = session("uname");
-            String status = session("is_active");
-            return forbidden(gamePage.render(uName,status));
         }
-        }else{
-        return forbidden(login.render());
-        }
+
     }
 
     /**
@@ -245,17 +230,14 @@ public class GamePage extends Controller {
     public static Result endGame() {
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
-                //end the game
-                //try selecting from db
-                //if no game is returned, the game code got fucked up somewhere and we've got a problem
+                removeGame();
                 return loadPage();
             } else {
                 String uName = session("uname");
                 String status = session("is_active");
-                return forbidden(gamePage.render(uName,status));
+                return forbidden(gamePage.render(uName, status));
             }
-        }
-        else {
+        } else {
             return forbidden(login.render());
         }
     }
@@ -298,7 +280,7 @@ public class GamePage extends Controller {
      * @return - Boolean
      */
     public static Boolean isNotOnlyMod() {
-        String sql2 = "SELECT * FROM user WHERE is_mod = 1 and game_code ='" + Integer.parseInt(session("gCode")) + "'";
+        String sql2 = "SELECT * FROM user WHERE is_mod = 1 and game_code ='" + session("gCode") + "'";
         int i = 0;
         java.sql.Connection conn2 = DB.getConnection();
         try {
@@ -444,8 +426,8 @@ instead of this one that you may want just logged */
         return forbidden(login.render());
 
 
-    }
 
+    }
     /**
      * Adds mod status to a particular user with a particular email
      *
@@ -536,7 +518,6 @@ instead of this one that you may want just logged */
 
     /**
      * adds a new game to the Game class database
-     *
      * @param - none
      * @return - HTTP 200 ok() status
      */
@@ -568,9 +549,145 @@ instead of this one that you may want just logged */
     }
 
 
+    public static void clearGamePlayers(String gCode) {
+
+        String sql = "Select * from user WHERE game_code = '" + gCode + "'";
+
+
+            java.sql.Connection conn = DB.getConnection();
+            try {
+
+                java.sql.Statement stmt = conn.createStatement();
+                try {
+                    ResultSet rst = stmt.executeQuery(sql);
+                    try {
+                        while (rst.next()) {
+                            int id = Integer.parseInt(rst.getString(1));
+                            changeType(id, "human");
+                            removeGCode(id);
+                        }
+
+                        rst.close();
+                    } finally {
+
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    /**
+     * Chnges a player's type in the database.
+     *
+     * @param id   id of the player to change the type of
+     * @param type desired type to change to
+     */
+    public static void changeType(int id, String type) {
+        String sql = "UPDATE user SET type = '" + type + "' WHERE id = " + id;
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Sets a player's game code back to ' ' in the database
+     *
+     * @param id id of the player to change the type of
+     */
+    public static void removeGCode(int id) {
+        String sql = "UPDATE user SET game_code = ' ' WHERE id = " + id;
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Changes a player's status between active and inactive.
+     *
+     * @return sends back with success or failure
+     */
+    public static Result changeActiveStatus() {
+        if (session("uname") != null) {
+            int id = Integer.parseInt(session("id"));
+            int activity = Integer.parseInt(session("is_active"));
+            String sql = "UPDATE user SET is_active = " + 1 + " WHERE id = " + id;
+            session("is_active", "1");
+            if (activity == 1) {
+                sql = "UPDATE user SET is_active = " + 0 + " WHERE id = " + id;
+                session("is_active", "0");
+            }
+            java.sql.Connection conn = DB.getConnection();
+            try {
+
+                java.sql.Statement stmt = conn.createStatement();
+                try {
+                    Boolean rst = stmt.execute(sql);
+
+                } finally {
+
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return(ok());
+    }
+
+
     /**
      * Adds a game to the game database
-     *
      * @param gameCodeIn(String)
      * @return - Result HTTP 200 ok status
      */
@@ -584,53 +701,48 @@ instead of this one that you may want just logged */
         return ok();
     }
 
-    /**
-     * changes a players type (zombie, human, moderator)
-     *
-     * @param - none
-     * @return - void
-     */
-    public static Result changeType() {
-        SqlUpdate down = Ebean.createSqlUpdate("UPDATE type SET place = 'zombie'");
-        down.execute();
-        return ok();
-    }
 
-    /**
-     * changes a players status to or from active
-     *
-     * @param - none
-     * @return - void
-     */
-    public static Result changeActiveStatus() {
-        SqlUpdate down = Ebean.createSqlUpdate("UPDATE is_active SET place = '0'");
-        down.execute();
-        return ok();
-    }
     /**
      * removes a game from the Game database given a game code
      * @return boolen to indicate success or failure
      */
-    public static boolean removeGame() {
-        String code = session("gCode");
+    public static void removeGame() {
+        if (session("uname") != null) {
+            String code = session("gCode");
+            clearGamePlayers(code);
+            session("gCode", " ");
 
-        //delete from the db where game code is gCode
-        return true;
+            String sql = "DELETE from game WHERE game_code = '" + code + "'";
+            java.sql.Connection conn = DB.getConnection();
+            try {
 
+                java.sql.Statement stmt = conn.createStatement();
+                try {
+                    Boolean rst = stmt.execute(sql);
+
+                } finally {
+
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            //delete from the db where game code is gCode
+
+        }
     }
 
-    /**
-     * sets the game code of every player in a game back to " " and makes all players in the game "humans" again
-     * @return boolean to indicate success or failure
-     */
-    public static boolean releasePlayers(){
-        //for every player in the database with the indicated game code, set game code back to ' ' and change type to 'human'
-        return true;
-    }
 
     /**
      * displays a players type
-     *
      * @param - none
      * @return - void
      *//*
@@ -653,8 +765,8 @@ instead of this one that you may want just logged */
         }
         return forbidden(login.render());
 
-
     }
+
 }
 
 
