@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="full" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Game Page</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
+      <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+    <![endif]-->
+    <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <h1 class="text-center">Send a message to all players</h1>
+
+          </div>
+
+          <div class="modal-body">
+
+            <form id="join-game" class="form col-md-12 center-block" action="" method="post">
+
+              <div class="form-group">
+                <input id="game-code" type="text" class="form-control input-lg" placeholder="Message game">
+              </div>
+
+              <div class="form-group">
+                <button id="join" class="btn btn-primary btn-lg btn-block">Notify</button>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="modal-footer">
+        </div>
+        </div>
+      </div>
+
+        <!-- script references -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+      <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
+      <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+  </body>
+</html>
