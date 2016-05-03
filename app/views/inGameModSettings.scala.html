@@ -168,6 +168,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.changeActiveStatus();
           });
+          $("#delete-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.deactivateAccount();
+          });
 
 
 

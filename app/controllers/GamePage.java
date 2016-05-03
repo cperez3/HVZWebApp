@@ -566,6 +566,11 @@ instead of this one that you may want just logged */
                             int id = Integer.parseInt(rst.getString(1));
                             changeType(id, "human");
                             removeGCode(id);
+                            int active = Integer.parseInt(rst.getString(7));
+                            if(active == 0){
+                                changeActiveById(id, active);
+                            }
+
                         }
 
                         rst.close();
@@ -656,38 +661,45 @@ instead of this one that you may want just logged */
         if (session("uname") != null) {
             int id = Integer.parseInt(session("id"));
             int activity = Integer.parseInt(session("is_active"));
-            String sql = "UPDATE user SET is_active = " + 1 + " WHERE id = " + id;
-            session("is_active", "1");
-            if (activity == 1) {
-                sql = "UPDATE user SET is_active = " + 0 + " WHERE id = " + id;
-                session("is_active", "0");
-            }
-            java.sql.Connection conn = DB.getConnection();
-            try {
-
-                java.sql.Statement stmt = conn.createStatement();
-                try {
-                    Boolean rst = stmt.execute(sql);
-
-                } finally {
-
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            changeActiveById(id, activity);
+            if( activity == 0){session("is_active", "1");}
+            else{session("is_active", "0");}
         }
         Result toGo = loadSettings();
         return(toGo);
     }
 
+    /**
+     * Changes a player of a specific id's active status from the current to its oppposite (active -> inactive; inactive ->a active)
+     * @param id id of the player to change the status of
+     */
+    public static void changeActiveById(int id, int activity){
+        String sql = "UPDATE user SET is_active = " + 1 + " WHERE id = " + id;
+        if (activity == 1) {
+            sql = "UPDATE user SET is_active = " + 0 + " WHERE id = " + id;
 
+        }
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * Adds a game to the game database
      * @param gameCodeIn(String)
