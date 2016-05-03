@@ -144,7 +144,7 @@ public class GamePage extends Controller {
         String email = session("email");
         System.out.println(email);
         if (email != null) {
-
+            session().clear();
             return deleteUser(email);
         } else {
             return forbidden(login.render());
@@ -173,6 +173,7 @@ public class GamePage extends Controller {
                 Boolean rst2 = stmt.execute(sql2);
                 //Boolean rst3 = stmt.execute(sql3);
                 // rst.close();
+
             } finally {
 
                 stmt.close();
@@ -186,7 +187,7 @@ public class GamePage extends Controller {
                 e.printStackTrace();
             }
         }
-        return ok();
+        return ok(home.render());
 
     }
 
@@ -682,7 +683,8 @@ instead of this one that you may want just logged */
                 }
             }
         }
-        return(ok());
+        Result toGo = loadSettings();
+        return(toGo);
     }
 
 
