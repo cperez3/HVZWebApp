@@ -37,7 +37,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <div id="no-user-message" style="display:none;color:red;text-align: center">Invalid Email. This user is not in your game or does not exist.</div>
+            <div id="no-user-message" class="error-msg">Invalid Email. This user is not in your game or does not exist.</div>
+            <div id="self-user-message" class="error-msg">You are already a moderator of this game and cannot add yourself!</div>
+            <div id="repeat-mod-message" class="error-msg">The user you entered is already a moderator of your game.</div>
 
           </div>
         </div>
@@ -65,8 +67,25 @@
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //alert("Not in this Game or Already a Moderator");
-                document.getElementById('no-user-message').style.borderColor = "red";
-                document.getElementById('no-user-message').style.display= 'block';
+                var error=XMLHttpRequest["responseText"];
+                if (error == "noUinGame"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('no-user-message').style.display= 'block';
+                  document.getElementById('repeat-mod-message').style.display= 'none';
+                  document.getElementById('self-user-message').style.display= 'none';
+                }
+                if (error == "addedYou"){
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('self-user-message').style.display= 'block';
+                  document.getElementById('no-user-message').style.display= 'none';
+                  document.getElementById('repeat-mod-message').style.display= 'none';
+                }
+                if (error == "repMod"){ //but actually the one for repeat mods
+                  document.getElementById('email').style.borderColor = "red";
+                  document.getElementById('repeat-mod-message').style.display= 'block';
+                  document.getElementById('no-user-message').style.display= 'none';
+                  document.getElementById('self-user-message').style.display= 'none';
+                }
               }
 
             });

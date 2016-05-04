@@ -440,6 +440,10 @@ instead of this one that you may want just logged */
 
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
+                if (email.equals(session("email"))){
+                    return(forbidden("addedYou"));
+
+                }
                 //String email = "mflaim1@ithaca.edu";
                 String id = "none";
                 String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = '" + session("gCode")+ "'";
@@ -505,7 +509,7 @@ instead of this one that you may want just logged */
                     //TO DO: reload page I guess with message of success and if user is not found the load page with fail message
                     return ok();
                 } else {
-                    return forbidden("user not in game");
+                    return forbidden("noUinGame");
                 }
 
 
