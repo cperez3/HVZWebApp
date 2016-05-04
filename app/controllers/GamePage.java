@@ -442,7 +442,7 @@ instead of this one that you may want just logged */
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
                 //String email = "mflaim1@ithaca.edu";
                 String id = "none";
-                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = " + Integer.parseInt(session("gCode"));
+                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = '" + session("gCode")+ "'";
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
                     //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request

@@ -54,12 +54,15 @@
                       </form>
                     </div>
                     <div class="form-group">
-
-                            <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
+                        <form id="send-mod-msg" class="form center-block">
+                              <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
+                        </form>
                     </div>
 
                     <div class="form-group">
-                            <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
+                      <form id="view-players-form" class="form center-block">
+                              <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
+                      </form>
                     </div>
 
                     <div class="form-group">
@@ -158,6 +161,7 @@
           });
           $("#add-mod-form").on('submit', function(a) {
             a.preventDefault();
+            window.location.href=@routes.GamePage.loadAddModPage();
           });
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();

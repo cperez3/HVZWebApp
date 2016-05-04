@@ -49,7 +49,7 @@ GET /endGame/  controllers.GamePage.endGame()
 
 GET /sendMessage/:recipient/:message/:location/ controllers.GamePage.sendMessage(recipient:String, message:String,location:String)
 
-#GET /addModerator/:email controllers.ModPage.addModerator(email:String)
+GET /addModerator/:email controllers.GamePage.addModerator(email:String)
 
 GET /enemySpotted/ controllers.GamePage.loadEnemySpotPage()
 
