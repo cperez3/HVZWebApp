@@ -435,13 +435,15 @@ instead of this one that you may want just logged */
      * @param - email(String)
      * @return - render log in if not logged in as mod in name, reloads page with success message
      */
-    public static Result addModerator(String email) {
+    public static Result addModerator() {
         //TO DO: if you are adding a mod who is already a mod then it should say that
-
+        String email="mflaim1@ithaca.edu";
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
                 //String email = "mflaim1@ithaca.edu";
                 String id = "none";
+                String game_code="none";
+                 String mod="none";
                 String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = " + Integer.parseInt(session("gCode"));
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
@@ -455,6 +457,9 @@ instead of this one that you may want just logged */
 
                                 int numColumns = rst.getMetaData().getColumnCount();
                                 id = rst.getString(1);
+                                game_code=rst.getString(8);
+                                mod=rst.getString(5);
+                                
                             }
 
                         } finally {
@@ -480,6 +485,9 @@ instead of this one that you may want just logged */
                     }
                 }
                 if (id != "none") {
+                    if(game_code.equals(session("gCode"))&&mod.equals("1")){
+                        return forbidden("already mod for game");
+                    }
                     String sql3 = "UPDATE user SET is_mod = " + 1 + " WHERE id = " + Integer.parseInt(id);
                     java.sql.Connection conn3 = DB.getConnection();
                     try {
