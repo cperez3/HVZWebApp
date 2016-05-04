@@ -22,6 +22,7 @@ import views.html.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import scala.collection.JavaConverters;
 
 public class GamePage extends Controller {
 
@@ -44,8 +45,8 @@ public class GamePage extends Controller {
 
     public static Result loadOMWpage() { return ok(omw.render());}
 
-    public static Result loadmessageHistoryPage() {
-        return (ok(messageHistory.render()));
+    public static Result loadmessageHistoryPage(String type) {
+        return getMessages(type);
     }
 
     public static Result loadviewPlayersPage() {
@@ -400,9 +401,7 @@ instead of this one that you may want just logged */
                                 teams.add(rst.getString(6));
 
                             }
-                            for (int i = 0; i < names.size(); i++) {
-                                players.put(names.get(i), teams.get(i));
-                            }
+
 
                         } finally {
                             try {
@@ -859,6 +858,66 @@ instead of this one that you may want just logged */
         }
         return forbidden(login.render());
 
+    }
+
+    public static Result getMessages(String type){
+
+        List<String> times = new LinkedList<String>();
+        List<String> senders = new LinkedList<String>();
+        List<String> messages = new LinkedList<String>();
+        List<String> locations = new LinkedList<String>();
+
+        String recipient=type;
+        boolean isMessages=false;
+        String sql2 = "SELECT * FROM message WHERE recipient = '"+recipient+"'OR recipient = 'all' AND game_code='"+session("gCode")+"'";
+        java.sql.Connection conn2 = DB.getConnection();
+        try {
+            //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+            java.sql.Statement stmt = conn2.createStatement();
+            try {
+                ResultSet rst = stmt.executeQuery(sql2);
+                try {
+                    while (rst.next()) {
+                        int numColumns = rst.getMetaData().getColumnCount();
+                        isMessages=true;
+                        /*System.out.println(rst.getString(2));
+                        System.out.println(rst.getString(5));
+                        System.out.println(rst.getString(6));
+                        System.out.println(rst.getString(7));*/
+                        times.add(rst.getString(2));
+                        messages.add(rst.getString(5));
+                        locations.add(rst.getString(6));
+                        senders.add(rst.getString(7));
+                    }
+
+                } finally {
+                    try {
+                        rst.close();
+                    } catch (Throwable ignore) { /* Propagate the original exception
+                            instead of this one that you may want just logged */
+                    }
+                }
+
+                // rst.close();
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn2.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!isMessages){
+            return(forbidden("noMessages"));
+        }
+
+        return(ok(messageHistory.render(times, messages, locations, senders)));
     }
 
 }
