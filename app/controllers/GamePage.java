@@ -448,7 +448,9 @@ instead of this one that you may want just logged */
                 }
                 //String email = "mflaim1@ithaca.edu";
                 String id = "none";
-                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = '" + session("gCode")+ "'";
+                String game_code="none";
+                 String mod="none";
+                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = " + Integer.parseInt(session("gCode"));
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
                     //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
@@ -461,6 +463,9 @@ instead of this one that you may want just logged */
 
                                 int numColumns = rst.getMetaData().getColumnCount();
                                 id = rst.getString(1);
+                                game_code=rst.getString(8);
+                                mod=rst.getString(5);
+
                             }
 
                         } finally {
@@ -486,6 +491,9 @@ instead of this one that you may want just logged */
                     }
                 }
                 if (id != "none") {
+                    if(game_code.equals(session("gCode"))&&mod.equals("1")){
+                        return forbidden("already mod for game");
+                    }
                     String sql3 = "UPDATE user SET is_mod = " + 1 + " WHERE id = " + Integer.parseInt(id);
                     java.sql.Connection conn3 = DB.getConnection();
                     try {

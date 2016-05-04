@@ -41,7 +41,7 @@ GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
 GET /getPlayers/ controllers.GamePage.getPlayers()
 
-GET /addModerator/:email controllers.GamePage.addModerator(email:String)
+GET /addModerator/ controllers.GamePage.addModerator()
 
 GET /createGame/  controllers.GamePage.createGame()
 
