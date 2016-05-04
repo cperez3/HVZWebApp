@@ -1,7 +1,4 @@
-
-
-
-
+@(team: String)(gCode: String)(msgs: Map[String, String])
 
 <!DOCTYPE html>
 <html class="full" lang="en">
@@ -28,13 +25,33 @@
         <div class="modal-content">
           <div class="modal-header">
 
-            <h1 class="text-center">Messages</h1>
+            <h1 class="text-center">Messages for @team+s in Game @gCode</h1>
 
           </div>
+          <div class="modal-body">
+            @if(msgs != null){
+              <table class="table-responsive col-xs-8 col-xs-offset-2">
+                <thead>
+                  <tr><th>Date Sent:</th><th>Message:</th></tr>
+                </thead>
+                <tbody>
+                @for((date, message) <- msgs){
+                  <tr>
+                    <td>@date</td>
+                    <td>@message</td>
+                  </tr>
+                }
+                </tbody>
+
+              </table>
+            }else{
+              <p>There are no users to display.</p>
+            }
           <ul style="list-style-type:disc">
             <li>input players in a loop</li>
           </ul>
 
+            </div>
         </div>
       </div>
     </div>
