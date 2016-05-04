@@ -476,7 +476,7 @@ instead of this one that you may want just logged */
                                 id = rst.getString(1);
                                 game_code=rst.getString(8);
                                 mod=rst.getString(5);
-                                
+
                             }
 
                         } finally {
