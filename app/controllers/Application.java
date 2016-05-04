@@ -40,7 +40,8 @@ public class Application extends Controller {
                         routes.javascript.LogIn.validateLogIn(),
                         routes.javascript.SignUp.addUser(),
                         routes.javascript.GamePage.verifyChangeModStatus(),
-                        routes.javascript.GamePage.addModerator()
+                        routes.javascript.GamePage.addModerator(),
+                        routes.javascript.GamePage.makeMessage()
                 )
         );
     }

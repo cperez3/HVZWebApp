@@ -16,6 +16,7 @@ create table message (
   recipient                 varchar(255),
   message                   varchar(255),
   location                  varchar(255),
+  sender                    varchar(255),
   constraint pk_message primary key (id))
 ;
 

@@ -116,7 +116,7 @@
 
         </div> <!-- end of  modal contet div-->
       </div>
-    </div>
+
 
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -162,6 +162,10 @@
           $("#add-mod-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.loadAddModPage();
+          });
+          $("#send-mod-msg").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.loadinGameModMessagePage();
           });
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();

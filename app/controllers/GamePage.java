@@ -42,6 +42,8 @@ public class GamePage extends Controller {
         return (ok(inGameModMessage.render()));
     }
 
+    public static Result loadOMWpage() { return ok(omw.render());}
+
     public static Result loadmessageHistoryPage() {
         return (ok(messageHistory.render()));
     }
@@ -790,6 +792,46 @@ instead of this one that you may want just logged */
 
     }*/
     //MESSAGES
+
+    public static Result makeMessage(String pageFrom, String body, String location){
+        String type = session("type");
+        if (type !=null){
+            Result msgRslt = loadSettings();
+            if(pageFrom.equals("modMsg")){
+                String body2 = "<p class='mod-msg'>" + body + "</p>";
+                msgRslt = sendMessage("all", body2, location);
+            }
+            else if(pageFrom.equals("enemSpot")){
+                body = "<p class='msg-title enem-msg'>Enemy Spotted!!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            else if(pageFrom.equals("help")){
+                body = "<p class='msg-title help-msg'>Help Requested!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            else if( pageFrom.equals("omw")){
+                body = "<p class='msg-title omw-msg'>On My Way!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            if(msgRslt == ok()){
+                return(ok());
+            }
+            else{
+                return msgRslt;
+            }
+        }
+        return(forbidden(login.render()));
+    }
+    /**
+     * Adds a new message to the messages table
+     * @param recipient humans/zombies/all --- who this message should go to
+     * @param message the body of the message
+     * @param location location the message is being sent from. Should be "" if a moderator message.
+     * @return
+     */
     public static Result sendMessage(String recipient, String message, String location) {
         String gameCode = session("gCode");
         if (gameCode != null) {
@@ -798,6 +840,7 @@ instead of this one that you may want just logged */
             newMessage.recipient = recipient;
             newMessage.message = message;
             newMessage.gameCode = gameCode;
+            newMessage.sender = session("uname");
             newMessage.save();
             return ok();
         }

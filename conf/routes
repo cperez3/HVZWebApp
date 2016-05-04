@@ -47,7 +47,7 @@ GET /createGame/  controllers.GamePage.createGame()
 
 GET /endGame/  controllers.GamePage.endGame()
 
-GET /sendMessage/:recipient/:message/:location/ controllers.GamePage.sendMessage(recipient:String, message:String,location:String)
+GET /sendMessage/:pageFrom/:body/:location/ controllers.GamePage.makeMessage(pageFrom:String, body:String,location:String)
 
 GET /addModerator/:email controllers.GamePage.addModerator(email:String)
 
@@ -58,6 +58,8 @@ GET /addMod/ controllers.GamePage.loadAddModPage()
 GET /enemySpot/ controllers.GamePage.loadEnemySpotPage()
 
 GET /helpPage/ controllers.GamePage.loadhelpPage()
+
+GET /omw/ controllers.GamePage.loadOMWpage()
 
 GET /inGameModeMessage/ controllers.GamePage.loadinGameModMessagePage()
 
