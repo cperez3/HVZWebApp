@@ -150,8 +150,8 @@ instead of this one that you may want just logged */
             session("uname", nameIn);
             session("id", String.valueOf(newUser.id));
             session("is_mod", isModVal);
-            session("type", "none");
-            session("is_active", "true");
+            session("type", "human");
+            session("is_active", "1");
             session("gCode", " ");
 
             return ok();

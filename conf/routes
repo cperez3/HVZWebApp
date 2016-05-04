@@ -39,18 +39,15 @@ GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
 
 GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
-GET /getPlayers/ controllers.GamePage.getPlayers()
-
-GET /addModerator/ controllers.GamePage.addModerator()
+GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
 GET /createGame/  controllers.GamePage.createGame()
 
 GET /endGame/  controllers.GamePage.endGame()
 
-GET /sendMessage/:recipient/:message/:location/ controllers.GamePage.sendMessage(recipient:String, message:String,location:String)
+GET /sendMessage/:pageFrom/:body/:location/ controllers.GamePage.makeMessage(pageFrom:String, body:String,location:String)
 
-
-#GET /addModerator/:email controllers.ModPage.addModerator(email:String)
+GET /addModerator/:email controllers.GamePage.addModerator(email:String)
 
 GET /enemySpotted/ controllers.GamePage.loadEnemySpotPage()
 
@@ -60,9 +57,14 @@ GET /enemySpot/ controllers.GamePage.loadEnemySpotPage()
 
 GET /helpPage/ controllers.GamePage.loadhelpPage()
 
+GET /omw/ controllers.GamePage.loadOMWpage()
+
 GET /inGameModeMessage/ controllers.GamePage.loadinGameModMessagePage()
 
 GET /messageHistory/ controllers.GamePage.loadmessageHistoryPage()
 
 GET /viewPlayers/ controllers.GamePage.loadviewPlayersPage()
 
+GET /changeStatus/ controllers.GamePage.changeActiveStatus()
+
+GET /changeTeam/ controllers.GamePage.changeTeam()

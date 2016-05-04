@@ -44,13 +44,13 @@
                   </div>
                 </form>
 
-            <form id="log-out-form"class="form col-md-12 center-block">
+            <form id="log-out-form" class="form col-xs-12 center-block">
 
               <div class="form-group">
                 <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
               </div>
             </form>
-            <form id="delete-form"class="form col-md-12 center-block">
+            <form id="delete-form" class="form col-xs-12 center-block">
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
               </div>
@@ -77,9 +77,13 @@
             window.location.href=@routes.GamePage.logOut();
           });
         $("#create-form").on('submit', function(a){
-          a.preventDefault();
-          window.location.href=@routes.GamePage.createGame();
+            a.preventDefault();
+            window.location.href=@routes.GamePage.createGame();
         });
+          $("#delete-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.deactivateAccount();
+          });
 
 
 

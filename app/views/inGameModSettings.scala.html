@@ -24,8 +24,7 @@
         <div class="modal-content">
           <div class="modal-header">
 
-            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
-
+            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
             <br>
             <br>
             <div class="col-xs-12"><h4>@uname</h4></div>
@@ -43,6 +42,7 @@
 
                   <h5 class="text-center">Game Code: @gCode </h5>
                     <br><br>
+                  <h4 class="error-msg">CAUTION: All actions taken are final.</h4> <!--TODO : confirm permanenet choices -->
                     <div class="form-group">
                       <form id="end-game-form" class="form center-block">
                         <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
@@ -54,12 +54,15 @@
                       </form>
                     </div>
                     <div class="form-group">
-
-                            <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
+                        <form id="send-mod-msg" class="form center-block">
+                              <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
+                        </form>
                     </div>
 
                     <div class="form-group">
-                            <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
+                      <form id="view-players-form" class="form center-block">
+                              <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
+                      </form>
                     </div>
 
                     <div class="form-group">
@@ -68,7 +71,9 @@
                                 <!-- "stop moderating is a lame phrase but it's what I've got atm -->
                         </form>
                     </div>
-                    <div id="drop-mod-error" class="error-msg"></div>
+                    <div id="drop-mod-error" class="error-msg">
+                        <p>You are the only moderator, please add another moderator before switching your moderator status.</p>
+                    </div>
                 </div><!-- mod-specific settings tab -->
                 <div role="tabpanel" class="tab-pane fade" id="gameStuff">
                   <div class="col-xs-12 text-center"><h5>Team: @team &emsp; Status: @status</h5></div>
@@ -84,7 +89,11 @@
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
                     </form>
                   </div>
-
+                  <div id="mod-status" class="form-group" style="display:none">
+                    <form id="remove-mod-form"class="form col-md-12 center-block">
+                      <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
+                    </form>
+                  </div>
                   <div class="form-group">
                     <form id="log-out-form"class="form col-md-12 center-block">
                       <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
@@ -93,17 +102,10 @@
                   <div class="form-group">
                     <form id="delete-form"class="form col-md-12 center-block">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
-
                     </form>
                   </div>
 
                     </div>
-
-
-
-
-
-
 
                 </div><!-- in game settings tab -->
 
@@ -114,7 +116,7 @@
 
         </div> <!-- end of  modal contet div-->
       </div>
-    </div>
+
 
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -143,7 +145,7 @@
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 //alert("There must be another moderator before you may step down.");
-                $("#drop-mod-error").append("<p>You are the only moderator, please add another moderator before switching your moderator status.</p>");
+                $("#drop-mod-error").slideDown();
                 //document.getElementById('no-user-message').style.borderColor = "red";
                 //document.getElementById('no-user-message').style.display= 'block';
               }
@@ -159,11 +161,33 @@
           });
           $("#add-mod-form").on('submit', function(a) {
             a.preventDefault();
+            window.location.href=@routes.GamePage.loadAddModPage();
+          });
+          $("#send-mod-msg").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.loadinGameModMessagePage();
+          });
+          $("#view-players-form").on('submit', function(a) {
+              a.preventDefault();
+              window.location.href=@routes.GamePage.loadviewPlayersPage();
           });
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.endGame();
           });
+          $("#change-status-form").on('submit', function(a){
+            a.preventDefault();
+            window.location.href=@routes.GamePage.changeActiveStatus();
+          });
+          $("#change-team-form").on('submit', function(a){
+            a.preventDefault();
+            window.location.href=@routes.GamePage.changeTeam();
+          });
+          $("#delete-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.deactivateAccount();
+          });
+
 
 
 
