@@ -434,7 +434,7 @@ instead of this one that you may want just logged */
     /**
      * Adds mod status to a particular user with a particular email
      *
-     * @param - email(String)
+     * @param - email(String) email of the future moderator
      * @return - render log in if not logged in as mod in name, reloads page with success message
      */
     public static Result addModerator(String email) {
@@ -492,7 +492,7 @@ instead of this one that you may want just logged */
                 }
                 if (id != "none") {
                     if(game_code.equals(session("gCode"))&&mod.equals("1")){
-                        return forbidden("already mod for game");
+                        return forbidden("repMod");
                     }
                     String sql3 = "UPDATE user SET is_mod = " + 1 + " WHERE id = " + Integer.parseInt(id);
                     java.sql.Connection conn3 = DB.getConnection();
