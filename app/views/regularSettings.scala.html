@@ -90,6 +90,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
           });
+          $("#change-team-form").on('submit', function(a){
+            a.preventDefault();
+            window.location.href=@routes.GamePage.changeTeam();
+          });
           $("#change-status-form").on('submit', function(a){
             a.preventDefault();
             window.location.href=@routes.GamePage.changeActiveStatus();

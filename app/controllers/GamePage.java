@@ -592,9 +592,28 @@ instead of this one that you may want just logged */
             }
         }
 
+    /**
+     * Called when a user presses the "change team"' button on their settings page
+     * @return the appropriate view of the settings page
+     */
+    public static Result changeTeam(){
+        String currTeam = session("type");
+        if (currTeam != null) {
+            if (currTeam.equals("human")) {
+                changeType(Integer.parseInt(session("id")), "zombie");
+                session("type", "zombie");
+            } else {
+                changeType(Integer.parseInt(session("id")), "human");
+                session("type", "human");
+            }
+        }
+        Result toGo = loadSettings();
+        //loadSettings should handle whatever needs to happen if the user is mod/not or not logged in
+        return(toGo);
+    }
 
     /**
-     * Chnges a player's type in the database.
+     * Chnges player (id) to a give type in the database.
      *
      * @param id   id of the player to change the type of
      * @param type desired type to change to
@@ -725,6 +744,7 @@ instead of this one that you may want just logged */
             String code = session("gCode");
             clearGamePlayers(code);
             session("gCode", " ");
+            session("type", "human");
 
             String sql = "DELETE from game WHERE game_code = '" + code + "'";
             java.sql.Connection conn = DB.getConnection();
