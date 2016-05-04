@@ -167,6 +167,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.loadinGameModMessagePage();
           });
+          $("#view-players-form").on('submit', function(a) {
+              a.preventDefault();
+              window.location.href=@routes.GamePage.loadviewPlayersPage();
+          });
           $("#end-game-form").on('submit', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.endGame();
