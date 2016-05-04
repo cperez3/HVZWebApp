@@ -49,7 +49,16 @@ public class GamePage extends Controller {
     }
 
     public static Result loadviewPlayersPage() {
-        return (ok(viewPlayers.render()));
+        if (session("is_mod") != null) {
+            if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
+                Map<String, String> playerMap = getPlayers();
+                return (ok(viewPlayers.render(playerMap, session("gCode"))));
+                // ^^ it gives an error in the ide but the code runs properly!
+            }
+            Result goTo = loadSettings();
+            return(goTo);
+        }
+        return(forbidden(login.render()));
 
     }
 
@@ -368,16 +377,14 @@ instead of this one that you may want just logged */
      * @param - none
      * @return - render the view players page with the hashmap of players or login page if player  is not a mod in a game
      */
-    public static Result getPlayers() {
-        if (session("is_mod") != null) {
-            if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
-                System.out.println("HEYYYYYYYYYY");
+    public static Map getPlayers() {
+
                 Map<String, String> players = new HashMap<String, String>();
                 List<String> names = new LinkedList<String>();
                 List<String> teams = new LinkedList<String>();
 
 
-                String sql2 = "SELECT * FROM user WHERE game_code = " + Integer.parseInt(session("gCode"));
+                String sql2 = "SELECT * FROM user WHERE game_code = '" + session("gCode") + "'";
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
                     //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
@@ -419,16 +426,7 @@ instead of this one that you may want just logged */
                         e.printStackTrace();
                     }
                 }
-                //TO DO: this is where you will call the player list page with the players hash map as input
-                return ok();
-            }
-            return forbidden(login.render());
-
-        }
-
-        return forbidden(login.render());
-
-
+                return players;
 
     }
     /**
@@ -735,7 +733,7 @@ instead of this one that you may want just logged */
     }
     /**
      * Adds a game to the game database
-     * @param gameCodeIn(String)
+     * @param gameCodeIn(String) the code of the game to add
      * @return - Result HTTP 200 ok status
      */
     public static Result addGame(String gameCodeIn) {
@@ -801,6 +799,13 @@ instead of this one that you may want just logged */
     }*/
     //MESSAGES
 
+    /**
+     * Fills all parameters required for sendMessage(). Allows for specific formatting based on source page
+     * @param pageFrom The page the message was sent from
+     * @param body The body of the message
+     * @param location The location the user was at
+     * @return 200 (ok) if successful. Forbidden if unsuccessful. Redirects to login if not logged in.
+     */
     public static Result makeMessage(String pageFrom, String body, String location){
         String type = session("type");
         if (type !=null){
@@ -838,7 +843,7 @@ instead of this one that you may want just logged */
      * @param recipient humans/zombies/all --- who this message should go to
      * @param message the body of the message
      * @param location location the message is being sent from. Should be "" if a moderator message.
-     * @return
+     * @return 200 http code if successful. Redirects if not logged in.
      */
     public static Result sendMessage(String recipient, String message, String location) {
         String gameCode = session("gCode");

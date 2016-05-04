@@ -39,9 +39,7 @@ GET /deactivateAccount/ controllers.GamePage.deactivateAccount()
 
 GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
-GET /getPlayers/ controllers.GamePage.getPlayers()
-
-GET /addModerator/ controllers.GamePage.addModerator()
+GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
 GET /createGame/  controllers.GamePage.createGame()
 
