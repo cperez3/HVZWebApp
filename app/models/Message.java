@@ -1,13 +1,8 @@
 package models;
 import play.db.ebean.Model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Version;
+
+import javax.persistence.*;
 import java.util.Date;
-import javax.persistence.PrePersist;
 /**
  * Created by mariahflaim on 4/28/16.
  */
@@ -24,6 +19,7 @@ public class Message extends Model {
     public String recipient;
     public String message;
     public String location;
+    public String sender;
 
     @Override
     public void save() {

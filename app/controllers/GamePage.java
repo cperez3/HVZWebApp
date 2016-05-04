@@ -42,6 +42,8 @@ public class GamePage extends Controller {
         return (ok(inGameModMessage.render()));
     }
 
+    public static Result loadOMWpage() { return ok(omw.render());}
+
     public static Result loadmessageHistoryPage() {
         return (ok(messageHistory.render()));
     }
@@ -432,14 +434,18 @@ instead of this one that you may want just logged */
     /**
      * Adds mod status to a particular user with a particular email
      *
-     * @param - email(String)
+     * @param - email(String) email of the future moderator
      * @return - render log in if not logged in as mod in name, reloads page with success message
      */
-    public static Result addModerator() {
+    public static Result addModerator(String email) {
         //TO DO: if you are adding a mod who is already a mod then it should say that
-        String email="mflaim1@ithaca.edu";
+
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
+                if (email.equals(session("email"))){
+                    return(forbidden("addedYou"));
+
+                }
                 //String email = "mflaim1@ithaca.edu";
                 String id = "none";
                 String game_code="none";
@@ -459,7 +465,7 @@ instead of this one that you may want just logged */
                                 id = rst.getString(1);
                                 game_code=rst.getString(8);
                                 mod=rst.getString(5);
-                                
+
                             }
 
                         } finally {
@@ -486,7 +492,7 @@ instead of this one that you may want just logged */
                 }
                 if (id != "none") {
                     if(game_code.equals(session("gCode"))&&mod.equals("1")){
-                        return forbidden("already mod for game");
+                        return forbidden("repMod");
                     }
                     String sql3 = "UPDATE user SET is_mod = " + 1 + " WHERE id = " + Integer.parseInt(id);
                     java.sql.Connection conn3 = DB.getConnection();
@@ -513,7 +519,7 @@ instead of this one that you may want just logged */
                     //TO DO: reload page I guess with message of success and if user is not found the load page with fail message
                     return ok();
                 } else {
-                    return forbidden("user not in game");
+                    return forbidden("noUinGame");
                 }
 
 
@@ -574,6 +580,11 @@ instead of this one that you may want just logged */
                             int id = Integer.parseInt(rst.getString(1));
                             changeType(id, "human");
                             removeGCode(id);
+                            int active = Integer.parseInt(rst.getString(7));
+                            if(active == 0){
+                                changeActiveById(id, active);
+                            }
+
                         }
 
                         rst.close();
@@ -595,9 +606,28 @@ instead of this one that you may want just logged */
             }
         }
 
+    /**
+     * Called when a user presses the "change team"' button on their settings page
+     * @return the appropriate view of the settings page
+     */
+    public static Result changeTeam(){
+        String currTeam = session("type");
+        if (currTeam != null) {
+            if (currTeam.equals("human")) {
+                changeType(Integer.parseInt(session("id")), "zombie");
+                session("type", "zombie");
+            } else {
+                changeType(Integer.parseInt(session("id")), "human");
+                session("type", "human");
+            }
+        }
+        Result toGo = loadSettings();
+        //loadSettings should handle whatever needs to happen if the user is mod/not or not logged in
+        return(toGo);
+    }
 
     /**
-     * Chnges a player's type in the database.
+     * Chnges player (id) to a give type in the database.
      *
      * @param id   id of the player to change the type of
      * @param type desired type to change to
@@ -664,38 +694,45 @@ instead of this one that you may want just logged */
         if (session("uname") != null) {
             int id = Integer.parseInt(session("id"));
             int activity = Integer.parseInt(session("is_active"));
-            String sql = "UPDATE user SET is_active = " + 1 + " WHERE id = " + id;
-            session("is_active", "1");
-            if (activity == 1) {
-                sql = "UPDATE user SET is_active = " + 0 + " WHERE id = " + id;
-                session("is_active", "0");
-            }
-            java.sql.Connection conn = DB.getConnection();
-            try {
-
-                java.sql.Statement stmt = conn.createStatement();
-                try {
-                    Boolean rst = stmt.execute(sql);
-
-                } finally {
-
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            changeActiveById(id, activity);
+            if( activity == 0){session("is_active", "1");}
+            else{session("is_active", "0");}
         }
         Result toGo = loadSettings();
         return(toGo);
     }
 
+    /**
+     * Changes a player of a specific id's active status from the current to its oppposite (active -> inactive; inactive ->a active)
+     * @param id id of the player to change the status of
+     */
+    public static void changeActiveById(int id, int activity){
+        String sql = "UPDATE user SET is_active = " + 1 + " WHERE id = " + id;
+        if (activity == 1) {
+            sql = "UPDATE user SET is_active = " + 0 + " WHERE id = " + id;
 
+        }
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * Adds a game to the game database
      * @param gameCodeIn(String)
@@ -721,6 +758,7 @@ instead of this one that you may want just logged */
             String code = session("gCode");
             clearGamePlayers(code);
             session("gCode", " ");
+            session("type", "human");
 
             String sql = "DELETE from game WHERE game_code = '" + code + "'";
             java.sql.Connection conn = DB.getConnection();
@@ -762,6 +800,46 @@ instead of this one that you may want just logged */
 
     }*/
     //MESSAGES
+
+    public static Result makeMessage(String pageFrom, String body, String location){
+        String type = session("type");
+        if (type !=null){
+            Result msgRslt = loadSettings();
+            if(pageFrom.equals("modMsg")){
+                String body2 = "<p class='mod-msg'>" + body + "</p>";
+                msgRslt = sendMessage("all", body2, location);
+            }
+            else if(pageFrom.equals("enemSpot")){
+                body = "<p class='msg-title enem-msg'>Enemy Spotted!!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            else if(pageFrom.equals("help")){
+                body = "<p class='msg-title help-msg'>Help Requested!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            else if( pageFrom.equals("omw")){
+                body = "<p class='msg-title omw-msg'>On My Way!</p>";
+                String location2 = "<p class='location'>" + location + "</p>";
+                msgRslt = sendMessage(type, body, location2);
+            }
+            if(msgRslt == ok()){
+                return(ok());
+            }
+            else{
+                return msgRslt;
+            }
+        }
+        return(forbidden(login.render()));
+    }
+    /**
+     * Adds a new message to the messages table
+     * @param recipient humans/zombies/all --- who this message should go to
+     * @param message the body of the message
+     * @param location location the message is being sent from. Should be "" if a moderator message.
+     * @return
+     */
     public static Result sendMessage(String recipient, String message, String location) {
         String gameCode = session("gCode");
         if (gameCode != null) {
@@ -770,6 +848,7 @@ instead of this one that you may want just logged */
             newMessage.recipient = recipient;
             newMessage.message = message;
             newMessage.gameCode = gameCode;
+            newMessage.sender = session("uname");
             newMessage.save();
             return ok();
         }

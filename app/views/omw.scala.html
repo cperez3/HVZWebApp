@@ -3,13 +3,14 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Moderator Message</title>
+    <title>Message: On My Way!</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
       <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
       <!--favicon -->
     <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
@@ -26,7 +27,8 @@
             <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
             <br>
 
-            <h1 class="text-center">Send a message to all players</h1>
+
+            <h1 class="text-center">I'm coming to help!</h1>
 
           </div>
 
@@ -35,12 +37,13 @@
             <form id="message-form" class="form col-md-12 center-block" action="" method="post">
 
               <div class="form-group">
-                <input id="message-body" type="text" class="form-control input-lg" placeholder="Message game">
+                <input id="location" type="text" class="form-control input-lg" placeholder="Where are you going?">
               </div>
               <div id="bad-msg-message" class="error-msg">Something went wrong with the message. Sorry.<br></div>
+
               <div id="empty-error" class="error-msg">Oops! Your message is too short!<br></div>
               <div class="form-group">
-                <button id="ssend" class="btn btn-primary btn-lg btn-block">Notify</button>
+                <button id="send" class="btn btn-primary btn-lg btn-block">Send Alert</button>
               </div>
 
             </form>
@@ -50,8 +53,8 @@
         </div>
         </div>
       </div>
-      </div>
 
+      </div>
         <!-- script references -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
       <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
@@ -64,10 +67,10 @@
         };
         $("#message-form").on('submit', function(e) {
           e.preventDefault();
-          var content = $('#message-body').val();
-          var page = "modMsg";
-          var location = " ";
-          if(content.length < 10){
+          var content = " ";
+          var page = "omw";
+          var location = $("#location").val();
+          if(location.length < 3){
             document.getElementById('empty-error').style.display="block";
             return;
           }
@@ -75,12 +78,12 @@
             success : function(data) {
               console.log(data);
               //figure out how to tell if user is in game or not
-              window.location.href=@routes.GamePage.loadSettings();
+              window.location.href=@routes.GamePage.loadPage();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log(errorThrown);
-              document.getElementById('message-body').style.borderColor = "red";
+              document.getElementById('location').style.borderColor = "red";
               document.getElementById('bad-msg-message').style.display= 'block';
             }
 

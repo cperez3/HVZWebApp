@@ -39,29 +39,29 @@
 
           </div>
           <div class="modal-body">
-            <form class="form col-md-12 center-block">
+            <form id="change-team-form" class="form col-md-12 center-block">
 
-              <div id="change-team-form" class="form-group">
+              <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
               </div>
             </form>
-              <form id="change-status-form"class="form col-md-12 center-block">
+              <form id="change-status-form"class="form col-xs-12 center-block">
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
               </div>
               </form>
-              <form id="remove-mod-form"class="form col-md-12 center-block">
+              <form id="remove-mod-form"class="form col-xs-12 center-block">
               <div id="mod-status" class="form-group" style="display:none">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
               </div>
             </form>
-              <form id="log-out-form"class="form col-md-12 center-block">
+              <form id="log-out-form"class="form col-xs-12 center-block">
 
               <div class="form-group">
                 <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
               </div>
               </form>
-            <form id="delete-form"class="form col-md-12 center-block">
+            <form id="delete-form"class="form col-xs-12 center-block">
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
               </div>
@@ -90,9 +90,17 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
           });
+          $("#change-team-form").on('submit', function(a){
+            a.preventDefault();
+            window.location.href=@routes.GamePage.changeTeam();
+          });
           $("#change-status-form").on('submit', function(a){
             a.preventDefault();
-            window.loaction.href=@routes.GamePage.changeActiveStatus();
+            window.location.href=@routes.GamePage.changeActiveStatus();
+          });
+          $("#delete-form").on('submit', function(a) {
+            a.preventDefault();
+            window.location.href=@routes.GamePage.deactivateAccount();
           });
 
 
