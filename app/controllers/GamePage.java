@@ -454,7 +454,9 @@ instead of this one that you may want just logged */
                 String id = "none";
                 String game_code="none";
                  String mod="none";
+
                 String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = '" + session("gCode") + "'";
+
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
                     //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
