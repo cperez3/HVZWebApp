@@ -61,7 +61,7 @@ GET /omw/ controllers.GamePage.loadOMWpage()
 
 GET /inGameModeMessage/ controllers.GamePage.loadinGameModMessagePage()
 
-GET /messageHistory/:type/ controllers.GamePage.loadmessageHistoryPage(type:String)
+GET /messageHistory/ controllers.GamePage.loadmessageHistoryPage()
 
 GET /viewPlayers/ controllers.GamePage.loadviewPlayersPage()
 

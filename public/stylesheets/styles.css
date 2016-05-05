@@ -20,3 +20,13 @@
     font-size: 90%;
     margin-top: .5em;
 }
+
+.message{
+    margin: 1%;
+    margin-bottom: 2%;
+    min-height: 3em;
+    color: #333;
+    background-color: rgba(109, 0, 0, .5);
+    border-radius: 12px;
+    padding: 2%;
+}
