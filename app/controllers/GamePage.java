@@ -553,7 +553,7 @@ instead of this one that you may want just logged */
      * @return - game code as String
      */
     //TO DO: query database to make sure that no games have that code
-    public static String generateGameCode() {
+    public static String gameCode() {
 
         Random ran = new Random();
         int top = 7;
