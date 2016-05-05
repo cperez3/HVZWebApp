@@ -31,8 +31,9 @@
 
                     </div>
                     <div class="modal-body">
-                        @if(userTeam != null){
-                            <table class="table-responsive col-xs-8 col-xs-offset-2">
+                        <div class="table-responsive">
+                            @if(userTeam != null){
+                            <table class="table">
                                 <thead>
                                     <tr><th>Username:</th><th>Team:</th></tr>
                                 </thead>
@@ -46,11 +47,11 @@
                                 </tbody>
 
                             </table>
+
                         }else{
                             <p>There are no users to display.</p>
                         }
-                        <br>
-
+                            </div>
 
                     </div>
                     <div class="modal-footer">
@@ -66,7 +67,7 @@
         <script>
                 function goBack(){
                     //TO DO: If user is moderator it should go back to the Mod Page
-                    window.location.href=@routes.GamePage.loadPage();
+                    window.location.href=@routes.GamePage.loadSettings();
                 }
 
                 $("#enem-spot-form").on('submit', function(a) {
