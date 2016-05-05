@@ -18,6 +18,7 @@ import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
+import java.util.Random;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -542,22 +543,25 @@ instead of this one that you may want just logged */
 
     /**
      * creates an alphanumeric game code
-     *
-     * @return game code as String
+     * @params - none
+     * @return - game code as String
      */
     //TO DO: query database to make sure that no games have that code
-    public static String gameCode() {
-        int limit = 7;
+    public static String generateGameCode() {
 
-        Random r = new Random();
+        Random ran = new Random();
+        int top = 7;
+        char data = ' ';
+        String dat = "";
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < limit; i++) {
-            char c = (char) (r.nextInt((int) (Character.MAX_VALUE)));
-            sb.append(c);
+        for (int i = 0; i <= top; i++) {
+            data = (char)(ran.nextInt(25) + 97);
+            dat = data + dat;
         }
-        return sb.toString();
+
+        System.out.println(dat);
+
+        return dat;
     }
 
 
