@@ -104,6 +104,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
           });
+          $("#delete-form").on('submit', function(b) {
+            b.preventDefault();
+            window.location.href=@routes.GamePage.deactivateAccount();
+          });
     </script>
   </body>
 </html>
