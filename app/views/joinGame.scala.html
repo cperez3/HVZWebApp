@@ -30,17 +30,14 @@
             }</style>
             <div id="settingsMenu" class="row">
               <div class="col-xs-6 col-xs-offset-6">
-                <form id="log-out-form"class="form col-md-12 center-block">
-
+                <form id="log-out-form"class="form">
                   <div class="form-group">
                     <button id="log-out" class="btn btn-primary btn-block" onclick="logOut()">Log Out</button>
                   </div>
                 </form>
-                <form id="delete-form"class="form col-md-12 center-block">
-                  <div class="form-group">
-                    <button class="btn btn-primary btn-block" id="delete-button" onclick="">Delete</button>
+                  <div class="form-group form">
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#delAcctModal">Delete</button>
                   </div>
-                </form>
               </div>
             </div>
             <h1 class="text-center">Join Game</h1>
@@ -59,6 +56,27 @@
               </div>
             </form>
           </div>
+
+            <!-- Delete Account Modal -->
+          <div class="modal fade" id="delAcctModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Really Delete?</h4>
+                </div>
+                <div class="modal-body">
+                  <p class="warning">Deleting your account is a permanent decision. This cannot be undone. Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="delete-button">Delete Account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!-- end of delete account modal -->
+
           <div class="modal-footer">
             <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Game Code Please Try Again.</div>
           </div>
@@ -104,7 +122,7 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.logOut();
           });
-          $("#delete-form").on('submit', function(b) {
+          $("#delete-button").on('click', function(b) {
             b.preventDefault();
             window.location.href=@routes.GamePage.deactivateAccount();
           });
