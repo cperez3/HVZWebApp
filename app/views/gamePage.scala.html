@@ -101,6 +101,10 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.loadOMWpage();
           });
+          $("#view-msgs-form").on('submit', function(a) {
+              a.preventDefault();
+              window.location.href=@routes.GamePage.loadmessageHistoryPage();
+          });
 
     </script>
   </body>

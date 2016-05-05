@@ -45,8 +45,12 @@ public class GamePage extends Controller {
 
     public static Result loadOMWpage() { return ok(omw.render());}
 
-    public static Result loadmessageHistoryPage(String type) {
-        return getMessages(type);
+    public static Result loadmessageHistoryPage() {
+        if(session("uname") != null) {
+            String type = session("type");
+            return getMessages(type);
+        }
+        return(forbidden(login.render()));
     }
 
     public static Result loadviewPlayersPage() {
@@ -401,7 +405,9 @@ instead of this one that you may want just logged */
                                 teams.add(rst.getString(6));
 
                             }
-
+                                for (int i = 0; i < names.size(); i++) {
+                                    players.put(names.get(i), teams.get(i));
+                                }
 
                         } finally {
                             try {
@@ -447,7 +453,7 @@ instead of this one that you may want just logged */
                 String id = "none";
                 String game_code="none";
                  String mod="none";
-                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = " + Integer.parseInt(session("gCode"));
+                String sql2 = "SELECT * FROM user WHERE email = '" + email + "' AND game_code = '" + session("gCode") + "'";
                 java.sql.Connection conn2 = DB.getConnection();
                 try {
                     //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
@@ -815,18 +821,15 @@ instead of this one that you may want just logged */
             }
             else if(pageFrom.equals("enemSpot")){
                 body = "<p class='msg-title enem-msg'>Enemy Spotted!!</p>";
-                String location2 = "<p class='location'>" + location + "</p>";
-                msgRslt = sendMessage(type, body, location2);
+                msgRslt = sendMessage(type, body, location);
             }
             else if(pageFrom.equals("help")){
                 body = "<p class='msg-title help-msg'>Help Requested!</p>";
-                String location2 = "<p class='location'>" + location + "</p>";
-                msgRslt = sendMessage(type, body, location2);
+                msgRslt = sendMessage(type, body, location);
             }
             else if( pageFrom.equals("omw")){
                 body = "<p class='msg-title omw-msg'>On My Way!</p>";
-                String location2 = "<p class='location'>" + location + "</p>";
-                msgRslt = sendMessage(type, body, location2);
+                msgRslt = sendMessage(type, body, location);
             }
             if(msgRslt == ok()){
                 return(ok());
@@ -917,7 +920,7 @@ instead of this one that you may want just logged */
             return(forbidden("noMessages"));
         }
 
-        return(ok(messageHistory.render(times, messages, locations, senders)));
+        return(ok(messageHistory.render(times, messages, locations, senders, session("type"), session("gCode"))));
     }
 
 }
