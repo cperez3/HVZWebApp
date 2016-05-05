@@ -808,6 +808,7 @@ instead of this one that you may want just logged */
         if (session("uname") != null) {
             String code = session("gCode");
             clearGamePlayers(code);
+            clearMessages(code);
             session("gCode", " ");
             session("type", "human");
 
@@ -837,6 +838,31 @@ instead of this one that you may want just logged */
             //delete from the db where game code is gCode
 
         }
+    }
+
+    public static void clearMessages(String gameCode){
+        String sql = "DELETE from message WHERE game_code = '" + gameCode + "'";
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
