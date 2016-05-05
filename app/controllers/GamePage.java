@@ -872,7 +872,7 @@ instead of this one that you may want just logged */
 
         String recipient=type;
         boolean isMessages=false;
-        String sql2 = "SELECT * FROM message WHERE recipient = '"+recipient+"'OR recipient = 'all' AND game_code='"+session("gCode")+"'";
+        String sql2 = "SELECT * FROM message WHERE recipient = '"+recipient+"' AND game_code='"+session("gCode")+ "' OR recipient = 'all' AND game_code='"+session("gCode")+"'";
         java.sql.Connection conn2 = DB.getConnection();
         try {
             //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
