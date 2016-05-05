@@ -42,31 +42,30 @@
 
                   <h5 class="text-center">Game Code: @gCode </h5>
                     <br><br>
-                  <h4 class="error-msg">CAUTION: All actions taken are final.</h4> <!--TODO : confirm permanenet choices -->
-                    <div class="form-group">
-                      <form id="end-game-form" class="form center-block">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="">End Game</button>
-                      </form>
+                    <div class="container">
+
+                    <div class="form-group form">
+                        <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#endGameModal">End Game</button>
                     </div>
                     <div class="form-group">
-                      <form id="add-mod-form" class="form center-block">
+                      <form id="add-mod-form" class="form">
                         <button class="btn btn-primary btn-lg btn-block" onclick="">Add Moderators</button>
                       </form>
                     </div>
                     <div class="form-group">
-                        <form id="send-mod-msg" class="form center-block">
+                        <form id="send-mod-msg" class="form">
                               <button class="btn btn-primary btn-lg btn-block" onclick="">Broadcast To All Players</button>
                         </form>
                     </div>
 
                     <div class="form-group">
-                      <form id="view-players-form" class="form center-block">
+                      <form id="view-players-form" class="form">
                               <button class="btn btn-primary btn-lg btn-block" onclick="">View all active players</button>
                       </form>
                     </div>
 
                     <div class="form-group">
-                        <form id="change-mod-status-form" class="form center-block">
+                        <form id="change-mod-status-form" class="form">
                             <button class="btn btn-primary btn-lg btn-block" onclick="">Stop Moderating</button>
                                 <!-- "stop moderating is a lame phrase but it's what I've got atm -->
                         </form>
@@ -74,49 +73,83 @@
                     <div id="drop-mod-error" class="error-msg">
                         <p>You are the only moderator, please add another moderator before switching your moderator status.</p>
                     </div>
+                        </div> <!-- container within the tab -->
                 </div><!-- mod-specific settings tab -->
+
                 <div role="tabpanel" class="tab-pane fade" id="gameStuff">
                   <div class="col-xs-12 text-center"><h5>Team: @team &emsp; Status: @status</h5></div>
                   <br><br>
-                  <div id="change-team-form" class="form-group">
-                    <form class="form col-md-12 center-block">
+                    <div class="container">
+                  <div class="form-group">
+                    <form class="form" id="change-team-form">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Change Team</button>
                     </form>
                   </div>
 
                   <div class="form-group">
-                    <form id="change-status-form"class="form col-md-12 center-block">
+                    <form id="change-status-form"class="form">
                       <button class="btn btn-primary btn-lg btn-block" onclick="">Change Player Status</button>
                     </form>
                   </div>
-                  <div id="mod-status" class="form-group" style="display:none">
-                    <form id="remove-mod-form"class="form col-md-12 center-block">
-                      <button class="btn btn-primary btn-lg btn-block" onclick="">Remove Moderator Status</button>
-                    </form>
-                  </div>
                   <div class="form-group">
-                    <form id="log-out-form"class="form col-md-12 center-block">
+                    <form id="log-out-form"class="form">
                       <button id="log-out" class="btn btn-primary btn-lg btn-block" onclick="logOut()">Log Out</button>
                     </form>
                   </div>
-                  <div class="form-group">
-                    <form id="delete-form"class="form col-md-12 center-block">
-                      <button class="btn btn-primary btn-lg btn-block" onclick="">Delete Account</button>
-                    </form>
+                  <div class="form-group form">
+                      <button class="btn btn-primary btn-lg btn-block"  data-toggle="modal" data-target="#delAcctModal">Delete Account</button>
                   </div>
-
-                    </div>
+                        </div> <!-- container within regular game settings -->
 
                 </div><!-- in game settings tab -->
 
               </div><!-- end of tab-related content -->
 
-          </div> <!-- end of modal-body div -->
+
+            <!-- Delete Account Modal -->
+             <div class="modal fade" id="delAcctModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Really Delete?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="warning">Deleting your account is a permanent decision. This cannot be undone. Are you sure?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="delete-button">Delete Account</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                 <!-- end of delete account modal -->
+              <!-- End Game Modal -->
+              <div class="modal fade" id="endGameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel">Really Delete?</h4>
+                          </div>
+                          <div class="modal-body">
+                              <p class="warning">A game cannot be resumed once it has ended. Ending cannot be undone. Are you sure?</p>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-primary" id="end-game-button">End Game</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                  <!-- end of end game modal -->
+          </div> <!-- end of modal-body div for overall page -->
 
 
-        </div> <!-- end of  modal contet div-->
+        </div> <!-- end of  modal contet div for overall page -->
       </div>
-
+     </div>
 
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -171,7 +204,7 @@
               a.preventDefault();
               window.location.href=@routes.GamePage.loadviewPlayersPage();
           });
-          $("#end-game-form").on('submit', function(a) {
+          $("#end-game-button").on('click', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.endGame();
           });
@@ -183,7 +216,7 @@
             a.preventDefault();
             window.location.href=@routes.GamePage.changeTeam();
           });
-          $("#delete-form").on('submit', function(a) {
+          $("#delete-button").on('click', function(a) {
             a.preventDefault();
             window.location.href=@routes.GamePage.deactivateAccount();
           });
