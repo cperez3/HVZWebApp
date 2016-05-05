@@ -53,11 +53,11 @@
             </form>
           </div>
           <div class="modal-footer">
-            <div id="username-message" style="display:none;color:red;text-align: center">User name already in use</div>
-            <div id="email-repeat-message" style="display:none;color:red;text-align: center">Email already in use</div>
-            <div id="email-message" style="display:none;color:red;text-align: center">Email is invalid</div>
-              <div id="password-message" style="display:none;color:red;text-align: center">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
-                <div id="password-message2" style="display:none;color:red;text-align: center">passwords do not match</div>
+            <div id="username-message" class="error-msg">User name already in use</div>
+            <div id="email-repeat-message" class="error-msg">Email already in use</div>
+            <div id="email-message" class="error-msg">Email is invalid</div>
+              <div id="password-message" class="error-msg">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
+                <div id="password-message2" class="error-msg">passwords do not match</div>
           </div>
         </div>
       </div>
@@ -67,21 +67,10 @@
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
-       function resetForm(){
-         document.getElementById('password-message2').style.display= 'none';
-         document.getElementById('password-message').style.display= 'none';
-         document.getElementById('email-message').style.display= 'none';
-         document.getElementById('username-message').style.display= 'none';
-         document.getElementById('email-repeat-message').style.display= 'none';
-         document.getElementById('password1').style.borderColor = "#CCC";
-         document.getElementById('password2').style.borderColor = "#CCC";
-         document.getElementById('email').style.borderColor = "#CCC";
 
-
-       }
           $("#signup-form").on('submit', function(e) {
             e.preventDefault();
-            resetForm();
+
             var email= $('#email').val();
 
             var name= $('#name').val();
@@ -117,27 +106,29 @@
                 if(error == "repeatUE"){
                   document.getElementById("name").style.borderColor = "red";
                   document.getElementById("email").style.borderColor = "red";
-                  document.getElementById('username-message').style.display= 'block';
-                  document.getElementById('email-repeat-message').style.display= 'block';
+                  $("#username-message").slideDown();
+                  $("#email-repeat-message").slideDown();
                 }else if(error=="repeatU"){
                   document.getElementById('name').style.borderColor = "red";
-                  document.getElementById('username-message').style.display= 'block';
+                  $("#username-message").slideDown();
+
                 }else if(error == "repeatE"){
                   document.getElementById('email').style.borderColor = "red";
-                  document.getElementById('email-repeat-message').style.display= 'block';
+                  $("#email-repeat-message").slideDown();
+
 
                 }else if(error=="email"){
                   document.getElementById('email').style.borderColor = "red";
-                  document.getElementById('email-message').style.display= 'block';
+                  $("#email-message").slideDown();
 
                 }else if(error=="password"){
                   document.getElementById('password1').style.borderColor = "red";
                   document.getElementById('password2').style.borderColor = "red";
-                  document.getElementById('password-message').style.display= 'block';
+                  $("#password-message").slideDown();
                 }else if(error=="mismatch"){
                   document.getElementById('password1').style.borderColor = "red";
                   document.getElementById('password2').style.borderColor = "red";
-                  document.getElementById('password-message2').style.display= 'block';
+                  $("#password-message2").slideDown();
                 }
 
               }

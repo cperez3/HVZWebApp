@@ -23,6 +23,8 @@ import java.util.Random;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.function.BooleanSupplier;
+
 import scala.collection.JavaConverters;
 
 public class GamePage extends Controller {
@@ -159,7 +161,7 @@ public class GamePage extends Controller {
      */
     public static Result deactivateAccount() {
         String email = session("email");
-        System.out.println(email);
+        //System.out.println(email);
         if (email != null) {
             session().clear();
             return deleteUser(email);
@@ -220,12 +222,20 @@ public class GamePage extends Controller {
         //Game game = Form.form(Game.class).bindFromRequest().get();
         // game.save();
         //TO DO : create game and add moderator to it
+
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") == null || session("gCode").equals(" "))) {
-                String gc = gameCode();
-                addGame(gc);
-                session("gCode", gc);
-                JoinGame.verifyCode(gc);
+                String gc=" ";
+                Boolean isGameCode=true;
+                while (isGameCode){
+                    gc = gameCode();
+                    isGameCode=alreadyGameCode(gc);
+                }
+                if(!gc.equals(" ")){
+                    addGame(gc);
+                    session("gCode", gc);
+                    JoinGame.verifyCode(gc);
+                }
                 return loadPage();
             } else {
                 String uName = session("uname");
@@ -236,6 +246,48 @@ public class GamePage extends Controller {
             return forbidden(login.render());
 
         }
+
+    }
+
+    public static Boolean alreadyGameCode(String gameCode){
+        Boolean isGameCode=false;
+        String sql2 = "SELECT * FROM game WHERE game_code='" + gameCode + "'";
+        int i = 0;
+        java.sql.Connection conn2 = DB.getConnection();
+        try {
+            //http://stackoverflow.com/questions/18546223/play-framework-execute-raw-sql-at-start-of-request
+
+            java.sql.Statement stmt = conn2.createStatement();
+            try {
+                ResultSet rst = stmt.executeQuery(sql2);
+                try {
+                    while (rst.next()) {
+                       isGameCode=true;
+                    }
+
+                } finally {
+                    try {
+                        rst.close();
+                    } catch (Throwable ignore) { /* Propagate the original exception
+instead of this one that you may want just logged */
+                    }
+                }
+
+                // rst.close();
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn2.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isGameCode;
 
     }
 
@@ -280,14 +332,14 @@ public class GamePage extends Controller {
                     changeModStatus();
                     return loadPage();
                 } else {
-                    System.out.println("ONLY MOD");
+                   // System.out.println("ONLY MOD");
                     return forbidden("You are the only moderator, please add another moderator before switching your moderator status.");
                 }
             }
-            System.out.println("NOT MOD");
+            //System.out.println("NOT MOD");
             return forbidden(login.render());
         }
-        System.out.println("NOT LOGGED IN");
+        //System.out.println("NOT LOGGED IN");
         return forbidden(login.render());
     }
 
@@ -537,17 +589,7 @@ instead of this one that you may want just logged */
 
     }
 
-    /**
-     * adds a new game to the Game class database
-     * @param - none
-     * @return - HTTP 200 ok() status
-     */
-    public static Result addNewGame() {
-        Game game = Form.form(Game.class).bindFromRequest().get();
-        //game.save();
 
-        return ok();
-    }
 
     /**
      * creates an alphanumeric game code
@@ -567,7 +609,7 @@ instead of this one that you may want just logged */
             dat = data + dat;
         }
 
-        System.out.println(dat);
+       // System.out.println(dat);
 
         return dat;
     }
@@ -766,6 +808,7 @@ instead of this one that you may want just logged */
         if (session("uname") != null) {
             String code = session("gCode");
             clearGamePlayers(code);
+            clearMessages(code);
             session("gCode", " ");
             session("type", "human");
 
@@ -795,6 +838,31 @@ instead of this one that you may want just logged */
             //delete from the db where game code is gCode
 
         }
+    }
+
+    public static void clearMessages(String gameCode){
+        String sql = "DELETE from message WHERE game_code = '" + gameCode + "'";
+        java.sql.Connection conn = DB.getConnection();
+        try {
+
+            java.sql.Statement stmt = conn.createStatement();
+            try {
+                Boolean rst = stmt.execute(sql);
+
+            } finally {
+
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 

@@ -39,7 +39,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <div id="no-user-message" style="display:none;color:red;text-align: center">Invalid Email or Password, Please Try Again.</div>
+                <div id="no-user-message" class="error-msg">Invalid Email or Password, Please Try Again.</div>
 
             </div>
         </div>
@@ -52,7 +52,6 @@
     <script>
 
           $("#login-form").on('submit', function(e) {
-              document.getElementById('no-user-message').style.display= 'none';
               e.preventDefault();
               var email= $('#email').val();
               var password= $('#password').val();
@@ -65,8 +64,8 @@
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
                       //alert("Invalid Login");
-                      document.getElementById('no-user-message').style.borderColor = "red";
-                      document.getElementById('no-user-message').style.display= 'block';
+                      $("#no-user-message").slideDown();
+
                   }
 
               });
