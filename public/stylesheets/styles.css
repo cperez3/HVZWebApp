@@ -25,8 +25,41 @@
     margin: 1%;
     margin-bottom: 2%;
     min-height: 3em;
-    color: #333;
-    background-color: rgba(109, 0, 0, .5);
+    color: #ddd;
+    background-color: rgba(66, 66, 66, .9);
     border-radius: 12px;
     padding: 2%;
+}
+
+.mod-msg{
+    color: rgb(250, 205, 205);
+    text-shadow: 1px 1px rgb(88, 88, 88);
+    font-size: 140%;
+    line-height: 105%;
+    font-weight: 500;
+}
+
+.time{
+    font-size: 95%;
+    color: #bbb;
+}
+
+.msg-title{
+    color: white;
+    text-shadow: 1px 1px #999;
+    font-size: 145%;
+    letter-spacing: 1px;
+    line-height: 105%;
+}
+
+.enem-msg{
+
+}
+
+.omw-msg{
+
+}
+
+.help-msg{
+
 }
