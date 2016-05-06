@@ -4,8 +4,13 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.Date;
 /**
- * Created by mariahflaim on 4/28/16.
- */
+ * @author      Mariah Flaim
+ * @author      Evan Willner
+ * @author      Elizabeth Dellea
+ * @author      Nikhil Patel
+ * @version     1.0
+ * @since       2016-04-28
+ **/
 @Entity
 public class Message extends Model {
     @Id//primary key

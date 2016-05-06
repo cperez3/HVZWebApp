@@ -27,29 +27,63 @@ import scala.collection.JavaConverters;
 
 public class GamePage extends Controller {
 
-    //TO LOAD NIKHILS HTML PAGES FOR SPRINT 2
+    /**
+     * loads the enemy spotted page
+     * @param - none
+     * @return - Result page of enemy spotted
+     */
     public static Result loadEnemySpotPage() {
         return (ok(enemySpot.render()));
     }
 
+    /**
+     * loads the add moderator page
+     * @param - none
+     * @return - Result page of add moderator
+     */
     public static Result loadAddModPage() {
         return (ok(addMod.render()));
     }
 
+    /**
+     * loads the help page
+     * @param - none
+     * @return - Result page of help
+     */
     public static Result loadhelpPage() {
         return (ok(helpPage.render()));
     }
 
+    /**
+     * loads the in game moderator message page
+     * @param - none
+     * @return - Result page of in game moderator message
+     */
     public static Result loadinGameModMessagePage() {
         return (ok(inGameModMessage.render()));
     }
 
+    /**
+     * loads the on my way page
+     * @param - none
+     * @return - Result page of on my way
+     */
     public static Result loadOMWpage() { return ok(omw.render());}
 
+    /**
+     * loads the message history page
+     * @param - none
+     * @return - Result page message history
+     */
     public static Result loadmessageHistoryPage(String type) {
         return getMessages(type);
     }
 
+    /**
+     * loads the view players page
+     * @param - none
+     * @return - Result page view players
+     */
     public static Result loadviewPlayersPage() {
         if (session("is_mod") != null) {
             if ((session("is_mod").equals("true") || session("is_mod").equals("1")) && (session("gCode") != null && !session("gCode").equals(" "))) {
@@ -133,7 +167,6 @@ public class GamePage extends Controller {
     }
     /**
      * clears session variables and logs out the current user
-     *
      * @param - none
      * @return - ok(login.render()) or forbidden(login.render())
      */
@@ -149,7 +182,6 @@ public class GamePage extends Controller {
     }
     /**
      * deactivate account of user that is currently logged in
-     *
      * @param - none
      * @return - ok () or forbidden(login.render())
      */
@@ -166,7 +198,6 @@ public class GamePage extends Controller {
 
     /**
      * deletes a user from the database with an email
-     *
      * @param - email(String)
      * @return - ok()
      */
@@ -208,7 +239,6 @@ public class GamePage extends Controller {
 
     /**
      * creates a new game in the Game class database
-     *
      * @param - none
      * @return - Result redirect to the in Game Mod Setting page or login if not logged in as moderator not in game
      */
@@ -237,7 +267,6 @@ public class GamePage extends Controller {
 
     /**
      * removes game from database
-     *
      * @param - none
      * @return - Result redirect to the no Game Mod Setting page or login if not logged in as mod in game
      */
@@ -258,7 +287,6 @@ public class GamePage extends Controller {
 
     /**
      * gets rid of moderator status of user and reloads page so that game page is not longer mod page
-     *
      * @param - none
      * @return - game page
      */
@@ -289,7 +317,6 @@ public class GamePage extends Controller {
 
     /**
      * checks to see if signed in moderator is not the only moderator in the game
-     *
      * @param - none
      * @return - Boolean
      */
@@ -340,7 +367,6 @@ instead of this one that you may want just logged */
 
     /**
      * changes moderator status of mod that is logged in
-     *
      * @param - none
      * @return - none
      */
@@ -375,7 +401,6 @@ instead of this one that you may want just logged */
 
     /**
      * gets all the players that are in the moderators game from the database
-     *
      * @param - none
      * @return - render the view players page with the hashmap of players or login page if player  is not a mod in a game
      */
@@ -431,7 +456,6 @@ instead of this one that you may want just logged */
     }
     /**
      * Adds mod status to a particular user with a particular email
-     *
      * @param - email(String) email of the future moderator
      * @return - render log in if not logged in as mod in name, reloads page with success message
      */
@@ -564,7 +588,11 @@ instead of this one that you may want just logged */
         return dat;
     }
 
-
+    /**
+     * clears a games player list
+     * @param - gCode (the game code of the game to clear)
+     * @return - none
+     */
     public static void clearGamePlayers(String gCode) {
 
         String sql = "Select * from user WHERE game_code = '" + gCode + "'";
@@ -628,8 +656,7 @@ instead of this one that you may want just logged */
     }
 
     /**
-     * Chnges player (id) to a give type in the database.
-     *
+     * Changes player (id) to a give type in the database.
      * @param id   id of the player to change the type of
      * @param type desired type to change to
      */
@@ -659,7 +686,6 @@ instead of this one that you may want just logged */
 
     /**
      * Sets a player's game code back to ' ' in the database
-     *
      * @param id id of the player to change the type of
      */
     public static void removeGCode(int id) {
@@ -688,7 +714,6 @@ instead of this one that you may want just logged */
 
     /**
      * Changes a player's status between active and inactive.
-     *
      * @return sends back with success or failure
      */
     public static Result changeActiveStatus() {
@@ -864,6 +889,11 @@ instead of this one that you may want just logged */
 
     }
 
+    /**
+     * loads the messages of a given player type
+     * @param - type (player type, Human or Zombie)
+     * @return - Result page of message history or forbidden
+     */
     public static Result getMessages(String type){
 
         List<String> times = new LinkedList<String>();
