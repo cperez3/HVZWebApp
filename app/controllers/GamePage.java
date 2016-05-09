@@ -236,7 +236,7 @@ public class GamePage extends Controller {
                     session("gCode", gc);
                     JoinGame.verifyCode(gc);
                 }
-                return loadPage();
+                return loadSettings();
             } else {
                 String uName = session("uname");
                 String status = session("is_active");
