@@ -11,41 +11,35 @@ package models;
 
 //import statements
 
+import play.api.mvc.AnyContentAsRaw;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-
-import com.avaje.ebean.SqlUpdate;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User extends Model {
-
-  @Id      //primary key
+public class Round extends Model {
+  @Id//primary key
   @GeneratedValue(strategy = GenerationType.AUTO)
   public int id;
-
-  public String displayName;
-  public String password;
-  public String email;
-  public Boolean isMod;
-  public String teamOld;
-  public Boolean isActive;
   public String gameCode;
 
-
   /*New Code*/
-  public String name;
-  @ManyToOne
-  public Round currentRound;
-  public Team team;
+  public String title;
+  public String description;
+  public String roundRules;
+  public String gameRules;
+  public String contactInfo;
+  @OneToMany
+  public List<Event> schedule;
+  @OneToMany
+  public List<User> players;
   @OneToMany
   public List<Message> messages;
 
-  public User() {
+  public Round() {
   }
 
-  public enum Team {HUMAN, ZOMBIE, NONPLAYING}
 
 }

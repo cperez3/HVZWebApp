@@ -69,7 +69,7 @@ public class LogIn extends Controller{
                             //this is where we'd take the stuff in each column and put it places!!!!!!!
                             // Column numbers start at 1.
                             // Also there are many methods on the result set to return
-                            //  the column as a particular type. Refer to the Sun documentation
+                            //  the column as a particular teamOld. Refer to the Sun documentation
                             //  for the list of valid conversions.
                             fetched[i] = rst.getString(i);
 
@@ -88,7 +88,7 @@ public class LogIn extends Controller{
                             session("email",fetched[4]);
                             session("id", fetched[1]);
                             session("is_mod", fetched[5]);
-                            session("type", fetched[6]);
+                            session("teamOld", fetched[6]);
                             session("is_active", fetched[7]);
                             if(fetched[8] == null){
                                 fetched[8] = " ";

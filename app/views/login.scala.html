@@ -12,7 +12,7 @@
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
         <!--favicon-->
-    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="icon" teamOld="image/png" href="@routes.Assets.at("images/favicon.png")">
 
 </head>
 <body>
@@ -27,10 +27,10 @@
             <div class="modal-body">
                 <form id="login-form" class="form col-md-12 center-block">
                     <div class="form-group">
-                        <input id="email" type="text" class="form-control input-lg" placeholder="Email">
+                        <input id="email" teamOld="text" class="form-control input-lg" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input id="password" type="password" class="form-control input-lg" placeholder="Password">
+                        <input id="password" teamOld="password" class="form-control input-lg" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <button id="signin-button" class="btn btn-primary btn-lg btn-block">Sign In</button>
@@ -48,7 +48,7 @@
 <!-- script references -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
-    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script teamOld="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
 
           $("#login-form").on('submit', function(e) {

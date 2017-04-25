@@ -11,9 +11,8 @@ package controllers;
 
 //import statements
 
-import models.Game;
+import models.Round;
 import models.Message;
-import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,9 +22,6 @@ import java.util.Random;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.function.BooleanSupplier;
-
-import scala.collection.JavaConverters;
 
 public class GamePage extends Controller {
 
@@ -50,7 +46,7 @@ public class GamePage extends Controller {
 
     public static Result loadmessageHistoryPage() {
         if(session("uname") != null) {
-            String type = session("type");
+            String type = session("teamOld");
             return getMessages(type);
         }
         return(forbidden(login.render()));
@@ -110,7 +106,7 @@ public class GamePage extends Controller {
         String isMod = session("is_mod");
         String uName = session("uname");
         String status = session("is_active");
-        String team = session("type");
+        String team = session("teamOld");
         if (isMod != null) {
             if (status.equals("1"))
                 status = "Active";
@@ -213,13 +209,13 @@ public class GamePage extends Controller {
     //MODERATOR FUNCTIONS
 
     /**
-     * creates a new game in the Game class database
+     * creates a new game in the Round class database
      *
      * @param - none
-     * @return - Result redirect to the in Game Mod Setting page or login if not logged in as moderator not in game
+     * @return - Result redirect to the in Round Mod Setting page or login if not logged in as moderator not in game
      */
     public static Result createGame() {
-        //Game game = Form.form(Game.class).bindFromRequest().get();
+        //Round game = Form.form(Round.class).bindFromRequest().get();
         // game.save();
         //TO DO : create game and add moderator to it
 
@@ -295,7 +291,7 @@ instead of this one that you may want just logged */
      * removes game from database
      *
      * @param - none
-     * @return - Result redirect to the no Game Mod Setting page or login if not logged in as mod in game
+     * @return - Result redirect to the no Round Mod Setting page or login if not logged in as mod in game
      */
     public static Result endGame() {
         if (session("is_mod") != null) {
@@ -436,11 +432,9 @@ instead of this one that you may want just logged */
      * @return - render the view players page with the hashmap of players or login page if player  is not a mod in a game
      */
     public static Map getPlayers() {
-
                 Map<String, String> players = new HashMap<String, String>();
                 List<String> names = new LinkedList<String>();
                 List<String> teams = new LinkedList<String>();
-
 
                 String sql2 = "SELECT * FROM user WHERE game_code = '" + session("gCode") + "'";
                 java.sql.Connection conn2 = DB.getConnection();
@@ -485,7 +479,6 @@ instead of this one that you may want just logged */
                     }
                 }
                 return players;
-
     }
     /**
      * Adds mod status to a particular user with a particular email
@@ -658,18 +651,18 @@ instead of this one that you may want just logged */
         }
 
     /**
-     * Called when a user presses the "change team"' button on their settings page
+     * Called when a user presses the "change teamOld"' button on their settings page
      * @return the appropriate view of the settings page
      */
     public static Result changeTeam(){
-        String currTeam = session("type");
+        String currTeam = session("teamOld");
         if (currTeam != null) {
             if (currTeam.equals("human")) {
                 changeType(Integer.parseInt(session("id")), "zombie");
-                session("type", "zombie");
+                session("teamOld", "zombie");
             } else {
                 changeType(Integer.parseInt(session("id")), "human");
-                session("type", "human");
+                session("teamOld", "human");
             }
         }
         Result toGo = loadSettings();
@@ -678,10 +671,10 @@ instead of this one that you may want just logged */
     }
 
     /**
-     * Chnges player (id) to a give type in the database.
+     * Chnges player (id) to a give teamOld in the database.
      *
-     * @param id   id of the player to change the type of
-     * @param type desired type to change to
+     * @param id   id of the player to change the teamOld of
+     * @param type desired teamOld to change to
      */
     public static void changeType(int id, String type) {
         String sql = "UPDATE user SET type = '" + type + "' WHERE id = " + id;
@@ -710,7 +703,7 @@ instead of this one that you may want just logged */
     /**
      * Sets a player's game code back to ' ' in the database
      *
-     * @param id id of the player to change the type of
+     * @param id id of the player to change the teamOld of
      */
     public static void removeGCode(int id) {
         String sql = "UPDATE user SET game_code = ' ' WHERE id = " + id;
@@ -791,17 +784,17 @@ instead of this one that you may want just logged */
      */
     public static Result addGame(String gameCodeIn) {
 
-        Game newGame = new Game();
+        Round newRound = new Round();
 
-        newGame.gameCode = gameCodeIn;
+        newRound.gameCode = gameCodeIn;
 
-        newGame.save();
+        newRound.save();
         return ok();
     }
 
 
     /**
-     * removes a game from the Game database given a game code
+     * removes a game from the Round database given a game code
      * @return boolen to indicate success or failure
      */
     public static void removeGame() {
@@ -810,7 +803,7 @@ instead of this one that you may want just logged */
             clearGamePlayers(code);
             clearMessages(code);
             session("gCode", " ");
-            session("type", "human");
+            session("teamOld", "human");
 
             String sql = "DELETE from game WHERE game_code = '" + code + "'";
             java.sql.Connection conn = DB.getConnection();
@@ -867,12 +860,12 @@ instead of this one that you may want just logged */
 
 
     /**
-     * displays a players type
+     * displays a players teamOld
      * @param - none
      * @return - void
      *//*
     public static void getType(){
-        User user = User.find.select("type").where().eq("type",type);
+        User user = User.find.select("teamOld").where().eq("teamOld",teamOld);
         System.out.println(user);
 
     }*/
@@ -886,7 +879,7 @@ instead of this one that you may want just logged */
      * @return 200 (ok) if successful. Forbidden if unsuccessful. Redirects to login if not logged in.
      */
     public static Result makeMessage(String pageFrom, String body, String location){
-        String type = session("type");
+        String type = session("teamOld");
         if (type !=null){
             Result msgRslt = loadSettings();
             if(pageFrom.equals("modMsg")){
@@ -929,7 +922,7 @@ instead of this one that you may want just logged */
             newMessage.recipient = recipient;
             newMessage.message = message;
             newMessage.gameCode = gameCode;
-            newMessage.sender = session("uname");
+            newMessage.senderOld = session("uname");
             newMessage.save();
             return ok();
         }
@@ -994,7 +987,7 @@ instead of this one that you may want just logged */
             return(forbidden("noMessages"));
         }
 
-        return(ok(messageHistory.render(times, messages, locations, senders, session("type"), session("gCode"))));
+        return(ok(messageHistory.render(times, messages, locations, senders, session("teamOld"), session("gCode"))));
     }
 
 }

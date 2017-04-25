@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html class="full" lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-teamOld" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>No Game Moderator Settings</title>
+    <title>No Round Moderator Settings</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
@@ -14,7 +14,7 @@
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
       <!--favicon-->
-    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="icon" teamOld="image/png" href="@routes.Assets.at("images/favicon.png")">
 
   </head>
   <body>
@@ -37,7 +37,7 @@
               <div class="container">
                 <form id="create-form" class="form center-block">
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="">Start Game</button>
+                    <button class="btn btn-primary btn-lg btn-block" onclick="">Start Round</button>
                   </div>
                 </form>
 
@@ -67,15 +67,15 @@
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button teamOld="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Really Delete?</h4>
                   </div>
                   <div class="modal-body">
                     <p class="warning">Deleting your account is a permanent decision. This cannot be undone. Are you sure?</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="delete-button">Delete Account</button>
+                    <button teamOld="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button teamOld="button" class="btn btn-primary" id="delete-button">Delete Account</button>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
-    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script teamOld="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
           function loadSettings(){
             window.location.href=@routes.GamePage.loadSettings();
