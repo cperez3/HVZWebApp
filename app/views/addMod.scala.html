@@ -12,7 +12,7 @@
     <![endif]-->
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
       <!--favicon-->
-    <link rel="icon" teamOld="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
   </head>
   <body>
@@ -21,7 +21,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" teamOld="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
             <br>
             <h1 class="text-center">Add Another Moderator</h1>
           </div>
@@ -29,7 +29,7 @@
             <div class="container">
 
               <div class="form-group">
-                <input id="email" teamOld="text" class="form-control input-lg" placeholder=" Enter email of Mod to add">
+                <input id="email" type="text" class="form-control input-lg" placeholder=" Enter email of Mod to add">
               </div>
               <div class="form-group">
                 <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addModModal">Add moderator</button>
@@ -43,7 +43,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button teamOld="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="myModalLabel">Are You Sure?</h4>
                 </div>
                 <div class="modal-body">
@@ -51,8 +51,8 @@
                   <h4 id="addedEmail"></h4>
                 </div>
                 <div class="modal-footer">
-                  <button teamOld="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button teamOld="button" class="btn btn-primary" id="add-moderator-button">Add Moderator</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="add-moderator-button">Add Moderator</button>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
-    <script teamOld="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
     <script>
 
           function goBack(){

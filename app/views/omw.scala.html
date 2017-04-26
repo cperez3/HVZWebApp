@@ -12,7 +12,7 @@
     <![endif]-->
 
       <!--favicon -->
-    <link rel="icon" teamOld="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
   </head>
 
@@ -24,7 +24,7 @@
         <div class="modal-content">
 
           <div class="modal-header">
-            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" teamOld="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+            <div class="col-xs-1 col-xs-offset-10"><input onclick="goBack()" type="image" class="icon icons8-Delete" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAB1ElEQVRoQ+3Z4U3DMBAF4NcJgE0YAUZgA5gMRmADGIFNgAlAh2oUuY3z3t3ZqiLnt3P25+c4jXvAzq7DzjyYoEtPdCY0Exo8A3PJAbgF8AbgGsATgJfkEB4BPAP4AnAP4EOprya0xJR+MlEFU2rLKAV0DpOJqjFL1AOAdyYpFtTCZKDWMEsDtRIYEIOJoBhMqW9JvbaSYkCfxw2ASdzaUDN5LKZg7BZ7pm6ioB9WsmjHoFRMKd8MgUnI23EL1aPmH5gBWbvMAWTWOlk8LCgL1RWjJFRmIjIgq2G/ANSLeR7/ayoJRVEqRN0xpWeoHow3KQUlJUNtgRu990S5MJ5naERSbkwGKLL7nVsAIUwWKAsVxmSCoqgUzAQ1dr2MHS8lJc+LtedOF0ZFQRnJ1BMUQkVAPTAF50Z5QT0xIZQHNALjRqkgL8aWkF0X9fkQwZTT1Ywazd/MbEKZA8msdYJjQD0G0KMm/YG3u2MsO9y7Ej41lXeImtT31qEns+TsKNgOyhmUglHPKAxzt/X3CgOyjhmUB8OiKIz6+dBCRTBbKBqjgtaSysCsoSSMB1SjMjE1SsZ4QcKGN74puymMH5mzxwlyTtyw22ZCw6ba2dFMyDlxw277BWOYeDV9EH2oAAAAAElFTkSuQmCC" width="25" height="25"/></div>
             <br>
 
 
@@ -37,7 +37,7 @@
             <form id="message-form" class="form col-md-12 center-block" action="" method="post">
 
               <div class="form-group">
-                <input id="location" teamOld="text" class="form-control input-lg" placeholder="Where are you going?">
+                <input id="location" type="text" class="form-control input-lg" placeholder="Where are you going?">
               </div>
               <div id="bad-msg-message" class="error-msg">Something went wrong with the message. Sorry.<br></div>
 
@@ -58,7 +58,7 @@
         <!-- script references -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
       <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
-      <script teamOld="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+      <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
       <script>
         function goBack(){
           //TO DO: If user is moderator it should go back to the Mod Page
