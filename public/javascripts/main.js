@@ -14,6 +14,8 @@ function switchScreen(screen) {
         $(activeScreen).fadeOut("fast", function () {
             activeScreen = newScreen;
             $(activeScreen).fadeIn(400, "linear");
+            if(screen=="map"){
+                initMap();}
         });
     }
 

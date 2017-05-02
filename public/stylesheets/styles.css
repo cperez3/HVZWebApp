@@ -32,7 +32,7 @@ h1{
     padding-bottom:10px;
 }
 .count{
-    font-size:50px;
+    font-size:40px;
     font-weight:bolder;
 }
 .countType{
@@ -45,14 +45,14 @@ h1{
     background-color:#334255;
     border-style:solid;
     border-width:2px;
-    border-color:dimgray;
-    border-radius:5px;
+    border-color:#808388;
     margin: 15px;
+    margin-top:5px;
 }
 .modAlerts hr{
     width: 50%;
     margin-left: 15px;
-    margin-top: 0px;
+    margin-top: 0;
 }
 .modAlerts h2{
     color:white;
@@ -103,14 +103,78 @@ h1{
 .nextMission {
     color:white;
     margin:15px;
+    background-color:#334255;
+    padding:10px;
+    padding-top:5px;
+    border-style:solid;
+    border-width:2px;
+    border-color:#808388;
 }
 .nextMission h2{
     font-size:35px;
+    margin-left:15px;
 }
 .nextMission h3{
     text-indent:25px;
 }
 
+/* Round Page */
+.sectionTitle{
+    background-color:#334255;
+    text-align:center;
+    color:white;
+    font-size:40px;
+}
+.screenContent{
+    color:white;
+    padding:20px;
+    border-top-style:solid;
+    border-top-width:2px;
+    border-top-color:#808388;
+}
+.screenContent span {
+    font-size: 1.5em;
+}
+/* Schedule */
+.scheduleContent{
+    color:white;
+}
+.day{
+    background-color:#334255;
+    border-style:solid;
+    border-width:2px;
+    border-color:#808388;
+}
+.day h2{
+    font-size:1.5em;
+    color:white;
+    margin-left:10px;
+}
+.missionBlock{
+    background-color: #283142;
+}
+.missionBlock p{
+    margin:10px;
+    padding:5px;
+}
+.nothing{
+    background-color:dimgray;
+}
+.event{
+    background-color:#1770c9;
+}
+.mission{
+    background-color: #e02828;
+}
+.endgame{
+    background-color:#690000;
+}
+.type1{
+    background-color:
+}
+.type2{
+    background-color:
+}
 /* Map Page */
 #mapScreen{
     height:100%;
@@ -125,6 +189,26 @@ h1{
     border-bottom-width: 20px;
     border-left-width: 0;
     border-right-width: 0;
+}
+.formSection{
+    margin-left:25px;
+    margin-right:25px;
+    margin-top:15px;
+    background-color:#334255;
+    padding:10px;
+    color:white;
+}
+.formSection .btn, .formSection h1{
+    margin-left:15px;
+}
+.markerBtn{
+    margin-left: 15px;
+    background-color: #192635;
+    border-width: 0;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /*
@@ -164,15 +248,16 @@ h1{
 **************************
  */
 @media only screen and (max-width: 850px) {
-    .score{
-        margin-top:40px;
+    .score {
+        margin-top: 40px;
     }
+}
 /*
 **************************
         OLD CODE
 **************************
  */
-.modal-footer {   border-top: 0px; }
+.modal-footer {   border-top: 0; }
 
 .full {
     background-color: black;
@@ -233,6 +318,4 @@ h1{
 
 }
 
-.help-msg{
-
-}
+.help-msg{}
