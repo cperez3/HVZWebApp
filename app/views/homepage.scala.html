@@ -1,0 +1,409 @@
+@main("Home","Round Title","6","17") {
+<style>
+    </style>
+
+    <!-- Home Screen -->
+    <section id="homeScreen">
+    <div class="text-center">
+      <button class="btn humanBtn">I DIED</button>
+    </div>
+    <div class="modAlerts">
+      <h2>Mod Alerts</h2>
+      <hr>
+      <div class="alert main">
+        <p>
+          Game will be on pause until 7:00pm for grace period.
+        </p>
+        <span>4/27 5:47pm</span>
+      </div>
+      <div class="alert">
+        <p>
+          Mission today will restrict humans to only socks and 6-shot blasters.
+        </p>
+        <span>4/27 12:15pm</span>
+      </div>
+      <div class="alert">
+        <p>
+          Game will be on pause until 6:45pm for grace period.
+        </p>
+        <span>4/26 5:17pm</span>
+      </div>
+      <div class="alert">
+        <p>
+          Due to rain, mission will now start at 4:30pm.
+        </p>
+        <span>4/26 1:15pm</span>
+      </div>
+      <div class="alert">
+        <p>
+          This week's round begins at 8:00am!!! Get pumped!
+        </p>
+        <span>4/25 11:45pm</span>
+      </div>
+    </div>
+    <div class="nextMission">
+      <h2>Next Mission: <span>Foul Play</span></h2>
+      <h3><span>Date:</span> Friday, 4/28</h3>
+      <h3><span>Time:</span> 5:30pm</h3>
+      <h3><span>Location:</span> Textor Hall</h3>
+    </div>
+  </section>
+    <!-- Round -->
+    <section id="roundScreen" style="display:none">
+        <div class="sectionTitle">Round Information</div>
+        <div class="screenContent">
+            <span>Description:</span>
+            <p>Welcome to the wonderful world of Bikini Bottom. There's a lot of fish in the sea, or at least there use to be.
+            Now, it's an apocalyptic wasteland. Armored Fish (tanks) and Acid-Spitting barnacles are all that remain. Good luck
+            out there. And remeber: "Just keep swimming!"</p><br>
+            <span>Special Zombies</span>
+            <ul>
+                <li>Tank:  Can only be stunned with socks
+                or missiles.</li>
+                <li>Spitter:  Shoots a small blaster, which stuns humans on hit.  Stunned humans cannot move for 30 seconds, but can shoot.</li>
+            </ul>
+            <span>Special Humans</span>
+            <ul>
+                <li>Armored:  Can survive one tag, after which the armor is destroyed.</li>
+            </ul><br>
+            <span>Game Rules</span>
+            <ol>
+                <li>Don’t be dick</li>
+                <li>Don’t be an idiot</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Schedule -->
+    <section id="scheduleScreen" style="display:none">
+        <div class="sectionTitle">Schedule</div>
+        <div class="scheduleContent">
+            <div class="day">
+                <h2>Monday</h2>
+                <div class="missionBlock event">
+                    <p>Event: 12:00pm-3:00pm, Academic Quad</p>
+                </div>
+                <div class="missionBlock mission">
+                    <p>Mission: 5:30pm-6:30pm, Textor</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Tuesday</h2>
+                <div class="missionBlock mission">
+                    <p>Mission: 6:00pm-7:00pm, Fitness Quad</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Wednesday</h2>
+                <div class="missionBlock event">
+                    <p>Event: 12:00pm-1:00pm, Academic Quad</p>
+                </div>
+                <div class="missionBlock event">
+                    <p>Event: 1:00pm-2:00pm, Smiddy Hall</p>
+                </div>
+                <div class="missionBlock event">
+                    <p>Event: 2:00pm-3:00pm, Park Quad</p>
+                </div>
+                <div class="missionBlock mission">
+                    <p>Mission: 5:30pm-6:30pm, Textor</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Thursday</h2>
+                <div class="missionBlock mission">
+                    <p>Mission: 5:00pm-6:00pm, Tennis Courts</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Friday</h2>
+                <div class="missionBlock mission">
+                    <p>Mission: 4:00pm-4:30pm, Textor</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Saturday</h2>
+                <div class="missionBlock endgame">
+                    <p>End Game: 11:00am-1:00pm, Academic Quad</p>
+                </div>
+            </div>
+            <div class="day">
+                <h2>Sunday</h2>
+                <div class="missionBlock nothing">
+                    <p>No missions today.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- Map -->
+    <section id="mapScreen" style="display:none">
+        <div id="mapCanvas"></div>
+        <div class="formSection">
+          <h1>Add Marker</h1>
+          <form id="markerForm">
+                  <fieldset>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="markerType">Marker Type</label>
+                          <div class="col-md-4">
+                              <div class="input-group">
+                                  <select class="form-control" name="markerType" id="markerType">
+                                      <option value="zombiesighting" label="Zombie Sighting">Zombie Sighting</option>
+                                      <option value="escort" label="Escort Request">Escort Request</option>
+                                      <option value="chilling" label="Chilling">Just Chilling</option>
+                                      <option value="other" label="Other">Other</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="positionStuff">Coordinates</label>
+                          <div class="col-md-4">
+                              <input class="form-control" id="giveCoordinates" name="positionStuff">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="additionalInformation">Additional Information</label>
+                          <div class="col-md-4">
+                              <textarea class="form-control" id="additionalInformation" name="additionalInformation"></textarea>
+                          </div>
+                      </div>
+                  </fieldset>
+          </form>
+            <button class="markerBtn" onclick="addNewMarker()">Add New Marker</button>
+
+        </div>
+    </section>
+    <!-- Chat -->
+    <section id="chatScreen" style="display:none"></section>
+    <!-- Rules -->
+    <section id="rulesScreen" style="display:none"></section>
+    <!-- Contact -->
+    <section id="contactsScreen" style="display:none"></section>
+    <!-- Settings -->
+    <section id="settingsScreen" style="display:none"></section>
+
+    <style>
+            #mapCanvas{width:100%;height:600px;}
+    </style>
+
+    <!-- Map -->
+    <script>
+        // Global Map Variable
+        var alreadydid = false;
+        var newCoord;
+        var map;
+        var markers=[];
+        var icons = {
+            zombiesighting: {
+                icon: '@routes.Assets.at("images/zombiesighting.png")'
+            },
+            escort: {
+                icon: '@routes.Assets.at("images/escort.png")'
+            },
+            chilling: {
+                icon: '@routes.Assets.at("images/chilling.png")'
+            },
+            other: {
+                icon: '@routes.Assets.at("images/other.png")'
+            }
+        };
+
+        // Prevent Form Submission default
+        if (document.getElementById('markerForm').addEventListener) {
+            document.getElementById('markerForm').addEventListener("submit", function(evt) {
+                evt.preventDefault();
+                window.history.back();
+            }, true);
+        }
+        else {
+            document.getElementById('markerForm').attachEvent('onsubmit', function(evt){
+                evt.preventDefault();
+                window.history.back();
+            });
+        }
+
+        // Create the map
+        function initMap() {
+            if(!alreadydid) {
+
+                //Create Style
+                var styledMapType = new google.maps.StyledMapType(
+                        [
+                            {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+                            {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+                            {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+                            {
+                                featureType: 'administrative',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#c9b2a6'}]
+                            },
+                            {
+                                featureType: 'administrative.land_parcel',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#dcd2be'}]
+                            },
+                            {
+                                featureType: 'administrative.land_parcel',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#ae9e90'}]
+                            },
+                            {
+                                featureType: 'landscape.natural',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#93817c'}]
+                            },
+                            {
+                                featureType: 'poi.park',
+                                elementType: 'geometry.fill',
+                                stylers: [{color: '#a5b076'}]
+                            },
+                            {
+                                featureType: 'poi.park',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#447530'}]
+                            },
+                            {
+                                featureType: 'road',
+                                elementType: 'geometry',
+                                stylers: [{color: '#f5f1e6'}]
+                            },
+                            {
+                                featureType: 'road.arterial',
+                                elementType: 'geometry',
+                                stylers: [{color: '#fdfcf8'}]
+                            },
+                            {
+                                featureType: 'road.highway',
+                                elementType: 'geometry',
+                                stylers: [{color: '#f8c967'}]
+                            },
+                            {
+                                featureType: 'road.highway',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#e9bc62'}]
+                            },
+                            {
+                                featureType: 'road.highway.controlled_access',
+                                elementType: 'geometry',
+                                stylers: [{color: '#e98d58'}]
+                            },
+                            {
+                                featureType: 'road.highway.controlled_access',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#db8555'}]
+                            },
+                            {
+                                featureType: 'road.local',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#806b63'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#8f7d77'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'labels.text.stroke',
+                                stylers: [{color: '#ebe3cd'}]
+                            },
+                            {
+                                featureType: 'transit.station',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'water',
+                                elementType: 'geometry.fill',
+                                stylers: [{color: '#b9d3c2'}]
+                            },
+                            {
+                                featureType: 'water',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#92998d'}]
+                            }
+                        ],
+                        {name: 'Styled Map'});
+
+                var ithaca = {lat: 42.4223, lng: -76.4950};
+                map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                    zoom: 17,
+                    center: ithaca,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true,
+                    fullScreenControl: false,
+                    zoomControl: true,
+                    zoomControlOptions: true,
+                    mapTypeControlOptions: {
+            mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                    'styled_map']
+          }
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: "Hello"
+                });
+                var marker = new google.maps.Marker({
+                    position: ithaca,
+                    map: map,
+                    icon: icons['other'].icon,
+                    title: 'Position of entire Round'
+                });
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+                google.maps.event.addListener(map, 'click', function (e) {
+                    updateCoordinates(e.latLng);
+                });
+                markers.push(marker);
+                alreadydid = true;
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+            }
+        }
+
+        // Add a new marker
+        function addNewMarker(){
+            var marker = new google.maps.Marker({
+                position: newCoord,
+                map:map,
+                icon: icons[document.getElementById('markerForm').markerType.value].icon,
+                title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: "<span>"+marker.title+"</span><br>"+document.getElementById('markerForm').additionalInformation.value
+            });
+            marker.addListener('click', function(){
+                infowindow.open(map,marker);
+            });
+            markers.push(marker);
+            google.maps.event.trigger(map, 'resize');
+            document.getElementById('markerForm').positionStuff.value = "";
+            document.getElementById('markerForm').additionalInformation.value = "";
+        }
+
+        // Update form field with new position
+        function updateCoordinates(pnt){
+            var lat = pnt.lat();
+            lat = lat.toFixed(4);
+            var lng = pnt.lng();
+            lng = lng.toFixed(4);
+            newCoord=pnt;
+            $('input[name="positionStuff"]').val(pnt);
+        }
+
+    </script>
+}
