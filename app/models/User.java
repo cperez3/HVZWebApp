@@ -43,6 +43,8 @@ public class User extends Model {
   @OneToMany
   public List<Message> messages;
 
+  public static Finder<Long, User> find = new Finder<>(Long.class, User.class);
+
   public User() {
   }
 

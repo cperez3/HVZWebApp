@@ -31,6 +31,8 @@ public class Message extends Model {
   public User sender;
   public DateTime time;
 
+  public static Finder<Long, Message> find = new Finder<>(Long.class, Message.class);
+
   @Override
   public void save() {
     createdAt();

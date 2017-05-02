@@ -1,4 +1,4 @@
-@(uname: String)
+@(uname: String, user: User)
 <!DOCTYPE html>
 <html class="full" lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
@@ -122,7 +122,7 @@
           });
         $("#create-form").on('submit', function(a){
             a.preventDefault();
-            window.location.href=@routes.GamePage.createGame();
+            window.location.href=@routes.GamePage.createRound(user.id);
         });
           $("#delete-button").on('click', function(a) {
             a.preventDefault();

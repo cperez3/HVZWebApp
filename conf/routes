@@ -27,7 +27,7 @@ GET /addUser/:email/:password1/:name/:mod controllers.SignUp.addUser(email:Strin
 
 GET /validateLogIn/:email/:password controllers.LogIn.validateLogIn(email:String,password:String)
 
-#GET /createGame/ controllers.JoinGame.createGame()
+#GET /createRound/ controllers.JoinGame.createRound()
 
 #GET /moderatorPage/ controllers.ModPage.loadPage()
 
@@ -41,7 +41,7 @@ GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
 GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
-GET /createGame/  controllers.GamePage.createGame()
+POST /createGame/  controllers.GamePage.createRound(userId:Long)
 
 GET /endGame/  controllers.GamePage.endGame()
 

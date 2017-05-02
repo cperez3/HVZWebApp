@@ -1,6 +1,7 @@
 package models;
 
 import org.joda.time.DateTime;
+import play.db.ebean.Model;
 
 import javax.persistence.Id;
 
@@ -17,5 +18,7 @@ public class Event {
   public Round round;
   public String humanLocation;
   public String zombieLocation;
+
+  public static Model.Finder<Long, Event> find = new Model.Finder<>(Long.class, Event.class);
 
 }

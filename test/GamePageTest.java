@@ -319,14 +319,14 @@ public class GamePageTest {
             public void createGameMod() {
                 /*request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.createGame(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod));
+                result=callAction(routes.ref.GamePage.createRound(),fakeRequest().withJsonBody(request).withSession("uname",uname).withSession("gCode"," ").withSession("is_mod",isMod));
                 assertEquals(OK,status(result));
                 assertEquals(true,contentAsString(result).contains(gamePageHTML));*/
             }
             public void createGameNotMod() {
                 /*request = Json.newObject();
 
-                result=callAction(routes.ref.GamePage.createGame(),fakeRequest().withJsonBody(request));
+                result=callAction(routes.ref.GamePage.createRound(),fakeRequest().withJsonBody(request));
                 assertEquals(FORBIDDEN,status(result));
                 assertEquals(true,contentAsString(result).contains(logInHTML));*/
 
