@@ -32,11 +32,11 @@ public class Round extends Model {
   public String roundRules;
   public String gameRules;
   public String contactInfo;
-  @OneToMany
+  @OneToMany(mappedBy = "round")
   public List<Event> schedule = new ArrayList<>();
-  @OneToMany
+  @OneToMany(mappedBy = "currentRound")
   public List<User> players = new ArrayList<>();
-  @OneToMany
+  @OneToMany(mappedBy = "round")
   public List<Message> messages = new ArrayList<>();
 
   public static Finder<Long, Round> find = new Finder<>(Long.class, Round.class);

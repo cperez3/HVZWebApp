@@ -40,7 +40,7 @@ public class User extends Model {
   @ManyToOne
   public Round currentRound;
   public Team team;
-  @OneToMany
+  @OneToMany(mappedBy = "sender")
   public List<Message> messages;
 
   public static Finder<Long, User> find = new Finder<>(Long.class, User.class);

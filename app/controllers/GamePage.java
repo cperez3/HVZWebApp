@@ -93,7 +93,7 @@ public class GamePage extends Controller {
       }
       if ((isMod.equals("1") || isMod.equals("true"))
           && gCode.equals(" ")) {
-        return ok(noGameModSettings.render(uName));
+        return ok(noGameModSettings.render(uName, null));
       } else {
         return forbidden(joinGame.render());
       }
@@ -133,7 +133,7 @@ public class GamePage extends Controller {
 
           return ok(inGameModSettings.render(uName, gCode, status, team));
         } else {
-          return ok(noGameModSettings.render(uName));
+          return ok(noGameModSettings.render(uName, null));
         }
       }
     }
