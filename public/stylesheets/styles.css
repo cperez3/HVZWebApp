@@ -66,6 +66,12 @@ h1{
     margin-left:15px;
     margin-right:15px;
 }
+.zombieBtn{
+    background-color: green !important;
+}
+.activeType{
+    color:white;
+}
 /*.alert:after
 {
     content: '';
@@ -238,7 +244,7 @@ h1{
 **************************
  */
 .zombie{
-    background-color:lawngreen;
+    background-color:#6ace2c;
 }
 
 
