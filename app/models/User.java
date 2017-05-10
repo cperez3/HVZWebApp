@@ -17,6 +17,7 @@ import javax.persistence.*;
 
 import com.avaje.ebean.SqlUpdate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,7 +42,9 @@ public class User extends Model {
   public Round currentRound;
   public Team team;
   @OneToMany(mappedBy = "sender")
-  public List<Message> messages;
+  public List<Message> messages = new ArrayList<>();
+  @OneToMany(mappedBy = "user")
+  public List<MapMarker> mapMarkers = new ArrayList<>();
 
   public static Finder<Long, User> find = new Finder<>(Long.class, User.class);
 

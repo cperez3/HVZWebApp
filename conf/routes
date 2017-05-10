@@ -43,7 +43,8 @@ GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
 GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
-POST /createGame/  controllers.GamePage.createRound(userId:Long)
+#POST /createGame/  controllers.GamePage.createRound(userId:Long)
+POST /createRound/  controllers.Rounds.createRound()
 
 GET /endGame/  controllers.GamePage.endGame()
 

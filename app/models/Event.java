@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
  * Created by Chris on 4/25/2017.
  */
 @Entity
-public class Event {
+public class Event extends  Model{
 
   @Id
   public Long id;

@@ -38,6 +38,8 @@ public class Round extends Model {
   public List<User> players = new ArrayList<>();
   @OneToMany(mappedBy = "round")
   public List<Message> messages = new ArrayList<>();
+  @OneToMany(mappedBy = "round")
+  public List<MapMarker> mapMarkers = new ArrayList<>();
 
   public static Finder<Long, Round> find = new Finder<>(Long.class, Round.class);
 
