@@ -40,6 +40,37 @@ h1{
     font-size:40px;
 }
 
+/* Round Creation */
+#roundCreation {
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    position:relative;
+    z-index:5000;
+    display:none;
+    background-color:gray;
+}
+#roundCreation form {
+    padding-left:15px;
+    padding-right:15px;
+}
+#roundCreation:target, #roundCreation:target + #cover{
+      display:block;
+      opacity:2;
+  }
+.cancel {
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 2px;
+    color: black;
+    height: 30px;
+    width: 35px;
+    font-size: 30px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}                                                                                                                                                                                                                                                                    } - See more at: http://www.corelangs.com/css/box/fulloverlay.html#sthash.xFyime5K.dpuf
 /* Homepage */
 .modAlerts{
     background-color:#334255;
@@ -274,7 +305,7 @@ h1{
 }
 
 .btn:hover, .btn:active, .btn:focus, .btn > a:focus, .btn > a:active, .btn > a:hover{
-    background-color: darkred;
+    background-color: #192635;
 }
 
 .error-msg{
@@ -325,3 +356,7 @@ h1{
 }
 
 .help-msg{}
+
+.smallerText{
+    font-size:16px;
+}
