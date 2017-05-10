@@ -49,12 +49,12 @@
 
                 <!-- Human & Zombie Score -->
             <div class="">
-                <div class="col-sm-6 score human">
-                    <span class="count">@humanCount</span><br>
+                <div class="col-sm-6 score human activeType">
+                    <span class="count humanCount">@humanCount</span><br>
                     <span class="countType">Humans</span>
                 </div>
                 <div class="col-sm-6 score zombie">
-                    <span class="count">@zombieCount</span><br>
+                    <span class="count zombieCount">@zombieCount</span><br>
                     <span class="countType">Zombies</span>
                 </div>
             </div>
@@ -76,6 +76,18 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiJfnVy0l-webqIktk7_vhXAgenVrr4K0">
+    </script>
+    <script>
+        $('.humanBtn').click(function(){
+            $('.humanBtn').text("BRAINZ?");
+            $('.human').toggleClass('activeType', false);
+            $('.zombie').toggleClass('activeType', true);
+            //$('.humanBtn').toggleClass('zombieBtn',true);
+            $('.humanCount').text('5');
+            $('.zombieCount').text('18');
+            var audio = document.getElementById("audio");
+            audio.play()
+        });
     </script>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 </html>

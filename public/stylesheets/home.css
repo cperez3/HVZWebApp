@@ -120,25 +120,35 @@ body {
         margin-right: 0;
     }
 }
-/* The Modal (background) */
+/* Sign-up, Log-in, Create Round, Join Round */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
-
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    background-color: #334255;
+    margin: 25% auto;
+    padding: 0 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 90%;
+    color:white;
+}
+#loginModal2 .modal-content{
+    margin:3% auto;
+}
+a{
+    color: #bababa;
+}
+a:hover, a:active{
+    text-decoration: none;
+    color:#dddcdc;
 }
 
 /* The Close Button */
@@ -154,4 +164,24 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.footer{
+    background-color:#192635;
+    color:#bebebe;
+    padding-left:15px;
+    padding-right:15px;
+}
+.footer p{
+    font-size:12px;
+    margin:0;
+}
+.apptitle{
+    font-weight:bold;
+    font-size:18px !important;
+    margin-top:5px !important;
+}
+.copyright{
+    font-style:italic;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
 }

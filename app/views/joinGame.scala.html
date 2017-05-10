@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html class="full" lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>Join Game</title>
-    <meta name="generator" content="Bootply" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
-      <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 
-    <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Humans VS Zombies</title>
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+      <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/home.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/nav.css")" rel="stylesheet">
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
-      <!--favicon-->
+
+      <!-- Favicon -->
     <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
   </head>
@@ -22,7 +28,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="col-xs-1 col-xs-offset-10"><input id="showSettings" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+            <div class="col-xs-1 col-xs-offset-10">
+              <input id="showSettings" type="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
 
 
             <style> #settingsMenu{
@@ -45,7 +52,7 @@
             <h5 class="text-center">Please enter a game code to join a game</h5>
 
           </div>
-          <div class="modal-body">
+          <div class="modal-body text-center">
             <form id="join-game" class="form col-md-12 center-block" action="" method="post">
               <div class="form-group">
                 <input id="game-code" type="text" class="form-control input-lg" placeholder="Game Code">
@@ -55,6 +62,7 @@
                 <button id="join" class="btn btn-primary btn-lg btn-block">Join</button>
               </div>
             </form>
+            <button id="createGame" class="btn btn-primary btn-lg">Create new round</button>
           </div>
 
             <!-- Delete Account Modal -->
@@ -83,12 +91,113 @@
         </div>
       </div>
     </div>
+    <div class="footer navbar-fixed-bottom text-center">
+      <p class="apptitle">The Official HvZ Battle App</p>
+      <p>A companion app that allows humans and zombies to get information quickly and to
+        stay tactical through integrated maps and messaging.</p>
+      <p class="copyright">&copy; 2017 Ithaca College HvZ</p>
+    </div>
+
+    <div id="roundCreation">
+      <a href="#" class="cancel">&times;</a>
+      <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+          <legend class="text-center"><h2>Create a new round</h2></legend>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="roundName">Round Name</label>
+            <div class="col-md-4">
+              <input id="roundName" name="roundName" type="text" placeholder="" class="form-control input-md" required="">
+
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="description">Description</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="description" name="description"></textarea>
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="rules">Rules</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="rules" placeholder="ex: 'Don't be an idiot.'" name="rules"></textarea>
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="specials">Specials</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="specials" placeholder="Information about special zombies, game mechanics, etc." name="specials"></textarea>
+            </div>
+          </div>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="medical">Emergency/Medical Contact</label>
+            <div class="col-md-4">
+              <input id="medical" name="medical" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+          </div>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="moderator">Moderator Contact</label>
+            <div class="col-md-4">
+              <input id="moderator" name="moderator" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+          </div>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="executive">Executive Board Contact</label>
+            <div class="col-md-4">
+              <input id="executive" name="executive" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+          </div>
+
+            <!-- Button -->
+          <div class="form-group text-center">
+            <label class="col-md-4 control-label" for="submitRound"></label>
+            <div class="col-md-4">
+              <button id="submitRound" name="submitRound" class="btn btn-primary">Create Round</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </div>
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
       <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 
       <script>
+        // Pull round creation form
+        $('#createGame').click(function(){
+           $('#roundCreation').fadeToggle();
+           $('#loginModal').css('opacity',.2);
+           $('.footer').css('opacity',.2);
+        });
+
+        // Close round creation form
+        $('.cancel').click(function(){
+          $('#roundCreation').fadeToggle();
+          $('#loginModal').css('opacity', 1);
+          $('.footer').css('opacity', 1);
+        });
+
           $("#join-game").on('submit', function(e) {
               e.preventDefault();
             document.getElementById('no-game-message').style.display= 'none';
