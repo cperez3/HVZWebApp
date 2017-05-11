@@ -132,22 +132,6 @@ body.nav-expanded {
     content: '\f105';
 }
 
-.main-menu li > a > span.icon {
-    float: left;
-    margin: 0.1em 1.7em -0.1em 0;
-    opacity: 0;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-
-}
-
-.main-menu li > a:hover > span.icon {
-    float: left;
-    margin: 0.1em 0.8em -0.1em 0;
-    opacity: 1;
-}
 .fa-lg{
     vertical-align:0;
     line-height:0;
@@ -178,8 +162,9 @@ body.nav-expanded {
         height:90px;
     }
     .navbar-brand{
-        font-size:50px;
-        top:5px;
-        padding-top:.65em;
+        font-size:50px !important;
+        top:5px !important;
+        padding-top:.65em !important;
+        line-height:20px !important;
     }
 }
