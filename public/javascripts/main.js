@@ -1,5 +1,6 @@
 // Global Variables
 var activeScreen= "#homeScreen";
+var allRoundData;
 
 /******************** GLOBAL FUNCTIONS ********************/
 
