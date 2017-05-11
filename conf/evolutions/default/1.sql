@@ -37,6 +37,8 @@ create table message (
   round_id                  bigint,
   sender_id                 integer,
   time                      datetime,
+  message_type              integer,
+  constraint ck_message_message_type check (message_type in (0,1,2)),
   constraint pk_message primary key (id))
 ;
 

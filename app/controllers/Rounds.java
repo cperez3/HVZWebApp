@@ -17,6 +17,9 @@ public class Rounds extends Controller {
 
   public static Result createRound() {
     User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
     System.out.println("ID: " + Long.parseLong(session("id")));
     DynamicForm form = Form.form().bindFromRequest();
 
@@ -50,7 +53,10 @@ public class Rounds extends Controller {
 
   public static Result getRound() {
     User user = User.find.byId(Long.parseLong(session("id")));
-    return ok(Json.toJson(user.currentRound));
+    if (user == null ) {
+      return unauthorized();
+    }
+    return ok(user.currentRound.toJson());
   }
 
   public static Result addEvent() {

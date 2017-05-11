@@ -196,7 +196,6 @@
         type: "POST",
         url: @routes.Users.login(),
         data: body,
-        dataType: FormData,
         success: function ( data ) {
           console.log("Login Success");
           console.log(data);
@@ -204,8 +203,7 @@
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log("Invalid Login");
-          console.log(data);
-          console.log(data.message);
+          console.log(errorThrown);
 
           $("#no-user-message").slideDown();
         }

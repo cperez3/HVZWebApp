@@ -52,7 +52,9 @@ public class Users extends Controller {
       session("is_active", Boolean.toString(user.isActive));
       session("gCode", user.currentRound.gameCode);
     }
-    return noContent();
+    response().setHeader("Content-Type", "text/json");
+    return ok(user.toJson());
+//    return noContent();
 //    return GamePage.loadPage();
   }
 

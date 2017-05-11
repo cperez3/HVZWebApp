@@ -11,7 +11,9 @@ package models;
 
 //import statements
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 import javax.persistence.*;
 
@@ -54,6 +56,20 @@ public class User extends Model {
   }
 
   public User() {
+  }
+
+  public ObjectNode toJson() {
+    ObjectNode node = Json.newObject();
+    node.put("id", id);
+    node.put("displayName", displayName);
+    node.put("name", name);
+    node.put("email", email);
+    if (currentRound != null) {
+      node.put("isMod", isMod);
+      node.put("isActive", isActive);
+      node.put("team", team.toString());
+    }
+    return node;
   }
 
   public enum Team {HUMAN, ZOMBIE, NONPLAYING}
