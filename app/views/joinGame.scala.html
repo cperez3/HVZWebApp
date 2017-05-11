@@ -133,7 +133,7 @@
 
             <!-- Textarea -->
           <div class="form-group">
-            <label class="col-md-4 control-label textLabel" for="specials">Specials</label>
+            <label class="col-md-4 control-label textLabel" for="specials">Special Mechanics</label>
             <div class="col-md-4">
               <textarea class="form-control" id="specials" placeholder="Information about special zombies, game mechanics, etc." name="specials"></textarea>
             </div>
@@ -241,5 +241,12 @@
             window.location.href=@routes.GamePage.deactivateAccount();
           });
     </script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <style>
+            .mce-branding-powered-by{
+              display:none;
+            }
+    </style>
   </body>
 </html>
