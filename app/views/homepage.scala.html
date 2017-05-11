@@ -205,7 +205,7 @@
         </div>
         <div id="scheduleCreation">
             <a href="#" class="cancel">&times;</a>
-            <form class="form-horizontal">
+            <form id="create-event" class="form-horizontal">
                 <fieldset>
 
                         <!-- Form Name -->
@@ -223,7 +223,7 @@
                         </div>
                     </div>
                         <!-- Select Basic -->
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label class="col-md-4 control-label" for="daysSelect">Select Day</label>
                         <div class="col-md-4">
                             <select id="daysSelect" name="scheduleType" class="form-control">
@@ -236,7 +236,7 @@
                                 <option value="7">Sunday</option>
                             </select>
                         </div>
-                    </div>
+                    </div>*@
 
                         <!-- Text input-->
                     <div class="form-group">
@@ -256,9 +256,16 @@
 
                         <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="locEvent">Location</label>
+                        <label class="col-md-4 control-label" for="humanLocation">Human Location</label>
                         <div class="col-md-4">
-                            <input id="locEvent" name="locEvent" type="text" placeholder="The flagpole" class="form-control input-md">
+                            <input id="humanLocation" name="humanLocation" type="text" placeholder="Fitness Quad" class="form-control input-md">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="zombieLocation">Zombie Location</label>
+                        <div class="col-md-4">
+                            <input id="zombieLocation" name="zombieLocation" type="text" placeholder="Textor" class="form-control input-md">
                         </div>
                     </div>
 
@@ -809,6 +816,40 @@
                         console.log(errorThrown);
 
                         $("#no-user-message").slideDown();
+                    }
+                });
+            });
+
+            $('#create-event').on('submit', function() {
+              var title = "Event";
+              switch($('#scheduleType').val()) {
+                  case 1: title = "Event";
+                      break;
+                  case 2: title = "Mission";
+                      break;
+                  case 3: title = "End Game";
+                      break;
+                  default: title = "Event";
+                      break;
+              }
+                body = {title: title,
+                    startTime: new Date($('#startTime').val()).getTime(),
+                    endTime: new Date($('#endTime').val()).getTime(),
+                    humanLocation: $('#humanLocation').val(),
+                    zombieLocation: $('#zombieLocation').val()};
+
+                $.ajax({
+                    type: "POST",
+                    url: @routes.Rounds.addEvent(),
+                    data: body,
+                    success: function ( data ) {
+                        console.log(data);
+                        round = data;
+                        loadSchedule();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(errorThrown);
+
                     }
                 });
             });

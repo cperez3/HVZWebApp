@@ -91,7 +91,7 @@ public class Rounds extends Controller {
     String humanLocation = form.get("humanLocation");
     String zombieLocation = form.get("zombieLocation");
     new Event(user.currentRound, title, startTime, endTime, humanLocation, zombieLocation);
-    return noContent();
+    return ok(user.currentRound.toJson());
   }
 
   public static Result getSchedule() {
