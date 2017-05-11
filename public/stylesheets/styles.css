@@ -48,11 +48,19 @@ h1{
     position:relative;
     z-index:5000;
     display:none;
-    background-color:gray;
+    background-color:#283142;
+    color:white;
+}
+#roundCreation h2{
+    color:white;
+    line-height:1.42857143;
 }
 #roundCreation form {
     padding-left:15px;
     padding-right:15px;
+}
+.textLabel{
+    font-size:20px;
 }
 #roundCreation:target, #roundCreation:target + #cover{
       display:block;
@@ -61,16 +69,31 @@ h1{
 .cancel {
     display: block;
     position: absolute;
-    top: 3px;
     right: 2px;
-    color: black;
+    color: #e5e1e1;
     height: 30px;
     width: 35px;
     font-size: 30px;
     text-decoration: none;
     text-align: center;
     font-weight: bold;
-}                                                                                                                                                                                                                                                                    } - See more at: http://www.corelangs.com/css/box/fulloverlay.html#sthash.xFyime5K.dpuf
+}
+.green{
+    background-color: #33b75c;
+}
+.green:active, .green:hover, .green:focus{
+    background-color: #288c47;
+}
+.leaveround{
+    background-color:#404040;
+    color:gray;
+    position:absolute;
+    bottom:0px;
+    text-align:center;
+    width:100%;
+    padding:10px;
+}
+
 /* Homepage */
 .modAlerts{
     background-color:#334255;
@@ -161,6 +184,9 @@ h1{
     text-align:center;
     color:white;
     font-size:40px;
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
+    border-bottom-color: #808388;
 }
 .screenContent{
     color:white;
@@ -197,21 +223,117 @@ h1{
 .nothing{
     background-color:dimgray;
 }
-.event{
-    background-color:#1770c9;
+/*.event{
+   background-color:#1770c9;
 }
 .mission{
-    background-color: #e02828;
+   background-color: #e02828;
 }
 .endgame{
-    background-color:#690000;
-}
+   background-color:#690000;
+}*/
 .type1{
     background-color:
 }
 .type2{
     background-color:
 }
+
+.eventitem {
+    background-color:#283142;
+    margin-left:5px;
+    margin-right:10px;
+    margin-bottom:10px;
+    display: inline-block;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+/*.eventitem p {
+   font-size:24px;
+}*/
+
+.eventinfo{
+    font-size:24px;
+}
+.events{
+    background-color:#283142;
+
+}
+
+.eventitem span {
+    font-style:italic;
+    font-size:20px;
+    color: #bebebe;
+}
+.mainschedule {
+    border-color:#93fe2b;
+    border-width:5px;
+}
+.mainschedule p {
+    color:white;
+    font-weight:bold;
+}
+.mainschedule span{
+    color: #bebebe;
+    font-style:italic;
+}
+
+
+.schedulebox{
+    background-color:#334255;
+    border-width:2px;
+    border-color:#808388;
+}
+.schedulebox hr{
+    width: 50%;
+    margin-left: 15px;
+    margin-top: 0;
+}
+.schedulebox h2{
+    color:white;
+    font-size:35px;
+    font-weight:bolder;
+    margin:10px;
+    margin-left:15px;
+}
+.schedulebox h3{
+    color:white;
+    font-size:28px;
+    font-weight:bolder;
+    margin:10px;
+    margin-left:15px;
+    text-decoration: underline;
+}
+
+.event{
+    color:#1770c9;
+    font-size:28px;
+    font-weight:bolder;
+}
+.mission{
+    color: #e02828;
+    font-size:28px;
+    font-weight:bolder;
+}
+.endgame{
+    color:#ff0000;
+    font-size:28px;
+    font-weight:bolder;
+}
+
+.schedulebox hr{
+    width: 50%;
+    margin-top: 0;
+}
+.addScheduleBtn {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+}
+
 /* Map Page */
 #mapScreen{
     height:100%;
@@ -247,7 +369,24 @@ h1{
     padding-left: 10px;
     padding-right: 10px;
 }
-
+/* Contact */
+.contactInfo{
+    text-align:center;
+    color:white;
+    margin:50px;
+}
+.contactInfo h2{
+    font-size:40px;
+}
+.contactInfo p{
+    font-size:50px;
+}
+.medical h2{
+    font-size:55px;
+}
+.medical p{
+    font-size: 65px;
+}
 /*
 **************************
        HUMAN STYLE
@@ -287,6 +426,9 @@ h1{
 @media only screen and (max-width: 850px) {
     .score {
         margin-top: 40px;
+    }
+    .contact{
+        margin-top: 35%;
     }
 }
 /*

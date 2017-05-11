@@ -77,60 +77,121 @@
     <!-- Schedule -->
     <section id="scheduleScreen" style="display:none">
         <div class="sectionTitle">Schedule</div>
-        <div class="scheduleContent">
-            <div class="day">
-                <h2>Monday</h2>
-                <div class="missionBlock event">
-                    <p>Event: 12:00pm-3:00pm, Academic Quad</p>
+        <div class="schedulebox">
+            <div class="scheduleContent">
+                <div class="day">
+                    <h3>Monday</h3>
+                    <div class="events">
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">12:00pm-3:00pm<br>
+                                Academic Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:30pm-6:30pm<br>
+                                Textor</p>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="missionBlock mission">
-                    <p>Mission: 5:30pm-6:30pm, Textor</p>
+
+                <div class="day">
+                    <h3>Tuesday</h3>
+
+                    <div class="events">
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">6:00pm-7:00pm<br>
+                                Fitness Quad</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="day">
-                <h2>Tuesday</h2>
-                <div class="missionBlock mission">
-                    <p>Mission: 6:00pm-7:00pm, Fitness Quad</p>
+
+                <div class="day">
+                    <h3>Wednesday</h3>
+
+                    <div class="events">
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">12:00pm-1:00pm<br>
+                                Academic Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">1:00pm-2:00pm<br>
+                                Smiddy Hall</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">2:00pm-3:00pm<br>
+                                Park Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:30pm-6:30pm<br>
+                                Textor</p>
+                        </div>
+                    </div>
+                    <img class="addScheduleBtn" onclick="" src="@routes.Assets.at("images/addEvent.png")">
                 </div>
-            </div>
-            <div class="day">
-                <h2>Wednesday</h2>
-                <div class="missionBlock event">
-                    <p>Event: 12:00pm-1:00pm, Academic Quad</p>
+
+                <div class="day">
+                    <h3>Thursday</h3>
+
+                    <div class="events">
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:00pm-6:00pm<br>
+                                Tennis Courts</p>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="missionBlock event">
-                    <p>Event: 1:00pm-2:00pm, Smiddy Hall</p>
+
+                <div class="day">
+                    <h3>Friday</h3>
+
+                    <div class="events">
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">4:00pm-4:30pm<br>
+                                Textor</p>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="missionBlock event">
-                    <p>Event: 2:00pm-3:00pm, Park Quad</p>
+
+                <div class="day">
+                    <h3>Saturday</h3>
+
+                    <div class="events">
+
+                        <div class="eventitem">
+                            <p class="endgame">End Game:</p>
+                            <p class="eventinfo">11:00am-1:00pm<br>
+                                Academic Quad</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="missionBlock mission">
-                    <p>Mission: 5:30pm-6:30pm, Textor</p>
+
+                <div class="day">
+                    <h3>Sunday</h3>
+                    <div class="events">
+                        <div class="missionBlock nothing">
+                            <p class="eventinfo">No missions today.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="day">
-                <h2>Thursday</h2>
-                <div class="missionBlock mission">
-                    <p>Mission: 5:00pm-6:00pm, Tennis Courts</p>
-                </div>
-            </div>
-            <div class="day">
-                <h2>Friday</h2>
-                <div class="missionBlock mission">
-                    <p>Mission: 4:00pm-4:30pm, Textor</p>
-                </div>
-            </div>
-            <div class="day">
-                <h2>Saturday</h2>
-                <div class="missionBlock endgame">
-                    <p>End Game: 11:00am-1:00pm, Academic Quad</p>
-                </div>
-            </div>
-            <div class="day">
-                <h2>Sunday</h2>
-                <div class="missionBlock nothing">
-                    <p>No missions today.</p>
-                </div>
+
             </div>
 
         </div>
@@ -174,11 +235,31 @@
         </div>
     </section>
     <!-- Chat -->
-    <section id="chatScreen" style="display:none"></section>
+    <section id="chatScreen" style="display:none">
+        <div class="sectionTitle">Chat</div>
+    </section>
     <!-- Rules -->
-    <section id="rulesScreen" style="display:none"></section>
+    <section id="rulesScreen" style="display:none">
+        <div class="sectionTitle">Rules</div>
+    </section>
     <!-- Contact -->
-    <section id="contactsScreen" style="display:none"></section>
+    <section id="contactsScreen" style="display:none">
+        <div class="sectionTitle">Contact Information</div>
+        <div class="contact">
+            <div class="contactInfo medical">
+                <h2>Emergency / Medical</h2>
+                <p class="phone">607-274-3333</p>
+            </div>
+            <div class="contactInfo">
+                <h2>Round Coordinator</h2>
+                <p class="phone">877-393-4448</p>
+            </div>
+            <div class="contactInfo">
+                <h2>Executive Board</h2>
+                <p class="phone">503-867-5309</p>
+            </div>
+        </div>
+    </section>
     <!-- Settings -->
     <section id="settingsScreen" style="display:none"></section>
 
@@ -209,7 +290,7 @@
             }
         };
 
-        // Prevent Form Submission default
+        /* Prevent Form Submission default */
         if (document.getElementById('markerForm').addEventListener) {
             document.getElementById('markerForm').addEventListener("submit", function(evt) {
                 evt.preventDefault();
@@ -223,7 +304,7 @@
             });
         }
 
-        // Create the map
+        /* Create the map */
         function initMap() {
             if(!alreadydid) {
 
@@ -377,7 +458,7 @@
             }
         }
 
-        // Add a new marker
+        /* Add a new marker */
         function addNewMarker(){
             var marker = new google.maps.Marker({
                 position: newCoord,
@@ -397,7 +478,7 @@
             document.getElementById('markerForm').additionalInformation.value = "";
         }
 
-        // Update form field with new position
+        /* Update form field with new position */
         function updateCoordinates(pnt){
             var lat = pnt.lat();
             lat = lat.toFixed(4);
