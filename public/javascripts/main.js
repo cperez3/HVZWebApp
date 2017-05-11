@@ -22,6 +22,7 @@ function switchScreen(screen) {
 
 }
 
+
 // Add Marker to map
 function addMarker(mapID, form){
     var mymap = document.getElementById(mapID)
