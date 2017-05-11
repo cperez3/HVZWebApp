@@ -22,7 +22,7 @@ function switchScreen(screen) {
                 initMap();
                 $.ajax({
                     type: "GET",
-                    url: '@routes.Maps.getMarkers',
+                    url: "@routes.Maps.getMarkers",
                     success : function(data) {
                     console.log(data);
                     allMarkers = data;

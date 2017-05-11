@@ -28,6 +28,9 @@ PUT /team/ controllers.Users.changeTeam()
 GET     /user/ controllers.Users.getProfile()
 DELETE /user/round/ controllers.Users.leaveRound()
 
+GET /maps/ controllers.Maps.getMarkers()
+PUT /maps/ controllers.Maps.addMarker()
+
 
 GET     /javascriptRoutes     controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
