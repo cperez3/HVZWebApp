@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.MapMarker;
 import models.User;
 import org.joda.time.DateTime;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -17,16 +19,19 @@ import java.util.List;
  */
 public class Maps extends Controller {
   public static Result addMarker() {
+//    response().setHeader("Accept", "application/json");
     User user = User.find.byId(Long.parseLong(session("id")));
     JsonNode body = request().body().asJson();
-
+//    DynamicForm body = Form.form().bindFromRequest();
+    System.out.println(body.toString());
     JsonNode position = body.get("position");
-    double longitude = position.get("lng").asDouble();
-    double latitude = position.get("lat").asDouble();
+    double lat = position.get("lat").asDouble();
+    double lng = position.get("lng").asDouble();
+    System.out.println(position);
     String icon = body.get("icon").asText();
     String title = body.get("title").asText();
 
-    MapMarker mapMarker = new MapMarker(title, icon, latitude, longitude, user);
+    MapMarker mapMarker = new MapMarker(title, icon,lat, lng, user);
     return ok(mapMarker.toJson());
   }
 

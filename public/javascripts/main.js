@@ -20,55 +20,12 @@ function switchScreen(screen) {
             $(activeScreen).fadeIn(400, "linear");
             if(screen=="map"){
                 initMap();
-                $.ajax({
-                    type: "GET",
-                    url: "@routes.Maps.getMarkers",
-                    success : function(data) {
-                    console.log(data);
-                    allMarkers = data;
-                    loadMarkers();
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log("Marker Alert Error");
-                    document.getElementById('no-game-message').style.borderColor = "red";
-                    document.getElementById('no-game-message').style.display= 'block';
-                }
-            });
+
             }
         });
     }
 
 }
-
-/* Submit Marker on Map */
-$("#markerForm").on('submit', function (e) {
-    e.preventDefault();
-
-    var body = {
-        title: $('#title').val(),
-        iconImage: $('#markerType').val(),
-        position: newCoord,
-        title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
-    };
-    $.ajax({
-        type: "POST",
-        url: '@routes.Maps.addMarker()',
-        data: body,
-        success : function(data) {
-
-        // Cal something to then go update the maps for everyone
-        /*insertMagicalFunctionHere();*/
-
-        /* Reset the form fields */
-        document.getElementById('markerForm').positionStuff.value = "";
-        document.getElementById('markerForm').additionalInformation.value = "";
-        console.log(data);
-    },
-    error : function(data) {
-        console.log(data);
-    }
-})
-});
 
 /*
 /!*

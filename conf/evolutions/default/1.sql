@@ -20,6 +20,7 @@ create table map_marker (
   icon                      varchar(255),
   latitude                  double,
   longitude                 double,
+  position                  varchar(255),
   time                      datetime,
   round_id                  bigint,
   user_id                   integer,

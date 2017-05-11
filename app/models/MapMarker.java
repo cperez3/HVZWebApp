@@ -21,6 +21,7 @@ public class MapMarker extends Model {
   public String icon;
   public double latitude;
   public double longitude;
+  public String position;
   public DateTime time;
   @ManyToOne
   public Round round;
@@ -37,6 +38,16 @@ public class MapMarker extends Model {
     this.icon = icon;
     this.latitude = latitude;
     this.longitude = longitude;
+    this.user = user;
+    this.round = user.currentRound;
+    this.time = DateTime.now();
+    this.save();
+  }
+
+  public MapMarker(String title, String icon, String position, User user) {
+    this.title = title;
+    this.icon = icon;
+    this.position = position;
     this.user = user;
     this.round = user.currentRound;
     this.time = DateTime.now();

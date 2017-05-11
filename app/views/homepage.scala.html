@@ -425,7 +425,7 @@
                     console.log("Join Error");
                     document.getElementById('no-game-message').style.borderColor = "red";
                     document.getElementById('no-game-message').style.display= 'block';
-                },
+                }
             });
 
 
@@ -457,12 +457,12 @@
                 alertsList += "<div class='alert main'><p>" + message + "</p><span>" + time + "</span></div>";
             }
           }
-          $('#modAlerts').empty()
+          $('#modAlerts').empty();
           $('#modAlerts').append(alertsList);
 
           console.log(round);
           var event = round['nextEvent'];
-            $('#nextMission').empty()
+            $('#nextMission').empty();
           if (event != null) {
               var eventDate = new Date(event.startTime * 1000);
               var eventMinuteText = "" + eventDate.getMinutes();
@@ -510,7 +510,7 @@
               var eventSection = "<div class='eventitem'>" +
                                   "<p class='event'>" + title + "</p>" +
                                   "<p class='eventinfo'>" + timeText + "<br>" +
-                                  locationText + "</p> </div>"
+                                  locationText + "</p> </div>";
 
               switch (startTime.getDay()){
                   case 0: $('#monday').append(eventSection);
@@ -724,15 +724,35 @@
                 var infowindow = new google.maps.InfoWindow({
                     content: "Hello"
                 });
+
+
                 var marker = new google.maps.Marker({
                     position: ithaca,
                     map: map,
                     icon: icons['other'].icon,
                     title: 'Position of entire Round'
                 });
+
                 marker.addListener('click', function () {
                     infowindow.open(map, marker);
                 });
+
+                $.ajax({
+                    type: "GET",
+                    url: "@routes.Maps.getMarkers",
+                    success : function(data) {
+                        console.log(data);
+                        allMarkers = data;
+                        loadMarkers();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Marker Alert Error");
+                        document.getElementById('no-game-message').style.borderColor = "red";
+                        document.getElementById('no-game-message').style.display= 'block';
+                    }
+                });
+
+
                 google.maps.event.addListener(map, 'click', function (e) {
                     updateCoordinates(e.latLng);
                 });
@@ -761,18 +781,77 @@
             google.maps.event.trigger(map, 'resize');
             document.getElementById('markerForm').positionStuff.value = "";
             document.getElementById('markerForm').additionalInformation.value = "";
+
+            console.log("Map Marker Submit");
+            var body = {
+                icon: $('#markerType').val(),
+                position: newCoord,
+                title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
+            };
+
+
+            console.log("Send Body: ");
+            console.log(body);
+
+            @*$.ajax({*@
+                @*type: "PUT",*@
+                @*url: '@routes.Maps.addMarker()',*@
+                @*accept: "application/json",*@
+                @*contentType: "application/json",*@
+                @*dataType: 'json',*@
+                @*data: body,*@
+                @*success: function(data) {*@
+                    @*console.log("Map Marker Submit success");*@
+                    @*// Cal something to then go update the maps for everyone*@
+                    @*/*insertMagicalFunctionHere();*/*@
+
+                    @*/* Reset the form fields */*@
+                    @*document.getElementById('markerForm').positionStuff.value = "";*@
+                    @*document.getElementById('markerForm').additionalInformation.value = "";*@
+                    @*console.log(data);*@
+                @*},*@
+                @*error : function(data) {*@
+                    @*console.log(data);*@
+                @*}*@
+            @*});*@
         }
 
         /* Update form field with new position */
         function updateCoordinates(pnt){
-            var lat = pnt.lat();
-            lat = lat.toFixed(4);
-            var lng = pnt.lng();
-            lng = lng.toFixed(4);
-            newCoord=pnt;
+            newCoord= pnt;
             $('input[name="positionStuff"]').val(pnt);
         }
 
+
+        var loadMarkers = function() {
+
+            /* Loop through the accepted JSON list, configure each marker -> put on map */
+            for (i in allMarkers) {
+
+                /* Creates map */
+                console.log("marker: ");
+                console.log(allMarkers[i]['position']);
+                var marker = new google.maps.Marker({
+                    position: allMarkers[i].position, /*Needs to be the JSON object of lat,long*/
+                    map: map, /*Does not change */
+                    icon: icons[allMarkers[i]['icon']].icon, /*May need to change the name "icon" to something else*/
+                    title: allMarkers[i]['title'] /* Needs to be pulled from JSON*/
+                });
+
+                /* Gives map content */
+                var infowindow = new google.maps.InfoWindow({
+                    content: allMarkers[i].content /*Needs to be added to the JSON object/captured from form*/
+                });
+
+                /* Adds marker to map */
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            /* Update the map after all markers have been added */
+            google.maps.event.trigger(map, 'resize');
+        }
     </script>
     <!-- Schedule -->
     <script>
@@ -791,36 +870,6 @@
                    $('#scheduleCreation').fadeToggle();
                }
             });
-
-
-
-            var loadMarkers = function() {
-
-                /* Loop through the accepted JSON list, configure each marker -> put on map */
-                for (i in allMarkers) {
-
-                    /* Creates map */
-                    var marker = new google.maps.Marker({
-                        position: allMarkers[i].position, /*Needs to be the JSON object of lat,long*/
-                        map: map, /*Does not change */
-                        icon: icons[allMarkers[i].iconImage].icon, /*May need to change the name "icon" to something else*/
-                        title: allMarkers[i].title /* Needs to be pulled from JSON*/
-                    });
-
-                    /* Gives map content */
-                    var infowindow = new google.maps.InfoWindow({
-                        content: allMarkers[i].content /*Needs to be added to the JSON object/captured from form*/
-                    });
-
-                    /* Adds marker to map */
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                }
-
-                /* Update the map after all markers have been added */
-                google.maps.event.trigger(map, 'resize');
-            };
 
 
             // Close round creation form
