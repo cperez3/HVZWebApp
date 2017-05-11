@@ -68,4 +68,27 @@ public class Messages extends Controller {
     }
     return ok(Json.toJson(messagesJson));
   }
+
+  public static Result sendModAlert() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
+    if (!user.isMod) {
+      return forbidden("Must have mode privileges");
+    }
+
+    DynamicForm form = Form.form().bindFromRequest();
+
+    String messageText = form.get("message");
+    if (messageText.isEmpty()) {
+      return badRequest("Message must have content.");
+    }
+
+    Message message = new Message(messageText, user);
+    message.messageType = Message.MessageType.MOD_ALERT;
+    message.save();
+
+    return getModAlerts();
+  }
 }

@@ -13,6 +13,7 @@ POST /messages/ controllers.Messages.sendMessage()
 GET /messages/ controllers.Messages.getMessages()
 
 GET /alerts/ controllers.Messages.getModAlerts()
+PUT /alerts/ controllers.Messages.sendModAlert()
 
 POST /events/ controllers.Rounds.addEvent()
 

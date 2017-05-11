@@ -45,7 +45,7 @@
         <div class="input-group">
             <input id="newAlert" type="text" class="form-control" placeholder="Enter message" style="height:57px;font-size:28px;border-radius:0;">
             <span class="input-group-btn">
-                <button class="btn btn-secondary" style="border-radius:0;background-color:#283142;color:white;border-style:solid;border-color:white;border-width:1px;" type="button">Send</button>
+                <button id="button-send-alert" class="btn btn-secondary" style="border-radius:0;background-color:#283142;color:white;border-style:solid;border-color:white;border-width:1px;" type="button">Send</button>
             </span>
         </div>
     </div>
@@ -426,17 +426,22 @@
 
         var loadAlerts = function() {
           var alertsList = "";
-          for (i in modAlerts) {
+          for (var i = 0; i < modAlerts.length && i < 5; i++) {
             var message = modAlerts[i].message;
-            var date = new Date(modAlerts[i].time * 1000);
+            var date = new Date(modAlerts[i]['time'] * 1000);
             var month = date.getMonth();
             var day = date.getDay();
             var hour = date.getHours();
             var minute = date.getMinutes();
-            var time = month + "/" + day + " " + hour + ":" + minute + "am";
+            var minuteText = "" + minute;
+            if (minute < 10) {
+              minuteText = "0" + minute;
+            }
+            if (hour === 0) hour = 12;
+            var time = month + "/" + day + " " + hour + ":" + minuteText + "am";
             if (hour > 12) {
               hour -= 12;
-              time = month + "/" + day + " " + hour + ":" + minute + "pm";
+              time = month + "/" + day + " " + hour + ":" + minuteText + "pm";
             }
 
             if (i > 0) {
@@ -453,12 +458,13 @@
             $('#nextMission').empty()
           if (event != null) {
               var eventDate = new Date(event.startTime * 1000);
-              var eventTime = eventDate.getHours() + ":" + eventDate.getMinutes() + "am";
+              var eventMinuteText = "" + eventDate.getMinutes();
+              if (minute < 10) {
+                  eventMinuteText = "0" + eventDate.getMinutes();
+              }
+              var eventTime = eventDate.getHours() + ":" + eventMinuteText + "am";
               if (eventDate.getHours() > 12) {
-                  eventTime = eventDate.getHours() - 12 + ":" + eventDate.getMinutes() + "pm";
-                  if (eventDate.getMinutes() < 10) {
-                      eventTime = eventDate.getHours() - 12 + ":0" + eventDate.getMinutes() + "pm";
-                  }
+                  eventTime = eventDate.getHours() - 12 + ":" + eventMinuteText + "pm";
               }
               var location = event['humanLocation'];
               if (user['team'] === 'ZOMBIE') {
@@ -471,6 +477,10 @@
 
               $('#nextMission').append(eventSection);
           }
+        }
+
+        var loadSchedule = function() {
+          var schedule = round['schedule'];
         }
     </script>
     <!-- Map -->
@@ -718,5 +728,28 @@
                 $('#scheduleCreation').fadeToggle();
                 $('.schedulebox').css('opacity',1);
             });
+
+
+            $('#button-send-alert').click(function() {
+              body = {message: $('#newAlert').val()}
+                $.ajax({
+                    type: "PUT",
+                    url: @routes.Messages.sendModAlert(),
+                    data: body,
+                    success: function ( data ) {
+                        console.log("Login Success");
+                        console.log(data);
+                        modAlerts = data;
+                        loadAlerts();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Invalid Login");
+                        console.log(errorThrown);
+
+                        $("#no-user-message").slideDown();
+                    }
+                });
+            });
+
     </script>
 }
