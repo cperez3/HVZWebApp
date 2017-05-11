@@ -1,6 +1,9 @@
 package controllers;
 
+import models.Event;
+import models.Message;
 import models.User;
+import org.joda.time.DateTime;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -28,6 +31,7 @@ public class Users extends Controller {
   }
 
   public static Result login() {
+    session().clear();
     System.out.println("Login Called");
     DynamicForm form = Form.form().bindFromRequest();
     String email = form.get("email");
@@ -52,10 +56,28 @@ public class Users extends Controller {
       session("is_active", Boolean.toString(user.isActive));
       session("gCode", user.currentRound.gameCode);
     }
-    response().setHeader("Content-Type", "text/json");
+
+    /*Message message = new Message("MOD ALERT 1", user);
+    message.messageType = Message.MessageType.MOD_ALERT;
+    message.save();
+    Message message2 = new Message("MOD ALERT 2", user);
+    message2.messageType = Message.MessageType.MOD_ALERT;
+    message2.save();*/
+    /*new Event(user.currentRound, "My Event", DateTime.now(), DateTime.now().plusHours(1), "Human Location", "Zombie Location");
+    new Event(user.currentRound, "My Event2", DateTime.now().plusHours(1), DateTime.now().plusHours(2), "Human Location", "Zombie Location");
+    new Event(user.currentRound, "My Event3", DateTime.now().plusHours(2), DateTime.now().plusHours(3), "Human Location", "Zombie Location");*/
+
     return ok(user.toJson());
 //    return noContent();
 //    return GamePage.loadPage();
+  }
+
+  public static Result getProfile() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
+    return ok(user.toJson());
   }
 
   public static Result changeTeam() {

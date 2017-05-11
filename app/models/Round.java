@@ -84,6 +84,18 @@ public class Round extends Model {
     return stringBuilder.toString();
   }
 
+  public int getNumHumans() {
+    return User.find.where().eq("currentRound", this)
+        .eq("team", User.Team.HUMAN)
+        .findRowCount();
+  }
+
+  public int getNumZombies() {
+    return User.find.where().eq("currentRound", this)
+        .eq("team", User.Team.ZOMBIE)
+        .findRowCount();
+  }
+
   public ObjectNode toJson() {
     ObjectNode objectNode = Json.newObject();
     objectNode.put("id", id);
@@ -93,11 +105,12 @@ public class Round extends Model {
     objectNode.put("roundRules", roundRules);
     objectNode.put("gameRules", gameRules);
     objectNode.put("contactInfo", contactInfo);
-
     objectNode.put("schedule", getScheduleAsJson());
     if (schedule.size() > 0) {
       objectNode.put("nextEvent", schedule.get(0).toJson());
     }
+    objectNode.put("numHumans", getNumHumans());
+    objectNode.put("numZombies", getNumZombies());
 
     return objectNode;
   }

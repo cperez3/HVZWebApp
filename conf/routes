@@ -16,11 +16,15 @@ GET /alerts/ controllers.Messages.getModAlerts()
 
 POST /events/ controllers.Rounds.addEvent()
 
+GET /roundHome/  controllers.Rounds.roundPage()
+
+GET /round/  controllers.Rounds.getRound()
 POST /round/  controllers.Rounds.createRound()
 PUT /round/ controllers.Rounds.joinRound()
 
 PUT /team/ controllers.Users.changeTeam()
 
+GET     /user/ controllers.Users.getProfile()
 DELETE /user/round/ controllers.Users.leaveRound()
 
 

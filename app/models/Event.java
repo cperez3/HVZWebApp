@@ -48,6 +48,6 @@ public class Event extends  Model{
     objectNode.put("endTime", endTime.getMillis());
     objectNode.put("humanLocation", humanLocation);
     objectNode.put("zombieLocation", zombieLocation);
-    return null;
+    return objectNode;
   }
 }

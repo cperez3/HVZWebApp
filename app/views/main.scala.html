@@ -34,7 +34,7 @@
                     <li><a onclick="switchScreen('chat')">Messaging <span class="icon"></span></a></li>
                     <li><a onclick="switchScreen('rules')">Rules <span class="icon"></span></a></li>
                     <li><a onclick="switchScreen('contacts')">Contacts <span class="icon"></span></a></li>
-                    <button class="btn leaveround"><a onclick="#">Leave Round </a></button>
+                    <button class="btn leaveround">Leave Round</button>
 
                 </ul>
             </nav>
@@ -50,11 +50,11 @@
                 <!-- Human & Zombie Score -->
             <div class="">
                 <div class="col-sm-6 score human activeType">
-                    <span class="count humanCount">@humanCount</span><br>
+                    <span id="humanCount" class="count humanCount">@humanCount</span><br>
                     <span class="countType">Humans</span>
                 </div>
                 <div class="col-sm-6 score zombie">
-                    <span class="count zombieCount">@zombieCount</span><br>
+                    <span id="zombieCount" class="count zombieCount">@zombieCount</span><br>
                     <span class="countType">Zombies</span>
                 </div>
             </div>
@@ -79,15 +79,58 @@
     </script>
     <script>
         $('.humanBtn').click(function(){
-            $('.humanBtn').text("BRAINZ?");
-            $('.human').toggleClass('activeType', false);
-            $('.zombie').toggleClass('activeType', true);
-            //$('.humanBtn').toggleClass('zombieBtn',true);
-            $('.humanCount').text('5');
-            $('.zombieCount').text('18');
-            var audio = document.getElementById("audio");
-            audio.play()
+            $.ajax({
+                type: "PUT",
+                url: @routes.Users.changeTeam(),
+                success : function(data) {
+                    console.log(data);
+                    $('.humanBtn').text("BRAINZ?");
+                    $('.human').toggleClass('activeType', false);
+                    $('.zombie').toggleClass('activeType', true);
+                    //$('.humanBtn').toggleClass('zombieBtn',true);
+                    loadNumbers();
+                    var audio = document.getElementById("audio");
+                    audio.play()
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Mod Alerts Error");
+                    document.getElementById('no-game-message').style.borderColor = "red";
+                    document.getElementById('no-game-message').style.display= 'block';
+                }
+            });
         });
+
+        $('.leaveround').click(function() {
+            $.ajax({
+                type: "DELETE",
+                url: "@routes.Users.leaveRound()",
+                data: {},
+                success : function(data) {
+                    console.log(data);
+                    window.location.href="@routes.Home.loadHome()";
+                },
+                error : function(data) {
+                    console.log(data);
+                }
+            })
+        })
+
+        var loadNumbers = function () {
+            $.ajax({
+                type: "GET",
+                url: @routes.Rounds.getRound,
+                success : function(data) {
+                    console.log(data);
+                    round = data;
+                    $('#humanCount').text(round['numHumans']);
+                    $('#zombieCount').text(round['numZombies']);
+                },
+                error : function(data) {
+                    console.log(data);
+                }
+            })
+        }
+        loadNumbers();
     </script>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 </html>

@@ -65,9 +65,12 @@ public class User extends Model {
     node.put("name", name);
     node.put("email", email);
     if (currentRound != null) {
+      node.put("currentRound", currentRound.id);
       node.put("isMod", isMod);
       node.put("isActive", isActive);
       node.put("team", team.toString());
+    } else  {
+      node.put("currentRound", Json.toJson(null));
     }
     return node;
   }

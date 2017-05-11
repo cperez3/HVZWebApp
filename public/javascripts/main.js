@@ -1,5 +1,8 @@
 // Global Variables
 var activeScreen= "#homeScreen";
+var round;
+var modAlerts;
+var user;
 
 /******************** GLOBAL FUNCTIONS ********************/
 

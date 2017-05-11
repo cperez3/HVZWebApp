@@ -10,6 +10,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
+import views.html.homepage;
 
 /**
  * Created by Chris on 5/10/2017.
@@ -99,5 +100,9 @@ public class Rounds extends Controller {
       return Results.unauthorized("Must be logged in.");
     }
     return ok(user.currentRound.getScheduleAsJson());
+  }
+
+  public static Result roundPage() {
+    return ok(homepage.render());
   }
 }

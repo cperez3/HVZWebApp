@@ -185,8 +185,6 @@
       var email= $('#email').val();
       var password= $('#password').val();
 
-      @*var listAction = #{jsAction @routes.Users.login()}*@
-
       var body = {
         "email": email,
         "password": password
@@ -199,7 +197,12 @@
         success: function ( data ) {
           console.log("Login Success");
           console.log(data);
-          window.location.href=@routes.GamePage.loadPage();
+          user = data;
+          if (data.currentRound !== null) {
+            window.location.href=@routes.Rounds.roundPage();
+          } else {
+            window.location.href=@routes.GamePage.loadPage();
+          }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           console.log("Invalid Login");
