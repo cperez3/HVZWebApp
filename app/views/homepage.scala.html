@@ -42,6 +42,12 @@
             <span>4/25 11:45pm</span>
           </div>
         </div>
+        <div class="input-group">
+            <input id="newAlert" type="text" class="form-control" placeholder="Enter message" style="height:57px;font-size:28px;border-radius:0;">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" style="border-radius:0;background-color:#283142;color:white;border-style:solid;border-color:white;border-width:1px;" type="button">Send</button>
+            </span>
+        </div>
     </div>
     <div id="nextMission" class="nextMission">
       <h2>Next Mission: <span>Foul Play</span></h2>
@@ -141,7 +147,7 @@
                                 Textor</p>
                         </div>
                     </div>
-                    <img class="addScheduleBtn" onclick="" src="@routes.Assets.at("images/addEvent.png")">
+                    <img class="addScheduleBtn" src="@routes.Assets.at("images/addEvent.png")">
                 </div>
 
                 <div class="day">
@@ -197,6 +203,77 @@
             </div>
 
         </div>
+        <div id="scheduleCreation">
+            <a href="#" class="cancel">&times;</a>
+            <form class="form-horizontal">
+                <fieldset>
+
+                        <!-- Form Name -->
+                    <legend class="text-center"><h2>Create a new schedule item</h2></legend>
+
+                        <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="scheduleType">Select Type</label>
+                        <div class="col-md-4">
+                            <select id="scheduleType" name="scheduleType" class="form-control">
+                                <option value="1">Event</option>
+                                <option value="2">Mission</option>
+                                <option value="3">End Game</option>
+                            </select>
+                        </div>
+                    </div>
+                        <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="daysSelect">Select Day</label>
+                        <div class="col-md-4">
+                            <select id="daysSelect" name="scheduleType" class="form-control">
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                                <option value="7">Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="startTime">Start Time</label>
+                        <div class="col-md-4">
+                            <input id="startTime" name="startTime" type="text" placeholder="ex. 5:00pm" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="endTime">End Time</label>
+                        <div class="col-md-4">
+                            <input id="endTime" name="endTime" type="text" placeholder="ex. 5:30pm" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="locEvent">Location</label>
+                        <div class="col-md-4">
+                            <input id="locEvent" name="locEvent" type="text" placeholder="The flagpole" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Button -->
+                    <div class="form-group text-center">
+                        <div class="col-md-4">
+                            <button id="submitEvent" name="submitEvent" class="btn btn-primary btn-lg green">Create Schedule Item</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
     </section>
     <!-- Map -->
     <section id="mapScreen" style="display:none">
@@ -221,13 +298,13 @@
                       <div class="form-group">
                           <label class="col-md-4 control-label" for="positionStuff">Coordinates</label>
                           <div class="col-md-4">
-                              <input class="form-control" id="giveCoordinates" name="positionStuff">
+                              <input class="form-control" id="giveCoordinates" name="positionStuff" placeholder="Click on map to select a location">
                           </div>
                       </div>
                       <div class="form-group">
                           <label class="col-md-4 control-label" for="additionalInformation">Additional Information</label>
                           <div class="col-md-4">
-                              <textarea class="form-control" id="additionalInformation" name="additionalInformation"></textarea>
+                              <input class="form-control" id="additionalInformation" name="additionalInformation"></input>
                           </div>
                       </div>
                   </fieldset>
@@ -239,6 +316,35 @@
     <!-- Chat -->
     <section id="chatScreen" style="display:none">
         <div class="sectionTitle">Chat</div>
+        <div class="chatArea" style="color:white;">
+            <div class="otherMessage">
+                <div>
+                    <p class="userSection pull-left">Chris</p>
+                    <p class="timeSection pull-right">12:15am</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div>
+                    <p class="userMessage">
+                        I really hate coding late at night. It's when the zombies attack and I die a lot.
+                    </p>
+                </div>
+            </div>
+            <div class="personalMessage">
+                <div>
+                    <p class="timeSection pull-right">12:15am</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div>
+                    <p class="userMessage">
+                        Same Chris. Same.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="newMessageBox">
+            <input class="messageInput" type="text" placeholder="Enter message">
+            <button class="btn btn-primary messageBtn">Send</button>
+        </div>
     </section>
     <!-- Rules -->
     <section id="rulesScreen" style="display:none">
@@ -588,5 +694,29 @@
             $('input[name="positionStuff"]').val(pnt);
         }
 
+    </script>
+    <!-- Schedule -->
+    <script>
+            // Pull round creation form
+            $('.addScheduleBtn').click(function(){
+                $('#scheduleCreation').fadeToggle();
+                $('.schedulebox').css('opacity',.2);
+            });
+            /* On submit, reset opacity of screen */
+            $('#submitEvent').click(function(){
+               $('.schedulebox').css('opacity',1);
+            });
+            $('#nav-expander').click(function(){
+               if($('.schedulebox').css('opacity')==.2){
+                   $('.schedulebox').css('opacity',1);
+                   $('#scheduleCreation').fadeToggle();
+               }
+            });
+
+            // Close round creation form
+            $('.cancel').click(function(){
+                $('#scheduleCreation').fadeToggle();
+                $('.schedulebox').css('opacity',1);
+            });
     </script>
 }

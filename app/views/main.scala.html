@@ -14,6 +14,9 @@
         <link href="@routes.Assets.at("stylesheets/nav.css")" rel="stylesheet">
         <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
 
+        <!-- Jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
@@ -27,14 +30,14 @@
 
                         <!--Include your navigation here-->
                     <li class="text-right"><a href="#" id="nav-close">X</a></li>
-                    <li><a onclick="switchScreen('home')">Home <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('round')">Round Info <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('schedule')">Schedule <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('map');">Map <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('chat')">Messaging <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('rules')">Rules <span class="icon"></span></a></li>
-                    <li><a onclick="switchScreen('contacts')">Contacts <span class="icon"></span></a></li>
-                    <button class="btn leaveround">Leave Round</button>
+                    <li><a onclick="switchScreen('home')">Home </a></li>
+                    <li><a onclick="switchScreen('round')">Round Info </a></li>
+                    <li><a onclick="switchScreen('schedule')">Schedule </a></li>
+                    <li><a onclick="switchScreen('map');">Map </a></li>
+                    <li><a onclick="switchScreen('chat')">Messaging </a></li>
+                    <li><a onclick="switchScreen('rules')">Rules </a></li>
+                    <li><a onclick="switchScreen('contacts')">Contacts </a></li>
+                    <button class="btn leaveround"><a>Leave Round </a></button>
 
                 </ul>
             </nav>
@@ -67,7 +70,6 @@
     </body>
 
     <!-- Scripts -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="@routes.Assets.at("javascripts/navgoco.js")"></script>
     <script src="@routes.Assets.at("javascripts/navigation.js")"></script>
@@ -132,5 +134,26 @@
         }
         loadNumbers();
     </script>
+    <!-- Script for TextArea and Displaying the data -->
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>
+            function htmlDecode(input){
+                var e = document.createElement('div');
+                e.innerHTML = input;
+                return e.childNodes[0].nodeValue;
+            }
+            function displayRichText(divID,rawData){
+                var newContent = htmlDecode(rawData);
+                $(divID).html(newContent);
+            }
+            /*var newContent = htmlDecode(document.getElementById("contentSection").innerHTML);
+            document.getElementById("contentSection").innerHTML = newContent;*/
+    </script>
+    <style>
+            .mce-branding-powered-by{
+                display:none;
+            }
+    </style>
     <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 </html>

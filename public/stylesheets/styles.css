@@ -39,17 +39,31 @@ h1{
     font-weight:bold;
     font-size:40px;
 }
+.fa-lg{
+    font-size:2em;
+    line-height: .5em;
+}
+.navbar-brand{
+    padding-top:6px;
+    font-size:35px;
+    line-height:35px;
+
+}
 
 /* Round Creation */
+.modal-body{
+    padding-bottom:0;
+}
 #roundCreation {
     height:100%;
     width:100%;
     margin:0 auto;
-    position:relative;
+    position:absolute;
     z-index:5000;
     display:none;
     background-color:#283142;
     color:white;
+    top:0;
 }
 #roundCreation h2{
     color:white;
@@ -58,6 +72,7 @@ h1{
 #roundCreation form {
     padding-left:15px;
     padding-right:15px;
+    background-color:#283142;
 }
 .textLabel{
     font-size:20px;
@@ -93,6 +108,12 @@ h1{
     width:100%;
     padding:10px;
 }
+.leaveround a{
+    font-size:35px;
+}
+.leaveround a:hover, .leaveround a:active, .leaveround a:focus{
+    background-color:#676767;
+}
 
 /* Homepage */
 .modAlerts{
@@ -119,6 +140,14 @@ h1{
     background-color:#283142;
     margin-left:15px;
     margin-right:15px;
+}
+.newModAlertBox{
+    background-color:#334255;
+    width:100%;
+}
+.btn-secondary{
+    font-size:30px;
+    color:white;
 }
 .zombieBtn{
     background-color: green !important;
@@ -256,7 +285,7 @@ h1{
 }*/
 
 .eventinfo{
-    font-size:24px;
+    font-size:28px;
 }
 .events{
     background-color:#283142;
@@ -280,8 +309,6 @@ h1{
     color: #bebebe;
     font-style:italic;
 }
-
-
 .schedulebox{
     background-color:#334255;
     border-width:2px;
@@ -334,6 +361,29 @@ h1{
     right: 15px;
 }
 
+#scheduleCreation {
+    width:75%;
+    margin:0 auto;
+    position:absolute;
+    z-index:5000;
+    display:none;
+    background-color:#283142;
+    color:white;
+    top:25%;
+    left:12%;
+    border-style: solid;
+    border-color: #fafafb;
+}
+#scheduleCreation h2{
+    color:white;
+    line-height:1.42857143;
+}
+#scheduleCreation form {
+    padding-left:15px;
+    padding-right:15px;
+    background-color:#283142;
+}
+
 /* Map Page */
 #mapScreen{
     height:100%;
@@ -368,6 +418,140 @@ h1{
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+}
+/* Messagign */
+.chatArea{
+    margin:auto 10px;
+}
+.otherMessage
+{
+    position: relative;
+    width: 90%;
+    min-height: 120px;
+    padding: 0px;
+    background: #e94103;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: #bc3605 solid 4px;
+    margin-top:25px;
+}
+
+.otherMessage:after
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #e94103 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 18%;
+}
+
+.otherMessage:before
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 18px 18px 0;
+    border-color: #bc3605 transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    bottom: -20px;
+    left: 17.7%;
+}
+.personalMessage
+{
+    position: relative;
+    width: 90%;
+    min-height: 120px;
+    padding: 0px;
+    background: #0085FF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: #005D84 solid 4px;
+    margin-top:25px;
+    left:9.7%;
+}
+
+.personalMessage:after
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #0085FF transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    margin-left: -15px;
+    bottom: -15px;
+    left: 82%;
+}
+
+.personalMessage:before
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 18px 18px 0;
+    border-color: #005D84 transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    margin-left: -18px;
+    bottom: -20px;
+    left: 82%;
+}
+.userSection{
+    font-size:30px;
+    font-weight:bold;
+    margin-left: 10px;
+}
+.timeSection{
+    font-style:italic;
+    font-size:22px;
+    margin-right:10px;
+    margin-top:3px;
+}
+.userMessage{
+    font-size:28px;
+    padding:10px;
+}
+.newMessageBox{
+    position:absolute;
+    bottom:0;
+    background-color:#334255;
+    width:100%;
+}
+.messageInput{
+    width:70%;
+    height:75px;
+    position:absolute;
+    bottom:0;
+    padding:5px;
+}
+.messageBtn{
+    border-radius:0;
+    margin:0;
+    height:75px;
+    width:30%;
+    background-color: #334255;
+    border-style:none;
+    position:absolute;
+    bottom:0;
+    right:0;
+    font-size:32px;
+}
+.messageBtn:hover, .messageBtn:active, .messageBtn:focus{
+    text-decoration:none;
+    background-color:#334255;
+    border-style: none;
 }
 /* Contact */
 .contactInfo{
@@ -423,12 +607,34 @@ h1{
        MOBILE STYLE
 **************************
  */
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 875px) {
     .score {
         margin-top: 40px;
     }
     .contact{
         margin-top: 35%;
+    }
+    .modal-content{
+        margin: 18% auto;
+    }
+    #newalert .form-control{
+        height:55px !important;
+        font-size:28px !important;
+        border-radius:0 !important;
+    }
+    #scheduleCreation .form-control{
+        height:55px;
+        font-size:28px;
+    }
+    #scheduleCreation .control-label{
+        font-size:32px;
+    }
+    #scheduleCreation .btn-lg{
+        font-size: 30px;
+    }
+    #scheduleCreation .cancel{
+        top: -10px;
+        font-size: 50px;
     }
 }
 /*
@@ -450,12 +656,15 @@ h1{
     background-color: #192635;
 }
 
+#no-game-message{
+    font-size:18px;
+}
+
 .error-msg{
     color: red;
     display: none;
     text-align: center;
-    font-size: 90%;
-    margin-top: .5em;
+    font-size: 18px;
 }
 
 .message{

@@ -24,7 +24,7 @@
   </head>
   <body>
       <!--login modal-->
-    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="loginModal" class="modal show bgStuff" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -86,7 +86,7 @@
             <!-- end of delete account modal -->
 
           <div class="modal-footer">
-            <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Round Code Please Try Again.</div>
+            <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Round Code</div>
           </div>
         </div>
       </div>
@@ -163,6 +163,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
       <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+
+    <style>
+    .bgStuff {
+      background: url("/assets/images/background.jpg") no-repeat center center fixed;
+    }
+    </style>
 
       <script>
         // Pull round creation form
@@ -245,5 +251,12 @@
             window.location.href=@routes.GamePage.deactivateAccount();
           });
     </script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <style>
+            .mce-branding-powered-by{
+              display:none;
+            }
+    </style>
   </body>
 </html>
