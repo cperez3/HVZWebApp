@@ -58,8 +58,30 @@ public class Users extends Controller {
 //    return GamePage.loadPage();
   }
 
-  public User getUserFromRequest() {
-    return null;
+  public static Result changeTeam() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
+
+    if (user.team == User.Team.HUMAN) {
+      user.team = User.Team.ZOMBIE;
+    }
+    user.save();
+    return noContent();
+  }
+
+  public static Result leaveRound() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
+
+    user.currentRound = null;
+    user.team = User.Team.NONPLAYING;
+    user.isMod = false;
+    user.save();
+    return noContent();
   }
 }
 

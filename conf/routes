@@ -19,6 +19,9 @@ POST /events/ controllers.Rounds.addEvent()
 POST /round/  controllers.Rounds.createRound()
 PUT /round/ controllers.Rounds.joinRound()
 
+PUT /team/ controllers.Users.changeTeam()
+
+DELETE /user/round/ controllers.Users.leaveRound()
 
 
 GET     /javascriptRoutes     controllers.Application.javascriptRoutes
