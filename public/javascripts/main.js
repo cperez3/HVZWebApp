@@ -3,6 +3,7 @@ var activeScreen= "#homeScreen";
 var round;
 var modAlerts;
 var user;
+var allMarkers;
 
 /******************** GLOBAL FUNCTIONS ********************/
 
@@ -18,12 +19,59 @@ function switchScreen(screen) {
             activeScreen = newScreen;
             $(activeScreen).fadeIn(400, "linear");
             if(screen=="map"){
-                initMap();}
+                initMap();
+                $.ajax({
+                    type: "GET",
+                    url: '@routes.Maps.getMarkers',
+                    success : function(data) {
+                    console.log(data);
+                    allMarkers = data;
+                    loadMarkers();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Marker Alert Error");
+                    document.getElementById('no-game-message').style.borderColor = "red";
+                    document.getElementById('no-game-message').style.display= 'block';
+                }
+            });
+            }
         });
     }
 
 }
 
+/* Submit Marker on Map */
+$("#markerForm").on('submit', function (e) {
+    e.preventDefault();
+
+    var body = {
+        title: $('#title').val(),
+        iconImage: $('#markerType').val(),
+        position: newCoord,
+        title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
+    };
+    $.ajax({
+        type: "POST",
+        url: '@routes.Maps.addMarker()',
+        data: body,
+        success : function(data) {
+
+        // Cal something to then go update the maps for everyone
+        /*insertMagicalFunctionHere();*/
+
+        /* Reset the form fields */
+        document.getElementById('markerForm').positionStuff.value = "";
+        document.getElementById('markerForm').additionalInformation.value = "";
+        console.log(data);
+    },
+    error : function(data) {
+        console.log(data);
+    }
+})
+});
+
+/*
+/!*
 // Add Marker to map
 function addMarker(mapID, form){
     var mymap = document.getElementById(mapID)
@@ -38,8 +86,9 @@ function addMarker(mapID, form){
         title: 'Hello World!'
     });
 
+*!/
 
-    /*'<div id="content">'+
+    /!*'<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
         '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
@@ -59,7 +108,7 @@ function addMarker(mapID, form){
         '(last visited June 22, 2009).</p>'+
         '</div>'+
         '</div>';
-       */
+       *!/
 
     var infowindow2 = new google.maps.InfoWindow({
         content: contentString
@@ -74,4 +123,4 @@ function addMarker(mapID, form){
         infowindow2.open(map, marker2);
     });
 
-}
+}*/
