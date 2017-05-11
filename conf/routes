@@ -9,6 +9,17 @@ GET     /                           controllers.Home.loadHome()
 POST /signup/ controllers.Users.createAccount()
 POST /login/ controllers.Users.login()
 
+POST /messages/ controllers.Messages.sendMessage()
+GET /messages/ controllers.Messages.getMessages()
+
+GET /alerts/ controllers.Messages.getModAlerts()
+
+POST /events/ controllers.Rounds.addEvent()
+
+POST /round/  controllers.Rounds.createRound()
+PUT /round/ controllers.Rounds.joinRound()
+
+
 
 GET     /javascriptRoutes     controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
@@ -49,7 +60,6 @@ GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
 #POST /createGame/  controllers.GamePage.createRound(userId:Long)
-POST /createRound/  controllers.Rounds.createRound()
 
 GET /endGame/  controllers.GamePage.endGame()
 

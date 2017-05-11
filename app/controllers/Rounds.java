@@ -3,6 +3,7 @@ package controllers;
 import models.Event;
 import models.Round;
 import models.User;
+import org.joda.time.DateTime;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -39,16 +40,30 @@ public class Rounds extends Controller {
     round.save();
     user.save();
 
-    return ok();
-//    return ok(round.toJson());
+    return ok(round.toJson());
+  }
 
-    /*
-    //Creating a User?
-    Form<User> userForm = Form.form(User.class);
-    User user = userForm.bindFromRequest().get();
-    user.save();*/
+  public static Result joinRound() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
 
+    DynamicForm form = Form.form().bindFromRequest();
+    String roundCode = form.get("code");
+    Round round = Round.findByCode(roundCode);
+    if (round == null) {
+      return badRequest("Invalid round code.");
+    }
 
+    round.players.add(user);
+    user.currentRound = round;
+    user.isActive = true;
+    user.team = User.Team.HUMAN;
+    user.isMod = false;
+    user.save();
+    round.save();
+    return ok(round.toJson());
   }
 
   public static Result getRound() {
@@ -67,13 +82,22 @@ public class Rounds extends Controller {
     if (!user.isMod) {
       return forbidden("Must be a moderator to add an event to the schedule.");
     }
-    Form<Event> eventForm = Form.form(Event.class);
-    Event event = eventForm.bindFromRequest().get();
-    event.save();
-    return ok(Json.toJson(event));
+
+    DynamicForm form = Form.form().bindFromRequest();
+    String title = form.get("title");
+    DateTime startTime = new DateTime(Long.parseLong(form.get("startTime")));
+    DateTime endTime = new DateTime(Long.parseLong(form.get("endTime")));
+    String humanLocation = form.get("humanLocation");
+    String zombieLocation = form.get("zombieLocation");
+    new Event(user.currentRound, title, startTime, endTime, humanLocation, zombieLocation);
+    return noContent();
   }
 
   public static Result getSchedule() {
-    return noContent();
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null) {
+      return Results.unauthorized("Must be logged in.");
+    }
+    return ok(user.currentRound.getScheduleAsJson());
   }
 }

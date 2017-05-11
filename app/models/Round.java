@@ -68,7 +68,7 @@ public class Round extends Model {
     save();
   }
 
-  public Round findByCode(String code) {
+  public static Round findByCode(String code) {
     return find.where().eq("gameCode", code).findUnique();
   }
 
@@ -94,6 +94,23 @@ public class Round extends Model {
     objectNode.put("gameRules", gameRules);
     objectNode.put("contactInfo", contactInfo);
 
+    objectNode.put("schedule", getScheduleAsJson());
+    if (schedule.size() > 0) {
+      objectNode.put("nextEvent", schedule.get(0).toJson());
+    }
+
     return objectNode;
+  }
+
+  public JsonNode getScheduleAsJson() {
+    List<Event> schedule = Event.find.where()
+        .eq("round", this)
+        .orderBy("startTime desc")
+        .findList();
+    List<JsonNode> eventNodes = new ArrayList<>();
+    for (Event event : schedule) {
+      eventNodes.add(event.toJson());
+    }
+    return Json.toJson(eventNodes);
   }
 }

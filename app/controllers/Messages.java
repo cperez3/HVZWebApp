@@ -50,4 +50,22 @@ public class Messages extends Controller {
     }
     return ok(Json.toJson(messagesJson));
   }
+
+  public static Result getModAlerts() {
+    User user = User.find.byId(Long.parseLong(session("id")));
+    if (user == null ) {
+      return unauthorized();
+    }
+
+    List<Message> messages = Message.find.where()
+        .eq("messageType", Message.MessageType.MOD_ALERT)
+        .eq("round", user.currentRound)
+        .orderBy("time desc")
+        .findList();
+    List<JsonNode> messagesJson = new ArrayList<>();
+    for (Message message : messages) {
+      messagesJson.add(message.toJson());
+    }
+    return ok(Json.toJson(messagesJson));
+  }
 }

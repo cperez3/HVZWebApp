@@ -206,21 +206,26 @@
               e.preventDefault();
             document.getElementById('no-game-message').style.display= 'none';
 
-            var code= $('#game-code').val();
-              myJsRoutes.controllers.JoinGame.verifyCode(code).ajax({
+            var code = $('#game-code').val();
 
-                  success : function(data) {
-                    console.log(data);
-                      //return data;
-                      window.location.href=@routes.GamePage.loadPage();
+            $.ajax({
+              type: "POST",
+              url: @routes.Rounds.joinRound(),
+              data: {code: code},
+              success : function(data) {
+                console.log(data);
+                console.log("Join Success");
+                  //return data;
+                  window.location.href=@routes.GamePage.loadPage();
 
-                  },
-                  error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    document.getElementById('no-game-message').style.borderColor = "red";
-                    document.getElementById('no-game-message').style.display= 'block';
-                  }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Join Error");
+                document.getElementById('no-game-message').style.borderColor = "red";
+                document.getElementById('no-game-message').style.display= 'block';
+              }
 
-              });
+            });
              e.stopPropagation();
             //console.log(myJsRoutes.controllers.JoinGame.verifyCode(codeString))
 
