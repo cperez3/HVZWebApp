@@ -11,8 +11,11 @@ package models;
 
 //import statements
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.api.mvc.AnyContentAsRaw;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,8 +25,7 @@ import java.util.Random;
 @Entity
 public class Round extends Model {
   @Id//primary key
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  public int id;
+  public long id;
   public String gameCode;
 
   /*New Code*/
@@ -67,7 +69,7 @@ public class Round extends Model {
   }
 
   public Round findByCode(String code) {
-    return find.where().eq(code, code).findUnique();
+    return find.where().eq("gameCode", code).findUnique();
   }
 
   public String generateRandomCode() {
@@ -80,5 +82,18 @@ public class Round extends Model {
       stringBuilder.append(characters.charAt(j));
     }
     return stringBuilder.toString();
+  }
+
+  public ObjectNode toJson() {
+    ObjectNode objectNode = Json.newObject();
+    objectNode.put("id", id);
+    objectNode.put("gameCode", gameCode);
+    objectNode.put("title", title);
+    objectNode.put("description", description);
+    objectNode.put("roundRules", roundRules);
+    objectNode.put("gameRules", gameRules);
+    objectNode.put("contactInfo", contactInfo);
+
+    return objectNode;
   }
 }

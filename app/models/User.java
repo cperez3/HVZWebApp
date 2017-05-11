@@ -15,8 +15,6 @@ import play.db.ebean.Model;
 
 import javax.persistence.*;
 
-import com.avaje.ebean.SqlUpdate;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +45,13 @@ public class User extends Model {
   public List<MapMarker> mapMarkers = new ArrayList<>();
 
   public static Finder<Long, User> find = new Finder<>(Long.class, User.class);
+
+  public User(String email, String password, String name) {
+    this.password = password;
+    this.email = email;
+    this.name = name;
+    save();
+  }
 
   public User() {
   }

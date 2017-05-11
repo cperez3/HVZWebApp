@@ -95,7 +95,7 @@ public class GamePage extends Controller {
           && gCode.equals(" ")) {
         return ok(noGameModSettings.render(uName, null));
       } else {
-        return forbidden(joinGame.render());
+        return ok(joinGame.render());
       }
 
     }

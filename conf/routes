@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Home.loadHome()
 
+
+POST /signup/ controllers.Users.createAccount()
+POST /login/ controllers.Users.login()
+
+
 GET     /javascriptRoutes     controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

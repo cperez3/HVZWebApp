@@ -64,7 +64,7 @@
 
                 <!-- Login Form -->
                 <div class="modal-body">
-                  <form id="login-form" class="form col-md-12 center-block">
+                  <form id="login-form" class="form col-md-12 center-block" onsubmit="@routes.Users.login()">
                     <div class="form-group">
                       <input id="email" type="text" class="form-control input-lg" placeholder="Email">
                     </div>
@@ -97,7 +97,7 @@
 
                 <div class="modal-body">
 
-                  <form id="signup-form"  class="form col-md-12 center-block" method="post" >
+                  <form id="signup-form"  class="form col-md-12 center-block" method="post" onsubmit="@routes.Users.createAccount()">
 
                     <div class="form-group">
                       <input id="name" type="text" class="form-control input-lg" placeholder="Username">
@@ -184,7 +184,33 @@
       e.preventDefault();
       var email= $('#email').val();
       var password= $('#password').val();
-      myJsRoutes.controllers.LogIn.validateLogIn(email,password).ajax({
+
+      @*var listAction = #{jsAction @routes.Users.login()}*@
+
+      var body = {
+        "email": email,
+        "password": password
+      };
+
+      $.ajax({
+        type: "POST",
+        url: @routes.Users.login(),
+        data: body,
+        dataType: FormData,
+        success: function ( data ) {
+          console.log("Login Success");
+          console.log(data);
+          window.location.href=@routes.GamePage.loadPage();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log("Invalid Login");
+          console.log(data);
+          console.log(data.message);
+
+          $("#no-user-message").slideDown();
+        }
+      });
+      @*myJsRoutes.controllers.LogIn.validateLogIn(email,password).ajax({
         success : function(data) {
           console.log(data);
           //figure out how to tell if user is in game or not
@@ -194,7 +220,7 @@
           //alert("Invalid Login");
           $("#no-user-message").slideDown();
         }
-      });
+      });*@
     });
 
     // Signup functionality
@@ -221,22 +247,34 @@
 
             }
 
-            myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({
+            var body = {
+              email: email,
+              password: password1,
+              name: name
+            };
+
+            @*myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({*@
+            $.ajax({
+              type: "POST",
+              url: @routes.Users.createAccount(),
+              data: body,
               success : function(data) {
                 //query to add the user if all is valid
-                myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
+                @*myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
 
                   success : function(data){
                     //when adding the user works, it should set them as logged in via cookies I suspect
                     window.location.href=@routes.GamePage.loadPage();
                   }
-                })
+                })*@
                 //figure out how to tell if user is in game or not
                 //if user  is signing up they should not be in any game yet
-
+                console.log(data);
+                console.log("Login Success");
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                errorThrown.toString();
                 var error=XMLHttpRequest["responseText"];
                 if(error == "repeatUE"){
                   document.getElementById("name").style.borderColor = "red";

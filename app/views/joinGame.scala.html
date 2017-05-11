@@ -100,7 +100,7 @@
 
     <div id="roundCreation">
       <a href="#" class="cancel">&times;</a>
-      <form class="form-horizontal">
+      <form id="create-round-form" class="form-horizontal" onsubmit="@routes.Rounds.createRound()">
         <fieldset>
 
             <!-- Form Name -->
@@ -110,7 +110,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="roundName">Round Name</label>
             <div class="col-md-4">
-              <input id="roundName" name="roundName" type="text" placeholder="" class="form-control input-md" required="">
+              <input id="title" name="title" type="text" placeholder="" class="form-control input-md" required="">
 
             </div>
           </div>
@@ -125,43 +125,25 @@
 
             <!-- Textarea -->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="rules">Rules</label>
+            <label class="col-md-4 control-label" for="rules">Round Rules</label>
             <div class="col-md-4">
-              <textarea class="form-control" id="rules" placeholder="ex: 'Don't be an idiot.'" name="rules"></textarea>
+              <textarea class="form-control" id="roundRules" placeholder="ex: 'Don't be an idiot.'" name="roundRules"></textarea>
             </div>
           </div>
 
             <!-- Textarea -->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="specials">Specials</label>
+            <label class="col-md-4 control-label" for="specials">Game Rules</label>
             <div class="col-md-4">
-              <textarea class="form-control" id="specials" placeholder="Information about special zombies, game mechanics, etc." name="specials"></textarea>
+              <textarea class="form-control" id="gameRules" placeholder="Information about special zombies, game mechanics, etc." name="gameRules"></textarea>
             </div>
           </div>
 
             <!-- Text input-->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="medical">Emergency/Medical Contact</label>
+            <label class="col-md-4 control-label" for="medical">Contact Info</label>
             <div class="col-md-4">
-              <input id="medical" name="medical" type="text" placeholder="" class="form-control input-md">
-
-            </div>
-          </div>
-
-            <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="moderator">Moderator Contact</label>
-            <div class="col-md-4">
-              <input id="moderator" name="moderator" type="text" placeholder="" class="form-control input-md">
-
-            </div>
-          </div>
-
-            <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="executive">Executive Board Contact</label>
-            <div class="col-md-4">
-              <input id="executive" name="executive" type="text" placeholder="" class="form-control input-md">
+              <input id="contactInfo" name="contactInfo" type="text" placeholder="" class="form-control input-md">
 
             </div>
           </div>
@@ -196,6 +178,29 @@
           $('#roundCreation').fadeToggle();
           $('#loginModal').css('opacity', 1);
           $('.footer').css('opacity', 1);
+        });
+
+        $("#create-round-form").on('submit', function (e) {
+          e.preventDefault();
+
+          var body = {
+            title: $('#title').val(),
+            description: $('#description').val(),
+            roundRules: $('#roundRules').val(),
+            gameRules: $('#gameRules').val(),
+            contactInfo: $('#contactInfo').val()
+          };
+          $.ajax({
+            type: "POST",
+            url: @routes.Rounds.createRound(),
+            data: body,
+            success : function(data) {
+              console.log(data);
+            },
+            error : function(data) {
+              console.log(data);
+            }
+          })
         });
 
           $("#join-game").on('submit', function(e) {

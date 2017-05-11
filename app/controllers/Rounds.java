@@ -17,14 +17,27 @@ public class Rounds extends Controller {
 
   public static Result createRound() {
     User user = User.find.byId(Long.parseLong(session("id")));
-    Form<Round> roundForm = Form.form(Round.class);
-    Round round = roundForm.bindFromRequest().get();
-    round.players.add(user);
+    System.out.println("ID: " + Long.parseLong(session("id")));
+    DynamicForm form = Form.form().bindFromRequest();
+
+//    Form<Round> roundForm = Form.form(Round.class);
+//    Round round = roundForm.bindFromRequest().get();
+    String title = form.get("title");
+    String description = form.get("description");
+    String roundRules = form.get("roundRules");
+    String gameRules = form.get("gameRules");
+    String contactInfo = form.get("contactInfo");
+
+    Round round = new Round(title, description, roundRules, gameRules, contactInfo, user);
     user.currentRound = round;
-
+    user.team = User.Team.HUMAN;
+    user.isMod = true;
+    user.isActive = true;
     round.save();
+    user.save();
 
-    return ok(Json.toJson(round));
+    return ok();
+//    return ok(round.toJson());
 
     /*
     //Creating a User?
