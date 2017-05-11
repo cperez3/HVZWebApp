@@ -1,6 +1,6 @@
 // Global Variables
 var activeScreen= "#homeScreen";
-var allRoundData;
+var allMarkers;
 
 /******************** GLOBAL FUNCTIONS ********************/
 
@@ -16,7 +16,22 @@ function switchScreen(screen) {
             activeScreen = newScreen;
             $(activeScreen).fadeIn(400, "linear");
             if(screen=="map"){
-                initMap();}
+                initMap();
+                $.ajax({
+                    type: "GET",
+                    url: @routes.Maps.getMarkers,
+                    success : function(data) {
+                    console.log(data);
+                    allMarkers = data;
+                    loadMarkers();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Marker Alert Error");
+                    document.getElementById('no-game-message').style.borderColor = "red";
+                    document.getElementById('no-game-message').style.display= 'block';
+                }
+            });
+            }
         });
     }
 
