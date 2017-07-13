@@ -15,9 +15,7 @@ import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signup;
-import play.data.Form;
-import play.db.ebean.Model;
-import java.lang.Exception;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -137,12 +135,12 @@ instead of this one that you may want just logged */
         //TO DO: check that username is not already being used
 
             User newUser = new User();
-            newUser.userName = nameIn;
+            newUser.displayName = nameIn;
             newUser.email = emailIn;
             newUser.password = passwordIn;
             newUser.isMod = Boolean.valueOf(isModVal);
             newUser.isActive = true;
-            newUser.type = "human";
+            newUser.teamOld = "human";
             newUser.gameCode = " ";
             newUser.save();
 
@@ -150,7 +148,7 @@ instead of this one that you may want just logged */
             session("uname", nameIn);
             session("id", String.valueOf(newUser.id));
             session("is_mod", isModVal);
-            session("type", "human");
+            session("teamOld", "human");
             session("is_active", "1");
             session("gCode", " ");
 

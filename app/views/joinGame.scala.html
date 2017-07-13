@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html class="full" lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>Join Game</title>
-    <meta name="generator" content="Bootply" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
-      <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 
-    <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Humans VS Zombies</title>
+    <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+      <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/home.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/nav.css")" rel="stylesheet">
     <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
-      <!--favicon-->
+
+      <!-- Favicon -->
     <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
   </head>
   <body>
       <!--login modal-->
-    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="loginModal" class="modal show bgStuff" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="col-xs-1 col-xs-offset-10"><input id="showSettings" type="image" class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
+            <div class="col-xs-1 col-xs-offset-10">
+              <input id="showSettings" type="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADb0lEQVRoQ+2ajW0UMRCFXyoAKoBUAFQAVACpgFABUAFQAVABpAKgAqCCJBWQdAAVgD60K+0tnp/1zd5FEZZWOeW843mev+fxHWid8dsReyHpsHrZg2qBku5JOg3klq9bLlDSQ0lfAyCPJH2r3MQ1gLyW9CpQ8qWkd/sAclPSHUlnicU/SnoazHsv6UVCFm5KTP2M5mYsAghcBSDsNkp4A5d5EMz5PrigN+35sB5AcEUXTARkBMHOjOOzpGeOYC9jjTJQ6paBgjU/SHoy+R5PcMF4QFogpooczQIWsLhUxmWQQ4yczNyVRPFJEmvPhwvGAuKBmC6AMiyAy+F6PQNXfCPpcWITTDAtIFkQPUpXvNMEYwEhwG5UrLqCjF+D9TeC33ItAg1fvYqD2CThbAwv2DP1YNdAzfoTZS388fautTXWuxx4XLOeRHUkw5t2hfO+xywiICiZ4U5rgyE9o4c5MkCOh0q7trKe/JAtZ4D82KLYVYGnaAKm2yK9aZhcT9UnTY6MGQqDPChMT43iVEl9a47IIj0pGP6EshZbhTkgF0qyZLjUfwQCTyLNkqX4zMPnpQMQxFRmYK2lYJCLm2EZHj6Tli8AkqHdGcWa1MF5EcuUUaFKIGGKbIAqS+2VQNyCZVgm03HJeIMqgUSJw1KoxLX/A2ls77Vxrb0HOymwgqpTAKm+YQ9qsCbpF/rTajSkAnwy6XIMUISRQXgohvyNelOtxShynOAygxPotOWTeYdaBeXhwQD8/dt6jTJND0XhHVqiHkWZ960yIFIUxRLUSxoBAWn8MiONY8unx522Io0ArIqhzK5bc8IWa+RaCL42BytchIbyPkeY2iOLXKXmg3vcjdpBVXm+wppunfKA9OT5CoU9GWadsoBwVH27tlad8pvXdi0gVHVuqHpyfadui17DxYiXjWtAqxtP2b+7SPzuJp8P/YRUNx5rZMCQFimYHFl7iSfFjvfJkNFtcBNExLU8MHQuoC9T8+KSFM9szYE7wcvmMgjo1qaYICIgfN8CgwLsoEUKM0dXWKwVg/wf+dMNcUFkgEzBQO/Z8X8uWWbhwQ5H8RVyp8HiWAzXxe22up4edRx3L3NoyjTesj8YSK8bUZSeXJTpVe3tJxxLAGXOMOE1wZIFszGyVGam6VbuCeUCB9Re5iJ19/64wNzUPzsgvgya037BAAAAAElFTkSuQmCC" width="25" height="25"/></div>
 
 
             <style> #settingsMenu{
@@ -40,12 +47,12 @@
                   </div>
               </div>
             </div>
-            <h1 class="text-center">Join Game</h1>
+            <h1 class="text-center">Join Round</h1>
             <h5 class="text-center">You are not currently in a game</h5>
             <h5 class="text-center">Please enter a game code to join a game</h5>
 
           </div>
-          <div class="modal-body">
+          <div class="modal-body text-center">
             <form id="join-game" class="form col-md-12 center-block" action="" method="post">
               <div class="form-group">
                 <input id="game-code" type="text" class="form-control input-lg" placeholder="Game Code">
@@ -55,6 +62,7 @@
                 <button id="join" class="btn btn-primary btn-lg btn-block">Join</button>
               </div>
             </form>
+            <button id="createGame" class="btn btn-primary btn-lg green">Create new round</button>
           </div>
 
             <!-- Delete Account Modal -->
@@ -78,36 +86,152 @@
             <!-- end of delete account modal -->
 
           <div class="modal-footer">
-            <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Game Code Please Try Again.</div>
+            <div id="no-game-message" style="display:none;color:red;text-align: center">Invalid Round Code</div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="footer navbar-fixed-bottom text-center">
+      <p class="apptitle">The Official HvZ Battle App</p>
+      <p>A companion app that allows humans and zombies to get information quickly and to
+        stay tactical through integrated maps and messaging.</p>
+      <p class="copyright">&copy; 2017 Ithaca College HvZ</p>
+    </div>
+
+    <div id="roundCreation">
+      <a href="#" class="cancel">&times;</a>
+      <form id="create-round-form" class="form-horizontal" onsubmit="@routes.Rounds.createRound()">
+        <fieldset>
+
+            <!-- Form Name -->
+          <legend class="text-center"><h2>Create a new round</h2></legend>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label textLabel" for="roundName">Round Name</label>
+            <div class="col-md-4">
+              <input id="title" name="title" type="text" placeholder="" class="form-control input-md" required="">
+
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label textLabel" for="description">Description</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="description" name="description"></textarea>
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label textLabel" for="rules">Round Rules</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="roundRules" placeholder="ex: 'Don't be an idiot.'" name="roundRules"></textarea>
+            </div>
+          </div>
+
+            <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label textLabel" for="specials">Game Rules</label>
+            <div class="col-md-4">
+              <textarea class="form-control" id="gameRules" placeholder="Information about special zombies, game mechanics, etc." name="gameRules"></textarea>
+            </div>
+          </div>
+
+            <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label textLabel" for="medical">Contact Info</label>
+            <div class="col-md-4">
+              <input id="contactInfo" name="contactInfo" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+          </div>
+
+            <!-- Button -->
+          <div class="form-group text-center">
+            <div class="col-md-4">
+              <button id="submitRound" name="submitRound" class="btn btn-primary green">Create Round</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
     </div>
       <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src='@routes.Assets.at("bootstrap/js/bootstrap.min.js")'></script>
       <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
 
+    <style>
+    .bgStuff {
+      background: url("/assets/images/background.jpg") no-repeat center center fixed;
+    }
+    </style>
+
       <script>
+        // Pull round creation form
+        $('#createGame').click(function(){
+           $('#roundCreation').fadeToggle();
+           $('#loginModal').css('opacity',.2);
+           $('.footer').css('opacity',.2);
+        });
+
+        // Close round creation form
+        $('.cancel').click(function(){
+          $('#roundCreation').fadeToggle();
+          $('#loginModal').css('opacity', 1);
+          $('.footer').css('opacity', 1);
+        });
+
+        $("#create-round-form").on('submit', function (e) {
+          e.preventDefault();
+
+          var body = {
+            title: $('#title').val(),
+            description: $('#description').val(),
+            roundRules: $('#roundRules').val(),
+            gameRules: $('#gameRules').val(),
+            contactInfo: $('#contactInfo').val()
+          };
+          $.ajax({
+            type: "POST",
+            url: @routes.Rounds.createRound(),
+            data: body,
+            success : function(data) {
+              console.log(data);
+            },
+            error : function(data) {
+              console.log(data);
+            }
+          })
+        });
+
           $("#join-game").on('submit', function(e) {
               e.preventDefault();
             document.getElementById('no-game-message').style.display= 'none';
 
-            var code= $('#game-code').val();
-              myJsRoutes.controllers.JoinGame.verifyCode(code).ajax({
+            var code = $('#game-code').val();
 
-                  success : function(data) {
-                    console.log(data);
-                      //return data;
-                      window.location.href=@routes.GamePage.loadPage();
+            $.ajax({
+              type: "POST",
+              url: @routes.Rounds.joinRound(),
+              data: {code: code},
+              success : function(data) {
+                console.log(data);
+                console.log("Join Success");
+                  //return data;
+                  window.location.href=@routes.Rounds.roundPage();
 
-                  },
-                  error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    document.getElementById('no-game-message').style.borderColor = "red";
-                    document.getElementById('no-game-message').style.display= 'block';
-                  }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Join Error");
+                document.getElementById('no-game-message').style.borderColor = "red";
+                document.getElementById('no-game-message').style.display= 'block';
+              }
 
-              });
+            });
              e.stopPropagation();
             //console.log(myJsRoutes.controllers.JoinGame.verifyCode(codeString))
 
@@ -127,5 +251,12 @@
             window.location.href=@routes.GamePage.deactivateAccount();
           });
     </script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    <style>
+            .mce-branding-powered-by{
+              display:none;
+            }
+    </style>
   </body>
 </html>

@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>In Game Moderator Settings</title>
+    <title>In Round Moderator Settings</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='@routes.Assets.at("bootstrap/css/bootstrap.css")' rel="stylesheet">
@@ -33,19 +33,19 @@
                 <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#modStuff" aria-controls="modStuff" role="tab" data-toggle="tab">Mod Settings</a></li>
-                <li role="presentation"><a href="#gameStuff" aria-controls="gameStuff" role="tab" data-toggle="tab">Game Settings</a></li>
+                <li role="presentation"><a href="#gameStuff" aria-controls="gameStuff" role="tab" data-toggle="tab">Round Settings</a></li>
               </ul>
 
                 <!-- Tab panes -->
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="modStuff">
 
-                  <h5 class="text-center">Game Code: @gCode </h5>
+                  <h5 class="text-center">Round Code: @gCode </h5>
                     <br><br>
                     <div class="container">
 
                     <div class="form-group form">
-                        <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#endGameModal">End Game</button>
+                        <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#endGameModal">End Round</button>
                     </div>
                     <div class="form-group">
                       <form id="add-mod-form" class="form">

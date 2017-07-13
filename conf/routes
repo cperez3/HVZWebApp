@@ -5,11 +5,40 @@
 # Home page
 GET     /                           controllers.Home.loadHome()
 
+
+POST /signup/ controllers.Users.createAccount()
+POST /login/ controllers.Users.login()
+
+POST /messages/ controllers.Messages.sendMessage()
+GET /messages/ controllers.Messages.getMessages()
+
+GET /alerts/ controllers.Messages.getModAlerts()
+PUT /alerts/ controllers.Messages.sendModAlert()
+
+POST /events/ controllers.Rounds.addEvent()
+
+GET /roundHome/  controllers.Rounds.roundPage()
+
+GET /round/  controllers.Rounds.getRound()
+POST /round/  controllers.Rounds.createRound()
+PUT /round/ controllers.Rounds.joinRound()
+
+PUT /team/ controllers.Users.changeTeam()
+
+GET     /user/ controllers.Users.getProfile()
+DELETE /user/round/ controllers.Users.leaveRound()
+
+GET /maps/ controllers.Maps.getMarkers()
+PUT /maps/ controllers.Maps.addMarker()
+
+
 GET     /javascriptRoutes     controllers.Application.javascriptRoutes
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET /login/ controllers.LogIn.loadLogIn()
+
+GET /homepage/ controllers.Test.loadTest()
 
 #POST /signup/ controllers.SignUp.addPerson()
 
@@ -27,7 +56,7 @@ GET /addUser/:email/:password1/:name/:mod controllers.SignUp.addUser(email:Strin
 
 GET /validateLogIn/:email/:password controllers.LogIn.validateLogIn(email:String,password:String)
 
-#GET /createGame/ controllers.JoinGame.createGame()
+#GET /createRound/ controllers.JoinGame.createRound()
 
 #GET /moderatorPage/ controllers.ModPage.loadPage()
 
@@ -41,7 +70,7 @@ GET /changeMod/ controllers.GamePage.verifyChangeModStatus()
 
 GET /getPlayers/ controllers.GamePage.loadviewPlayersPage()
 
-GET /createGame/  controllers.GamePage.createGame()
+#POST /createGame/  controllers.GamePage.createRound(userId:Long)
 
 GET /endGame/  controllers.GamePage.endGame()
 

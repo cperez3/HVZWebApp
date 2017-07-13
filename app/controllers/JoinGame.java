@@ -11,13 +11,10 @@ package controllers;
 
 //import statements
 
-import models.Game;
-import play.data.Form;
 import play.db.DB;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.joinGame;
-import views.html.gamePage;
 import views.html.login;
 
 import java.sql.ResultSet;

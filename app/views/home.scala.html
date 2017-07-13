@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html class="full" lang="en">
-    <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
-
   <head>
 
     <meta charset="utf-8">
@@ -11,66 +9,314 @@
     <meta name="author" content="">
 
     <title>Humans VS Zombies</title>
-
-      <!-- Bootstrap Core CSS -->
-    <link href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")" rel="stylesheet">
-
-    <!--favicon -->
     <link rel="icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-      <!-- Custom CSS -->
-    <link href="@routes.Assets.at("stylesheets/home.css")" rel="stylesheet">
 
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- CSS -->
+    <link href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("stylesheets/home.css")" rel="stylesheet">
+    <link href='@routes.Assets.at("stylesheets/styles.css")' rel="stylesheet">
 
   </head>
 
   <body>
 
-      <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+      <!-- Header -->
+   @* <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <a href="#nav-toggle" class="pull-left" id="nav-toggle">
+            <button type="button" class="navbar-toggle pull-left">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Humans VS Zombies</a>
+            </button>
+          </a>
+          <a class="navbar-brand" href="#">HvZ Player App</a>
         </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="@routes.SignUp.loadSignUp()">Sign Up</a>
-            </li>
-            <li>
-              <a href="@routes.LogIn.loadLogIn()">Log In</a>
-            </li>
-          </ul>
-        </div>
-          <!-- /.navbar-collapse -->
       </div>
-        <!-- /.container -->
-    </nav>
+    </nav>*@
+
+    @*<div id="wrapper">
+      <!-- Navigation Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li><a href="#">About</a></li>
+          <li><a href="@routes.SignUp.loadSignUp()">Sign Up</a></li>
+          <li><a href="@routes.LogIn.loadLogIn()">Log In</a></li>
+        </ul>
+      </div>*@
+
+      <!-- Page Content -->
+      <div id="">
+        <div class="container-fluid">
+
+          <!-- Primary Login/Signup Area -->
+          <!-- Login -->
+          <div id="loginModal" class="modal existing bgStuff" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Login Form Header -->
+                <div class="modal-header">
+                  <h1 class="text-center">Login</h1>
+                </div>
+
+                <!-- Login Form -->
+                <div class="modal-body">
+                  <form id="login-form" class="form col-md-12 center-block" onsubmit="@routes.Users.login()">
+                    <div class="form-group">
+                      <input id="email" type="text" class="form-control input-lg" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <input id="password" type="password" class="form-control input-lg" placeholder="Password">
+                    </div>
+                    <div class="form-group text-center">
+                      <button id="signin-button" class="btn btn-primary btn-lg btn-block">Sign In</button>
+                      <span><a class="smallerText" onclick="formSwap('make account')">Create an account</a></span>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Login Form Error Message -->
+                <div class="modal-footer">
+                  <div id="no-user-message" class="error-msg" style="display:none">Invalid Email or Password, Please Try Again.</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- Signup -->
+          <div id="loginModal2" class="modal addNew bgStuff" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <h1 class="text-center">Register</h1>
+                </div>
+
+                <div class="modal-body">
+
+                  <form id="signup-form"  class="form col-md-12 center-block" method="post" onsubmit="@routes.Users.createAccount()">
+
+                    <div class="form-group">
+                      <input id="name" type="text" class="form-control input-lg" placeholder="Username">
+                    </div>
+
+                    <div class="form-group">
+                      <input id="email2" type="text" class="form-control input-lg" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                      <input id="password1" type="password" class="form-control input-lg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <input id="password2" type="password" class="form-control input-lg" placeholder="Re-type Password">
+                    </div>
+                    @*<div class="checkbox">
+                      <label><input id="is-mod" type="checkbox" value="">I'm a moderator</label>
+                    </div>*@
+                    <div class="form-group text-center">
+                      <button id="signup-button" class="btn btn-primary btn-lg btn-block" >Sign Up</button>
+                      <span><a class="smallerText" onclick="formSwap('use existing')">Already have an account?</a></span>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <div id="username-message" class="error-msg">User name already in use</div>
+                  <div id="email-repeat-message" class="error-msg">Email already in use</div>
+                  <div id="email-message" class="error-msg">Email is invalid</div>
+                  <div id="password-message" class="error-msg">passwords must be at least 6 characters long and include at least 1 number and uppercase letter</div>
+                  <div id="password-message2" class="error-msg">passwords do not match</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <div class="footer navbar-fixed-bottom text-center">
+      <p class="apptitle">The Official HvZ Battle App</p>
+      <p>A companion app that allows humans and zombies to get information quickly and to
+      stay tactical through integrated maps and messaging.</p>
+      <p class="copyright">&copy; 2017 Ithaca College HvZ</p>
+    </div>
 
 
 
-      <!-- jQuery -->
-    <script src="@routes.Assets.at("javascripts/jquery.js")"></script>
 
-      <!-- Bootstrap Core JavaScript -->
+    <!-- Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="@routes.Assets.at("bootstrap/js/bootstrap.min.js")"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>
+
+    <!-- Custom Script -->
+    <script>
+
+    // Menu navigation
+    $("#nav-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+
+    // Set initial login form visibility
+    $('.existing').css('display', 'block');
+    //Form swap
+    function formSwap(switchTo) {
+      if ($('.addNew').is(":visible")){
+            $('.addNew').fadeOut("fast", function(){
+              $('.existing').fadeIn(400,"linear");
+            });
+            return
+      }
+      if ($('.existing').is(":visible")){
+        $('.existing').fadeOut("fast", function(){
+          $('.addNew').fadeIn(400,"linear");
+          return
+        });
+      }
+    }
+
+    // Login functionality
+    $("#login-form").on('submit', function(e) {
+      e.preventDefault();
+      var email= $('#email').val();
+      var password= $('#password').val();
+
+      var body = {
+        "email": email,
+        "password": password
+      };
+
+      $.ajax({
+        type: "POST",
+        url: @routes.Users.login(),
+        data: body,
+        success: function ( data ) {
+          console.log("Login Success");
+          console.log(data);
+          user = data;
+          if (data.currentRound !== null) {
+            window.location.href=@routes.Rounds.roundPage();
+          } else {
+            window.location.href=@routes.GamePage.loadPage();
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log("Invalid Login");
+          console.log(errorThrown);
+
+          $("#no-user-message").slideDown();
+        }
+      });
+      @*myJsRoutes.controllers.LogIn.validateLogIn(email,password).ajax({
+        success : function(data) {
+          console.log(data);
+          //figure out how to tell if user is in game or not
+          window.location.href=@routes.GamePage.loadPage();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          //alert("Invalid Login");
+          $("#no-user-message").slideDown();
+        }
+      });*@
+    });
+
+    // Signup functionality
+    </script>
+
+    <style>
+    .bgStuff {
+      background: url("/assets/images/background.jpg") no-repeat center center fixed;
+    }
+    </style>
+
+    <!-- Signup script -->
+    <script>
+
+          $("#signup-form").on('submit', function(e) {
+            e.preventDefault();
+
+            var email= $('#email2').val();
+
+            var name= $('#name').val();
+
+            var password1= $('#password1').val();
+
+            var password2= $('#password2').val();
+            var isMod = "true";
+            if($('#is-mod').is(':checked')){
+              isMod="true";
+            }else{
+              isMod="false";
+
+            }
+
+            var body = {
+              email: email,
+              password: password1,
+              name: name
+            };
+
+            @*myJsRoutes.controllers.SignUp.validateSignUp(email,password1,password2,name,isMod).ajax({*@
+            $.ajax({
+              type: "POST",
+              url: @routes.Users.createAccount(),
+              data: body,
+              success : function(data) {
+                //query to add the user if all is valid
+                @*myJsRoutes.controllers.SignUp.addUser(email,password1,name,isMod).ajax({
+
+                  success : function(data){
+                    //when adding the user works, it should set them as logged in via cookies I suspect
+                    window.location.href=@routes.GamePage.loadPage();
+                  }
+                })*@
+                //figure out how to tell if user is in game or not
+                //if user  is signing up they should not be in any game yet
+                console.log(data);
+                console.log("Login Success");
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                errorThrown.toString();
+                var error=XMLHttpRequest["responseText"];
+                if(error == "repeatUE"){
+                  document.getElementById("name").style.borderColor = "red";
+                  document.getElementById("email").style.borderColor = "red";
+                  $("#username-message").slideDown();
+                  $("#email-repeat-message").slideDown();
+                }else if(error=="repeatU"){
+                  document.getElementById('name').style.borderColor = "red";
+                  $("#username-message").slideDown();
+
+                }else if(error == "repeatE"){
+                  document.getElementById('email').style.borderColor = "red";
+                  $("#email-repeat-message").slideDown();
+
+
+                }else if(error=="email"){
+                  document.getElementById('email').style.borderColor = "red";
+                  $("#email-message").slideDown();
+
+                }else if(error=="password"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  $("#password-message").slideDown();
+                }else if(error=="mismatch"){
+                  document.getElementById('password1').style.borderColor = "red";
+                  document.getElementById('password2').style.borderColor = "red";
+                  $("#password-message2").slideDown();
+                }
+
+              }
+
+            });
+
+          });
+    </script>
 
   </body>
-
 </html>

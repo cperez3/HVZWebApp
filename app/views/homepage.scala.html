@@ -1,0 +1,938 @@
+@main("Home","Round Title","6","17") {
+<style>
+    </style>
+
+    <!-- Home Screen -->
+    <section id="homeScreen">
+    <div class="text-center">
+      <button class="btn humanBtn">I DIED</button>
+    </div>
+    <div class="modAlerts">
+      <h2>Mod Alerts</h2>
+      <hr>
+        <div id="modAlerts">
+          <div class="alert main">
+            <p>
+              Game will be on pause until 7:00pm for grace period.
+            </p>
+            <span>4/27 5:47pm</span>
+          </div>
+          <div class="alert">
+            <p>
+              Mission today will restrict humans to only socks and 6-shot blasters.
+            </p>
+            <span>4/27 12:15pm</span>
+          </div>
+          <div class="alert">
+            <p>
+              Game will be on pause until 6:45pm for grace period.
+            </p>
+            <span>4/26 5:17pm</span>
+          </div>
+          <div class="alert">
+            <p>
+              Due to rain, mission will now start at 4:30pm.
+            </p>
+            <span>4/26 1:15pm</span>
+          </div>
+          <div class="alert">
+            <p>
+              This week's round begins at 8:00am!!! Get pumped!
+            </p>
+            <span>4/25 11:45pm</span>
+          </div>
+        </div>
+        <div class="input-group">
+            <input id="newAlert" type="text" class="form-control" placeholder="Enter message" style="height:57px;font-size:28px;border-radius:0;">
+            <span class="input-group-btn">
+                <button id="button-send-alert" class="btn btn-secondary" style="border-radius:0;background-color:#283142;color:white;border-style:solid;border-color:white;border-width:1px;" type="button">Send</button>
+            </span>
+        </div>
+    </div>
+    <div id="nextMission" class="nextMission">
+      <h2>Next Mission: <span>Foul Play</span></h2>
+      <h3><span>Date:</span> Friday, 4/28</h3>
+      <h3><span>Time:</span> 5:30pm</h3>
+      <h3><span>Location:</span> Textor Hall</h3>
+    </div>
+        <audio id="audio" src="@routes.Assets.at("images/brainz.mp3")" ></audio>
+  </section>
+    <!-- Round -->
+    <section id="roundScreen" style="display:none">
+        <div class="sectionTitle">Round Information</div>
+        <div class="screenContent">
+            <span>Description:</span>
+            <p>Welcome to the wonderful world of Bikini Bottom. There's a lot of fish in the sea, or at least there use to be.
+            Now, it's an apocalyptic wasteland. Armored Fish (tanks) and Acid-Spitting barnacles are all that remain. Good luck
+            out there. And remeber: "Just keep swimming!"</p><br>
+            <span>Special Zombies</span>
+            <ul>
+                <li>Tank:  Can only be stunned with socks
+                or missiles.</li>
+                <li>Spitter:  Shoots a small blaster, which stuns humans on hit.  Stunned humans cannot move for 30 seconds, but can shoot.</li>
+            </ul>
+            <span>Special Humans</span>
+            <ul>
+                <li>Armored:  Can survive one tag, after which the armor is destroyed.</li>
+            </ul><br>
+            <span>Game Rules</span>
+            <ol>
+                <li>Don’t be dick</li>
+                <li>Don’t be an idiot</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Schedule -->
+    <section id="scheduleScreen" style="display:none">
+        <div class="sectionTitle">Schedule</div>
+        <div class="schedulebox">
+            <div class="scheduleContent">
+                <div class="day">
+                    <h3>Monday</h3>
+                    <div id="monday" class="events">
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">12:00pm-3:00pm<br>
+                                Academic Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:30pm-6:30pm<br>
+                                Textor</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="day">
+                    <h3>Tuesday</h3>
+
+                    <div id="tuesday" class="events">
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">6:00pm-7:00pm<br>
+                                Fitness Quad</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day">
+                    <h3>Wednesday</h3>
+
+                    <div id="wednesday" class="events">
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">12:00pm-1:00pm<br>
+                                Academic Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">1:00pm-2:00pm<br>
+                                Smiddy Hall</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="event">Event:</p>
+                            <p class="eventinfo">2:00pm-3:00pm<br>
+                                Park Quad</p>
+                        </div>
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:30pm-6:30pm<br>
+                                Textor</p>
+                        </div>
+                    </div>
+                    <img class="addScheduleBtn" src="@routes.Assets.at("images/addEvent.png")">
+                </div>
+
+                <div class="day">
+                    <h3>Thursday</h3>
+
+                    <div id="thursday" class="events">
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">5:00pm-6:00pm<br>
+                                Tennis Courts</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="day">
+                    <h3>Friday</h3>
+
+                    <div id="friday" class="events">
+
+                        <div class="eventitem">
+                            <p class="mission">Mission:</p>
+                            <p class="eventinfo">4:00pm-4:30pm<br>
+                                Textor</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="day">
+                    <h3>Saturday</h3>
+
+                    <div id="saturday" class="events">
+
+                        <div class="eventitem">
+                            <p class="endgame">End Game:</p>
+                            <p class="eventinfo">11:00am-1:00pm<br>
+                                Academic Quad</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day">
+                    <h3>Sunday</h3>
+                    <div id="sunday" class="events">
+                        <div class="missionBlock nothing">
+                            <p class="eventinfo">No missions today.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="scheduleCreation">
+            <a href="#" class="cancel">&times;</a>
+            <form id="create-event" class="form-horizontal">
+                <fieldset>
+
+                        <!-- Form Name -->
+                    <legend class="text-center"><h2>Create a new schedule item</h2></legend>
+
+                        <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="scheduleType">Select Type</label>
+                        <div class="col-md-4">
+                            <select id="scheduleType" name="scheduleType" class="form-control">
+                                <option value="1">Event</option>
+                                <option value="2">Mission</option>
+                                <option value="3">End Game</option>
+                            </select>
+                        </div>
+                    </div>
+                        <!-- Select Basic -->
+                    @*<div class="form-group">
+                        <label class="col-md-4 control-label" for="daysSelect">Select Day</label>
+                        <div class="col-md-4">
+                            <select id="daysSelect" name="scheduleType" class="form-control">
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                                <option value="7">Sunday</option>
+                            </select>
+                        </div>
+                    </div>*@
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="startTime">Start Time</label>
+                        <div class="col-md-4">
+                            <input id="startTime" name="startTime" type="text" placeholder="ex. 5:00pm" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="endTime">End Time</label>
+                        <div class="col-md-4">
+                            <input id="endTime" name="endTime" type="text" placeholder="ex. 5:30pm" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="humanLocation">Human Location</label>
+                        <div class="col-md-4">
+                            <input id="humanLocation" name="humanLocation" type="text" placeholder="Fitness Quad" class="form-control input-md">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="zombieLocation">Zombie Location</label>
+                        <div class="col-md-4">
+                            <input id="zombieLocation" name="zombieLocation" type="text" placeholder="Textor" class="form-control input-md">
+                        </div>
+                    </div>
+
+                        <!-- Button -->
+                    <div class="form-group text-center">
+                        <div class="col-md-4">
+                            <button id="submitEvent" name="submitEvent" class="btn btn-primary btn-lg green">Create Schedule Item</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+    </section>
+    <!-- Map -->
+    <section id="mapScreen" style="display:none">
+        <div id="mapCanvas"></div>
+        <div class="formSection">
+          <h1>Add Marker</h1>
+          <form id="markerForm">
+                  <fieldset>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="markerType">Marker Type</label>
+                          <div class="col-md-4">
+                              <div class="input-group">
+                                  <select class="form-control" name="markerType" id="markerType">
+                                      <option value="zombiesighting" label="Zombie Sighting">Zombie Sighting</option>
+                                      <option value="escort" label="Escort Request">Escort Request</option>
+                                      <option value="chilling" label="Chilling">Just Chilling</option>
+                                      <option value="other" label="Other">Other</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="positionStuff">Coordinates</label>
+                          <div class="col-md-4">
+                              <input class="form-control" id="giveCoordinates" name="positionStuff" placeholder="Click on map to select a location">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="additionalInformation">Additional Information</label>
+                          <div class="col-md-4">
+                              <input class="form-control" id="additionalInformation" name="additionalInformation"></input>
+                          </div>
+                      </div>
+                  </fieldset>
+          </form>
+            <button class="markerBtn" onclick="addNewMarker()">Add New Marker</button>
+
+        </div>
+    </section>
+    <!-- Chat -->
+    <section id="chatScreen" style="display:none">
+        <div class="sectionTitle">Chat</div>
+        <div class="chatArea" style="color:white;">
+            <div class="otherMessage">
+                <div>
+                    <p class="userSection pull-left">Chris</p>
+                    <p class="timeSection pull-right">12:15am</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div>
+                    <p class="userMessage">
+                        I really hate coding late at night. It's when the zombies attack and I die a lot.
+                    </p>
+                </div>
+            </div>
+            <div class="personalMessage">
+                <div>
+                    <p class="timeSection pull-right">12:15am</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div>
+                    <p class="userMessage">
+                        Same Chris. Same.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="newMessageBox">
+            <input class="messageInput" type="text" placeholder="Enter message">
+            <button class="btn btn-primary messageBtn">Send</button>
+        </div>
+    </section>
+    <!-- Rules -->
+    <section id="rulesScreen" style="display:none">
+        <div class="sectionTitle">Rules</div>
+    </section>
+    <!-- Contact -->
+    <section id="contactsScreen" style="display:none">
+        <div class="sectionTitle">Contact Information</div>
+        <div class="contact">
+            <div class="contactInfo medical">
+                <h2>Emergency / Medical</h2>
+                <p class="phone">607-274-3333</p>
+            </div>
+            <div class="contactInfo">
+                <h2>Round Coordinator</h2>
+                <p class="phone">877-393-4448</p>
+            </div>
+            <div class="contactInfo">
+                <h2>Executive Board</h2>
+                <p class="phone">503-867-5309</p>
+            </div>
+        </div>
+    </section>
+    <!-- Settings -->
+    <section id="settingsScreen" style="display:none"></section>
+
+    <style>
+            #mapCanvas{width:100%;height:600px;}
+    </style>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: @routes.Rounds.getRound,
+                success : function(data) {
+                    console.log(data);
+                    round = data;
+                    $.ajax({
+                        type: "GET",
+                        url: @routes.Users.getProfile,
+                        success : function(data) {
+                            console.log(data);
+                            user = data;
+                            loadSchedule();
+                            $.ajax({
+                                type: "GET",
+                                url: @routes.Messages.getModAlerts,
+                                success : function(data) {
+                                    console.log(data);
+                                    modAlerts = data;
+                                    loadAlerts();
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    console.log("Mod Alerts Error");
+                                    document.getElementById('no-game-message').style.borderColor = "red";
+                                    document.getElementById('no-game-message').style.display= 'block';
+                                }
+                            });
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            console.log("Mod Alerts Error");
+                            document.getElementById('no-game-message').style.borderColor = "red";
+                            document.getElementById('no-game-message').style.display= 'block';
+                        }
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Join Error");
+                    document.getElementById('no-game-message').style.borderColor = "red";
+                    document.getElementById('no-game-message').style.display= 'block';
+                }
+            });
+
+
+        });
+
+        var loadAlerts = function() {
+          var alertsList = "";
+          for (var i = 0; i < modAlerts.length && i < 5; i++) {
+            var message = modAlerts[i].message;
+            var date = new Date(modAlerts[i]['time'] * 1000);
+            var month = date.getMonth();
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var minuteText = "" + minute;
+            if (minute < 10) {
+              minuteText = "0" + minute;
+            }
+            if (hour === 0) hour = 12;
+            var time = month + "/" + day + " " + hour + ":" + minuteText + "am";
+            if (hour > 12) {
+              hour -= 12;
+              time = month + "/" + day + " " + hour + ":" + minuteText + "pm";
+            }
+
+            if (i > 0) {
+                alertsList += "<div class='alert'><p>" + message + "</p><span>" + time + "</span></div>";
+            } else {
+                alertsList += "<div class='alert main'><p>" + message + "</p><span>" + time + "</span></div>";
+            }
+          }
+          $('#modAlerts').empty();
+          $('#modAlerts').append(alertsList);
+
+          console.log(round);
+          var event = round['nextEvent'];
+            $('#nextMission').empty();
+          if (event != null) {
+              var eventDate = new Date(event.startTime * 1000);
+              var eventMinuteText = "" + eventDate.getMinutes();
+              if (minute < 10) {
+                  eventMinuteText = "0" + eventDate.getMinutes();
+              }
+              var eventTime = eventDate.getHours() + ":" + eventMinuteText + "am";
+              if (eventDate.getHours() > 12) {
+                  eventTime = eventDate.getHours() - 12 + ":" + eventMinuteText + "pm";
+              }
+              var location = event['humanLocation'];
+              if (user['team'] === 'ZOMBIE') {
+                  location = event['zombieLocation'];
+              }
+              var eventSection = "<h2>Next Mission: <span>" + event['title'] + "</span></h2>" +
+                      "<h3><span>Date: </span>" + eventDate.getMonth() + "/" + eventDate.getDate() + "</h3>" +
+                      "<h3><span>Time: </span>" + eventTime + "</h3>" +
+                      "<h3><span>Location: </span>" + location + "</h3>"
+
+              $('#nextMission').append(eventSection);
+          }
+        };
+
+        var loadSchedule = function() {
+          var schedule = round['schedule'];
+            $('#monday').empty();
+            $('#tuesday').empty();
+            $('#wednesday').empty();
+            $('#thursday').empty();
+            $('#friday').empty();
+            $('#saturday').empty();
+            $('#sunday').empty();
+          schedule.forEach(function (event) {
+              var title = event['title'];
+              var humanLocation = event['humanLocation'];
+              var zombieLocation = event['zombieLocation'];
+              var startTime = new Date(event['startTime']);
+              var endTime = new Date(event['endTime']);
+              var timeText = formatTime(startTime) + "-" + formatTime(endTime);
+              var locationText = humanLocation;
+              if (user['team'] === 'ZOMBIE') {
+                  locationText = zombieLocation;
+              }
+
+              var eventSection = "<div class='eventitem'>" +
+                                  "<p class='event'>" + title + "</p>" +
+                                  "<p class='eventinfo'>" + timeText + "<br>" +
+                                  locationText + "</p> </div>";
+
+              switch (startTime.getDay()){
+                  case 0: $('#monday').append(eventSection);
+                      break;
+                  case 1: $('#tuesday').append(eventSection);
+                      break;
+                  case 2: $('#wednesday').append(eventSection);
+                      break;
+                  case 3: $('#thursday').append(eventSection);
+                      break;
+                  case 4: $('#friday').append(eventSection);
+                      break;
+                  case 5: $('#saturday').append(eventSection);
+                      break;
+                  case 6: $('#sunday').append(eventSection);
+                      break;
+              }
+
+          })
+        };
+
+        var formatTime = function(time) {
+          var month = time.getMonth();
+          var date = time.getDate();
+          var day = time.getDay();
+          var hour = time.getHours();
+          var minute = time.getMinutes();
+
+          var hourText = "" + hour;
+          var minuteText = "" + minute;
+          if (minute < 10) {
+            minuteText = "0" + minute;
+          }
+          if (hour > 12) {
+            hourText = hour-12;
+            return hourText + ":" + minuteText + "pm";
+          } else {
+            return hourText + ":" + minuteText + "am";
+          }
+        }
+    </script>
+    <!-- Map -->
+    <script>
+
+        // Global Map Variable
+        var alreadydid = false;
+        var newCoord;
+        var map;
+        var markers=[];
+        var icons = {
+            zombiesighting: {
+                icon: '@routes.Assets.at("images/zombiesighting.png")'
+            },
+            escort: {
+                icon: '@routes.Assets.at("images/escort.png")'
+            },
+            chilling: {
+                icon: '@routes.Assets.at("images/chilling.png")'
+            },
+            other: {
+                icon: '@routes.Assets.at("images/other.png")'
+            }
+        };
+
+        /* Prevent Form Submission default */
+        if (document.getElementById('markerForm').addEventListener) {
+            document.getElementById('markerForm').addEventListener("submit", function(evt) {
+                evt.preventDefault();
+                window.history.back();
+            }, true);
+        }
+        else {
+            document.getElementById('markerForm').attachEvent('onsubmit', function(evt){
+                evt.preventDefault();
+                window.history.back();
+            });
+        }
+
+        /* Create the map */
+        function initMap() {
+            if(!alreadydid) {
+
+                //Create Style
+                var styledMapType = new google.maps.StyledMapType(
+                        [
+                            {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+                            {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+                            {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+                            {
+                                featureType: 'administrative',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#c9b2a6'}]
+                            },
+                            {
+                                featureType: 'administrative.land_parcel',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#dcd2be'}]
+                            },
+                            {
+                                featureType: 'administrative.land_parcel',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#ae9e90'}]
+                            },
+                            {
+                                featureType: 'landscape.natural',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#93817c'}]
+                            },
+                            {
+                                featureType: 'poi.park',
+                                elementType: 'geometry.fill',
+                                stylers: [{color: '#a5b076'}]
+                            },
+                            {
+                                featureType: 'poi.park',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#447530'}]
+                            },
+                            {
+                                featureType: 'road',
+                                elementType: 'geometry',
+                                stylers: [{color: '#f5f1e6'}]
+                            },
+                            {
+                                featureType: 'road.arterial',
+                                elementType: 'geometry',
+                                stylers: [{color: '#fdfcf8'}]
+                            },
+                            {
+                                featureType: 'road.highway',
+                                elementType: 'geometry',
+                                stylers: [{color: '#f8c967'}]
+                            },
+                            {
+                                featureType: 'road.highway',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#e9bc62'}]
+                            },
+                            {
+                                featureType: 'road.highway.controlled_access',
+                                elementType: 'geometry',
+                                stylers: [{color: '#e98d58'}]
+                            },
+                            {
+                                featureType: 'road.highway.controlled_access',
+                                elementType: 'geometry.stroke',
+                                stylers: [{color: '#db8555'}]
+                            },
+                            {
+                                featureType: 'road.local',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#806b63'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#8f7d77'}]
+                            },
+                            {
+                                featureType: 'transit.line',
+                                elementType: 'labels.text.stroke',
+                                stylers: [{color: '#ebe3cd'}]
+                            },
+                            {
+                                featureType: 'transit.station',
+                                elementType: 'geometry',
+                                stylers: [{color: '#dfd2ae'}]
+                            },
+                            {
+                                featureType: 'water',
+                                elementType: 'geometry.fill',
+                                stylers: [{color: '#b9d3c2'}]
+                            },
+                            {
+                                featureType: 'water',
+                                elementType: 'labels.text.fill',
+                                stylers: [{color: '#92998d'}]
+                            }
+                        ],
+                        {name: 'Styled Map'});
+
+                var ithaca = {lat: 42.4223, lng: -76.4950};
+                map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                    zoom: 17,
+                    center: ithaca,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true,
+                    fullScreenControl: false,
+                    zoomControl: true,
+                    zoomControlOptions: true,
+                    mapTypeControlOptions: {
+            mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                    'styled_map']
+          }
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: "Hello"
+                });
+
+
+                var marker = new google.maps.Marker({
+                    position: ithaca,
+                    map: map,
+                    icon: icons['other'].icon,
+                    title: 'Position of entire Round'
+                });
+
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "@routes.Maps.getMarkers",
+                    success : function(data) {
+                        console.log(data);
+                        allMarkers = data;
+                        loadMarkers();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Marker Alert Error");
+                        document.getElementById('no-game-message').style.borderColor = "red";
+                        document.getElementById('no-game-message').style.display= 'block';
+                    }
+                });
+
+
+                google.maps.event.addListener(map, 'click', function (e) {
+                    updateCoordinates(e.latLng);
+                });
+                markers.push(marker);
+                alreadydid = true;
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+            }
+        }
+
+        /* Add a new marker */
+        function addNewMarker(){
+            var marker = new google.maps.Marker({
+                position: newCoord,
+                map:map,
+                icon: icons[document.getElementById('markerForm').markerType.value].icon,
+                title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: "<span>"+marker.title+"</span><br>"+document.getElementById('markerForm').additionalInformation.value
+            });
+            marker.addListener('click', function(){
+                infowindow.open(map,marker);
+            });
+            markers.push(marker);
+            google.maps.event.trigger(map, 'resize');
+            document.getElementById('markerForm').positionStuff.value = "";
+            document.getElementById('markerForm').additionalInformation.value = "";
+
+            console.log("Map Marker Submit");
+            var body = {
+                icon: $('#markerType').val(),
+                position: newCoord,
+                title: document.getElementById('markerType').options[document.getElementById('markerType').selectedIndex].innerHTML
+            };
+
+
+            console.log("Send Body: ");
+            console.log(body);
+
+            @*$.ajax({*@
+                @*type: "PUT",*@
+                @*url: '@routes.Maps.addMarker()',*@
+                @*accept: "application/json",*@
+                @*contentType: "application/json",*@
+                @*dataType: 'json',*@
+                @*data: body,*@
+                @*success: function(data) {*@
+                    @*console.log("Map Marker Submit success");*@
+                    @*// Cal something to then go update the maps for everyone*@
+                    @*/*insertMagicalFunctionHere();*/*@
+
+                    @*/* Reset the form fields */*@
+                    @*document.getElementById('markerForm').positionStuff.value = "";*@
+                    @*document.getElementById('markerForm').additionalInformation.value = "";*@
+                    @*console.log(data);*@
+                @*},*@
+                @*error : function(data) {*@
+                    @*console.log(data);*@
+                @*}*@
+            @*});*@
+        }
+
+        /* Update form field with new position */
+        function updateCoordinates(pnt){
+            newCoord= pnt;
+            $('input[name="positionStuff"]').val(pnt);
+        }
+
+
+        var loadMarkers = function() {
+
+            /* Loop through the accepted JSON list, configure each marker -> put on map */
+            for (i in allMarkers) {
+
+                /* Creates map */
+                console.log("marker: ");
+                console.log(allMarkers[i]['position']);
+                var marker = new google.maps.Marker({
+                    position: allMarkers[i].position, /*Needs to be the JSON object of lat,long*/
+                    map: map, /*Does not change */
+                    icon: icons[allMarkers[i]['icon']].icon, /*May need to change the name "icon" to something else*/
+                    title: allMarkers[i]['title'] /* Needs to be pulled from JSON*/
+                });
+
+                /* Gives map content */
+                var infowindow = new google.maps.InfoWindow({
+                    content: allMarkers[i].content /*Needs to be added to the JSON object/captured from form*/
+                });
+
+                /* Adds marker to map */
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            /* Update the map after all markers have been added */
+            google.maps.event.trigger(map, 'resize');
+        }
+    </script>
+    <!-- Schedule -->
+    <script>
+            // Pull round creation form
+            $('.addScheduleBtn').click(function(){
+                $('#scheduleCreation').fadeToggle();
+                $('.schedulebox').css('opacity',.2);
+            });
+            /* On submit, reset opacity of screen */
+            $('#submitEvent').click(function(){
+               $('.schedulebox').css('opacity',1);
+            });
+            $('#nav-expander').click(function(){
+               if($('.schedulebox').css('opacity')==.2){
+                   $('.schedulebox').css('opacity',1);
+                   $('#scheduleCreation').fadeToggle();
+               }
+            });
+
+
+            // Close round creation form
+            $('.cancel').click(function(){
+                $('#scheduleCreation').fadeToggle();
+                $('.schedulebox').css('opacity',1);
+            });
+
+
+            $('#button-send-alert').click(function() {
+              body = {message: $('#newAlert').val()}
+                $.ajax({
+                    type: "PUT",
+                    url: @routes.Messages.sendModAlert(),
+                    data: body,
+                    success: function ( data ) {
+                        console.log("Login Success");
+                        console.log(data);
+                        modAlerts = data;
+                        loadAlerts();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("Invalid Login");
+                        console.log(errorThrown);
+
+                        $("#no-user-message").slideDown();
+                    }
+                });
+            });
+
+            $('#create-event').on('submit', function() {
+              var title = "Event";
+              switch($('#scheduleType').val()) {
+                  case 1: title = "Event";
+                      break;
+                  case 2: title = "Mission";
+                      break;
+                  case 3: title = "End Game";
+                      break;
+                  default: title = "Event";
+                      break;
+              }
+                body = {title: title,
+                    startTime: new Date($('#startTime').val()).getTime(),
+                    endTime: new Date($('#endTime').val()).getTime(),
+                    humanLocation: $('#humanLocation').val(),
+                    zombieLocation: $('#zombieLocation').val()};
+
+                $.ajax({
+                    type: "POST",
+                    url: @routes.Rounds.addEvent(),
+                    data: body,
+                    success: function ( data ) {
+                        console.log(data);
+                        round = data;
+                        loadSchedule();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(errorThrown);
+
+                    }
+                });
+            });
+
+    </script>
+}

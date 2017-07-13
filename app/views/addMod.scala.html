@@ -97,7 +97,7 @@
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //alert("Not in this Game or Already a Moderator");
+                //alert("Not in this Round or Already a Moderator");
                 var error=XMLHttpRequest["responseText"];
                 if (error == "noUinGame"){
                   document.getElementById('email').style.borderColor = "red";
